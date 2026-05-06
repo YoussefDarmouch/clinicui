@@ -1,31 +1,17 @@
-import { useState, useEffect } from 'react'
-import { getMedecins } from './api/public.api'
+import { useSelector } from "react-redux";
+import Login from "./features/auth/pages/Login";
 
 function App() {
-  const [medecins, setMedecins] = useState([]);
+  const auth = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    getMedecins()
-      .then((res) => {
-        // console.log("API:", res.data.data.data);
-        setMedecins(res.data.data.data);
-      })
-      .catch(console.log);
-  }, []);
+  console.log("USER:", auth.user);
+  console.log("TOKEN:", auth.token);
+  console.log("ROLE:", auth.role);
+  console.log("AUTH STATE:", auth);
+
   return (
     <div>
-      <h1>Medecins List</h1>
-
-      {medecins?.length > 0 ? (
-        medecins.map((m) => (
-          <div key={m.id}>
-            <p>{m.user?.name}</p>
-            <p>{m.specialite?.name}</p>
-          </div>
-        ))
-      ) : (
-        <p>Loading...</p>
-      )}
+      <Login />
     </div>
   );
 }
