@@ -59,7 +59,7 @@ export default function Login() {
                 <Button type="submit">Login</Button>
             </form>
 
-            <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+            <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
                 {message}
             </Modal>
         </>
