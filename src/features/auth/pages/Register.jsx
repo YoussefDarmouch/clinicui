@@ -1,11 +1,11 @@
-import React from 'react'
-import { useState } from "react";
+import React, { useState } from "react";
 import { register } from "../../../api/auth.api";
-import Input from "../../../components/ui/Input";
-import Button from "../../../components/ui/Button";
 import { useNavigate } from "react-router-dom";
+import AuthForm from "../components/AuthForm";
+
 export default function Register() {
     const navigate = useNavigate();
+
     const [form, setForm] = useState({
         name: "",
         email: "",
@@ -16,93 +16,58 @@ export default function Register() {
         date_naissance: "",
         sexe: "",
     });
-    const handleChange = (e) => {
+
+    const handleChange = (name, value) => {
         setForm({
             ...form,
-            [e.target.name]: e.target.value,
+            [name]: value,
         });
-    }
+    };
+
     const handleRegister = async (e) => {
         e.preventDefault();
+
         try {
-            const res = await register(form);
-            console.log("user creat successful", res);
+            await register(form);
+
             alert("Account created ✅");
+
             setTimeout(() => {
                 navigate("/login");
-            }, 1500);
+            }, 1000);
+
         } catch (error) {
-            console.log(error);
             alert("Register failed ❌");
         }
-    }
+    };
 
     return (
-        <form onSubmit={handleRegister} className="flex flex-col gap-4 w-80">
-
-            <Input
-                label="Name"
-                name="name"
-                value={form.name}
-                onChange={handleChange}
-            />
-
-            <Input
-                label="Email"
-                name="email"
-                type="email"
-                value={form.email}
-                onChange={handleChange}
-            />
-
-            <Input
-                label="Password"
-                name="password"
-                type="password"
-                value={form.password}
-                onChange={handleChange}
-            />
-
-            <Input
-                label="Confirme Password"
-                name="password_confirmation"
-                type="password"
-                value={form.password_confirmation}
-                onChange={handleChange}
-            />
-
-            <Input
-                label="Phone"
-                name="phone"
-                value={form.phone}
-                onChange={handleChange}
-            />
-
-            <Input
-                label="Address"
-                name="address"
-
-                value={form.address}
-                onChange={handleChange}
-            />
-
-            <Input
-                label="Date de naissance"
-                name="date_naissance"
-                type="date"
-                value={form.date_naissance}
-                onChange={handleChange}
-            />
-
-            <select name="sexe" onChange={handleChange}>
-                <option value="">sexe</option>
-                <option value="M">Male</option>
-                <option value="F">Female</option>
-            </select>
-
-
-            <Button type="submit">Register</Button>
-
-        </form>
-    )
+        <AuthForm
+            title="Register"
+            buttonText="Create account"
+            onSubmit={handleRegister}
+            onChange={handleChange}
+            fields={[
+                { name: "name", label: "Name", type: "text", value: form.name },
+                { name: "email", label: "Email", type: "email", value: form.email },
+                { name: "password", label: "Password", type: "password", value: form.password },
+                { name: "password_confirmation", label: "Confirm Password", type: "password", value: form.password_confirmation },
+                { name: "phone", label: "Phone", type: "text", value: form.phone },
+                { name: "address", label: "Address", type: "text", value: form.address },
+                { name: "date_naissance", label: "Date de naissance", type: "date", value: form.date_naissance },
+            ]}
+            footer={
+                <select
+                    name="sexe"
+                    value={form.sexe}
+                    onChange={(e) => handleChange("sexe", e.target.value)}
+                    style={{ marginTop: "10px" }}
+                >
+                    <option value="">sexe</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                </select>
+            }
+        />
+    );
 }

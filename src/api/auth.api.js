@@ -9,3 +9,9 @@ export const register = (data) => {
 export const logout = () => {
     return api.post("auth/logout");
 }
+export const resetPassword = (data) => {
+    return api.post("auth/reset-password", data);
+}
+export const forgotPassword = (data) => {
+    return api.post("auth/forgot-password", data);
+}

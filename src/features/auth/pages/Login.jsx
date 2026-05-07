@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { Link } from "react-router-dom";
 import { loginSuccess } from '../../../app/slices/authSlice'
 import { login } from '../../../api/auth.api'
 import Button from '../../../components/ui/Button'
@@ -62,6 +63,16 @@ export default function Login() {
             <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
                 {message}
             </Modal>
+            <div style={{ marginTop: "10px" }}>
+                <p>
+                    Don't have an account?{" "}
+                    <Link to="/register">Register</Link>
+                </p>
+
+                <p>
+                    <Link to="/forgot-password">Forgot Password?</Link>
+                </p>
+            </div>
         </>
     )
 }
