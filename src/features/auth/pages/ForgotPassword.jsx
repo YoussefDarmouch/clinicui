@@ -1,63 +1,52 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { forgotPassword } from '../../../api/auth.api'
-import AuthForm from '../components/AuthForm'
+import { useState } from "react";
+import { forgotPasswordService } from "../services/auth.service";
+import AuthForm from "../components/AuthForm";
 
 export default function ForgotPassword() {
-
-    const [form, setForm] = useState({
-        email: ""
-    });
-
+    const [form, setForm] = useState({ email: "" });
     const [loading, setLoading] = useState(false);
-
-    const navigate = useNavigate();
+    const [message, setMessage] = useState("");
 
     const handleChange = (name, value) => {
-        setForm({
-            ...form,
-            [name]: value
-        });
+        setForm({ ...form, [name]: value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         setLoading(true);
 
         try {
-            const res = await forgotPassword({ email: form.email });
+            const res = await forgotPasswordService({ email: form.email });
 
-            console.log("SUCCESS:", res);
-
-            const token = res?.data?.data?.token;
-            const userEmail = form.email;
-
-            navigate(`/reset-password?token=${token}&email=${userEmail}`);
+            setMessage(res.data.message);
 
         } catch (err) {
-            console.log("ERROR:", err);
+            setMessage("Something went wrong");
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <AuthForm
-            title="Forgot Password"
-            buttonText="Send reset link"
-            loading={loading}
-            onSubmit={handleSubmit}
-            onChange={handleChange}
-            fields={[
-                {
-                    name: "email",
-                    label: "Email",
-                    type: "email",
-                    value: form.email,
-                    placeholder: "Enter your email"
-                }
-            ]}
-        />
+        <div>
+            <AuthForm
+                title="Forgot Password"
+                buttonText="Send reset link"
+                loading={loading}
+                onSubmit={handleSubmit}
+                onChange={handleChange}
+                fields={[
+                    {
+                        name: "email",
+                        label: "Email",
+                        type: "email",
+                        value: form.email,
+                        placeholder: "Enter your email"
+                    }
+                ]}
+            />
+
+            {message && <p>{message}</p>}
+        </div>
     );
 }

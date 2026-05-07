@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { register } from "../../../api/auth.api";
+
+import { registerService } from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
 import AuthForm from "../components/AuthForm";
 
@@ -28,7 +29,7 @@ export default function Register() {
         e.preventDefault();
 
         try {
-            await register(form);
+            await registerService(form);
 
             alert("Account created ✅");
 

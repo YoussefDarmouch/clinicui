@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from "react-router-dom";
 import { loginSuccess } from '../../../app/slices/authSlice'
-import { login } from '../../../api/auth.api'
+
+import { loginService } from '../services/auth.service';
 import Button from '../../../components/ui/Button'
 import Input from '../../../components/ui/Input'
 import Modal from '../../../components/ui/Modal'
@@ -19,7 +20,7 @@ export default function Login() {
         e.preventDefault();
 
         try {
-            const data = await login({ email, password });
+            const data = await loginService({ email, password });
 
             dispatch(
                 loginSuccess({

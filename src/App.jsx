@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux";
-import Login from "./features/auth/pages/Login";
-import MainLayout from "./components/layout/MainLayou";
-import Register from "./features/auth/pages/Register";
-import AppRoutes from "./routes/AppRoutes";
-
+import { Routes, Route } from "react-router-dom";
+import Home from "./features/public/pages/Home";
+import MedecinsList from "./features/public/pages/MedecinsList";
+import MedecinDetails from "./features/public/pages/MedecinDetails";
+import Specialites from "./features/public/pages/Specialites";
+import Medicaments from "./features/public/pages/Medicaments";
 function App() {
   const auth = useSelector((state) => state.auth);
 
@@ -12,7 +13,17 @@ function App() {
   console.log("ROLE:", auth.role);
   console.log("AUTH STATE:", auth);
 
-  return <AppRoutes />;
+  return (
+    <Routes>
+
+      {/* Public routes */}
+      <Route path="/" element={<Home />} />
+      <Route path="/medecins" element={<MedecinsList />} />
+      <Route path="/medecins/:id" element={<MedecinDetails />} />
+      <Route path="/specialites" element={<Specialites />} />
+      <Route path="/medicaments" element={<Medicaments />} />
+
+    </Routes>);
 }
 
 export default App;

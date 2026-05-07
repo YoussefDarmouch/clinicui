@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
-import { resetPassword } from '../../../api/auth.api'
+import { resetPasswordService } from '../services/auth.service'
 import AuthForm from '../components/AuthForm'
 
 export default function ResetPassword() {
@@ -17,10 +17,13 @@ export default function ResetPassword() {
     });
 
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
-    if (!email || !token) {
-        return <p>Invalid reset link</p>;
-    }
+    useEffect(() => {
+        if (!email || !token) {
+            setError("Invalid reset link");
+        }
+    }, [email, token]);
 
     const handleChange = (name, value) => {
         setForm({
@@ -34,7 +37,7 @@ export default function ResetPassword() {
         setLoading(true);
 
         try {
-            await resetPassword({
+            await resetPasswordService({
                 email,
                 token,
                 password: form.password,
@@ -51,6 +54,10 @@ export default function ResetPassword() {
             setLoading(false);
         }
     };
+
+    if (error) {
+        return <p>{error}</p>;
+    }
 
     return (
         <AuthForm
