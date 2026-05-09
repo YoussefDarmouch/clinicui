@@ -27,10 +27,7 @@ const CreateRendezVous = () => {
     // 🔐 auth check
     useEffect(() => {
         const token = localStorage.getItem("token");
-
-        if (!token) {
-            navigate("/login");
-        }
+        if (!token) navigate("/login");
     }, []);
 
     // 📥 load doctors
@@ -40,11 +37,11 @@ const CreateRendezVous = () => {
 
     const fetchDoctors = async () => {
         try {
-            const res = await getMedecinsService();
-            setDoctors(res.data.data.data);
-            console.log(doctors)
-        } catch (err) {
-            console.error(err);
+            const response = await getMedecinsService();
+            const doctorsData = response?.data?.data?.data || [];
+            setDoctors(doctorsData);
+        } catch (error) {
+            console.error(error);
         } finally {
             setLoading(false);
         }
@@ -61,8 +58,11 @@ const CreateRendezVous = () => {
         setSlotsLoading(true);
         try {
             const res = await getAvailableSlotsService(selectedDoctor, selectedDate);
+
+            // 🔥 IMPORTANT: slots are strings
             setAvailableSlots(res.data.data || []);
-            console.log(availableSlots)
+            setSelectedSlot(null);
+
         } catch (err) {
             console.error(err);
             setAvailableSlots([]);
@@ -71,7 +71,6 @@ const CreateRendezVous = () => {
         }
     };
 
-    // ✍️ form change
     const handleChange = (e) => {
         setForm({
             ...form,
@@ -79,7 +78,7 @@ const CreateRendezVous = () => {
         });
     };
 
-    // 🚀 CREATE RDV (SERVICE USED)
+    // 🚀 CREATE RDV
     const handleCreateRDV = async () => {
 
         if (!selectedDoctor || !selectedSlot) {
@@ -92,7 +91,7 @@ const CreateRendezVous = () => {
         try {
             const payload = {
                 medecin_id: selectedDoctor,
-                date_heure: `${selectedDate} ${selectedSlot.time}`,
+                date_heure: selectedSlot, // ✅ FIXED
                 motif: form.motif,
                 notes: form.notes
             };
@@ -101,13 +100,11 @@ const CreateRendezVous = () => {
 
             alert("Rendez-vous créé avec succès!");
 
-            // reset form
+            // reset
             setSelectedDoctor('');
             setSelectedSlot(null);
-            setForm({
-                motif: '',
-                notes: ''
-            });
+            setAvailableSlots([]);
+            setForm({ motif: '', notes: '' });
 
         } catch (error) {
             console.error(error);
@@ -133,12 +130,10 @@ const CreateRendezVous = () => {
         <div className="min-h-screen bg-gray-50">
             <Navbar />
 
-            {/* HEADER */}
             <div className="text-center p-8 bg-white shadow">
                 <h1 className="text-3xl font-bold">Créer Rendez-vous</h1>
             </div>
 
-            {/* BODY */}
             <div className="max-w-5xl mx-auto p-6 grid grid-cols-2 gap-8">
 
                 {/* LEFT */}
@@ -153,7 +148,7 @@ const CreateRendezVous = () => {
                         <option value="">Select doctor</option>
                         {doctors.map(doc => (
                             <option key={doc.id} value={doc.id}>
-                                Dr {doc.name}
+                                Dr {doc.user.name}
                             </option>
                         ))}
                     </select>
@@ -174,10 +169,10 @@ const CreateRendezVous = () => {
                                 <button
                                     key={i}
                                     onClick={() => setSelectedSlot(slot)}
-                                    className={`p-2 border rounded ${selectedSlot === slot ? 'bg-blue-600 text-white' : ''}`}
+                                    className={`p-2 border rounded ${selectedSlot === slot ? 'bg-blue-600 text-white' : ''
+                                        }`}
                                 >
-                                    {slot.time}
-                                    {console.log(slot.time)}
+                                    {slot}
                                 </button>
                             ))
                         )}
