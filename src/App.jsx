@@ -1,7 +1,9 @@
 import { useSelector } from "react-redux";
-import Login from "./features/auth/pages/Login";
-import MainLayout from "./components/layout/MainLayou";
-import Register from "./features/auth/pages/Register";
+// import Login from "./features/auth/pages/Login";
+// import MainLayout from "./components/layout/MainLayou";
+// import Register from "./features/auth/pages/Register";
+// import AppRoutes from "./routes/AppRoutes";
+import Home from "./features/public/pages/Home";
 import AppRoutes from "./routes/AppRoutes";
 
 function App() {

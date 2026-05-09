@@ -6,19 +6,34 @@ import Register from "../features/auth/pages/Register"
 import ForgotPassword from "../features/auth/pages/ForgotPassword"
 import ResetPassword from "../features/auth/pages/ResetPassword"
 
+// Public Pages
+import Home from "../features/public/pages/Home"
+import Doctors from "../features/public/pages/Doctors"
+import DoctorDetails from "../features/public/pages/DoctorDetails"
+import Specialities from "../features/public/pages/Specialities"
+import CreateRendezVous from "../features/public/pages/CreateRendezVous"
+import Medicaments from "../features/public/pages/Medicaments"
 
 export default function AppRoutes() {
     return (
 
-
         <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<Home />} />
+            <Route path="/doctors" element={<Doctors />} />
+            <Route path="/doctors/:id" element={<DoctorDetails />} />
+            <Route path="/specialites" element={<Specialities />} />
+            <Route path="/createRendezVous" element={<CreateRendezVous />} />
+            <Route path="/medicaments" element={<Medicaments />} />
 
-            <Route path="/" element={<Navigate to="/login" />} />
+            {/* Auth Routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
 
+            {/* Redirect unknown routes to home */}
+            <Route path="*" element={<Navigate to="/" />} />
         </Routes>
 
     )

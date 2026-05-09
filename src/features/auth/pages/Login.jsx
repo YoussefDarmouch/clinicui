@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { loginSuccess } from '../../../app/slices/authSlice'
 import { login } from '../../../api/auth.api'
 import Button from '../../../components/ui/Button'
@@ -14,26 +14,38 @@ export default function Login() {
     const [message, setMessage] = useState("");
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
 
         try {
-            const data = await login({ email, password });
+            const res = await login({ email, password });
+
+            const user = res.data.user || res.data.data?.user;
+            const token = res.data.token || res.data.data?.token;
+
+            if (!token || !user) {
+                throw new Error("Invalid login response");
+            }
 
             dispatch(
                 loginSuccess({
-                    user: data.user,
-                    token: data.token,
-                    role: data?.user?.roles?.[0]?.name || "user",
+                    user,
+                    token,
+                    role: user?.roles?.[0]?.name || "user",
                 })
             );
 
-            setMessage("Login successful ✅");
-            setModalOpen(true);
+            localStorage.setItem("token", token);
+            localStorage.setItem("user", JSON.stringify(user));
+            localStorage.setItem("role", user?.roles?.[0]?.name || "user");
+
+            navigate("/createRendezVous");
 
         } catch (error) {
-            setMessage("Login failed ❌");
+            console.log(error);
+            setMessage(error?.response?.data?.message || "Login failed ❌");
             setModalOpen(true);
         }
     };
@@ -63,6 +75,7 @@ export default function Login() {
             <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
                 {message}
             </Modal>
+
             <div style={{ marginTop: "10px" }}>
                 <p>
                     Don't have an account?{" "}
