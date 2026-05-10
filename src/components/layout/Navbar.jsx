@@ -1,20 +1,33 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from "react-redux";
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../app/slices/authSlice";
 
 export default function Navbar() {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const location = useLocation();
 
+    // get user 
+    const { isAuthenticated } = useSelector((state) => state.auth);
+    const navigate = useNavigate();
     const handleLogout = () => {
         dispatch(logout());
         localStorage.clear();
-        navigate("/login");
+        navigate("/home");
     };
-
+    const handleRendezvous = () => {
+        if (!isAuthenticated) {
+            navigate("/login", {
+                state: {
+                    from: location.pathname,
+                },
+            });
+            return
+        }
+        navigate("/createRendezVous");
+    }
     const closeMenu = () => setIsMenuOpen(false);
 
     return (
@@ -38,20 +51,28 @@ export default function Navbar() {
                         <Link to="/doctors">Doctors</Link>
                         <Link to="/specialites">Specialities</Link>
                         <Link to="/medicaments">Medicaments</Link>
-
-                        <Link
-                            to="/createRendezVous"
+                        <button
+                            onClick={handleRendezvous}
                             className="bg-white text-blue-600 px-4 py-2 rounded-full font-semibold"
                         >
-                            Book Appointment
-                        </Link>
-
-                        <button
-                            onClick={handleLogout}
-                            className="bg-red-500 px-4 py-2 rounded-full"
-                        >
-                            Logout
+                            Create RendezVous
                         </button>
+
+                        {isAuthenticated ? (
+                            <button
+                                onClick={handleLogout}
+                                className="bg-red-500 px-4 py-2 rounded-full"
+                            >
+                                Logout
+                            </button>
+                        ) : (
+                            <Link
+                                to="/login"
+                                className="bg-white text-blue-600 px-4 py-2 rounded-full"
+                            >
+                                Login
+                            </Link>
+                        )}
                     </nav>
 
                     {/* MOBILE BUTTON */}
@@ -74,24 +95,31 @@ export default function Navbar() {
                     <Link to="/doctors" onClick={closeMenu}>Doctors</Link>
                     <Link to="/specialites" onClick={closeMenu}>Specialities</Link>
                     <Link to="/medicaments" onClick={closeMenu}>Medicaments</Link>
-
-                    <Link
-                        to="/createRendezVous"
-                        onClick={closeMenu}
-                        className="block bg-white text-blue-600 px-3 py-2 rounded"
-                    >
-                        Book Appointment
-                    </Link>
-
                     <button
                         onClick={() => {
-                            handleLogout();
+                            handleRendezvous();
                             closeMenu();
                         }}
-                        className="bg-red-500 px-3 py-2 rounded w-full"
+                        className="bg-white text-blue-600 px-4 py-2 rounded-full font-semibold w-full"
                     >
-                        Logout
+                        Create RendezVous
                     </button>
+
+                    {isAuthenticated ? (
+                        <button
+                            onClick={handleLogout}
+                            className="bg-red-500 px-4 py-2 rounded-full"
+                        >
+                            Logout
+                        </button>
+                    ) : (
+                        <Link
+                            to="/login"
+                            className="bg-white text-blue-600 px-4 py-2 rounded-full"
+                        >
+                            Login
+                        </Link>
+                    )}
 
                 </div>
 

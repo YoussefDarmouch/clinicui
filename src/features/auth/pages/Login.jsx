@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { loginSuccess } from '../../../app/slices/authSlice'
 import { login } from '../../../api/auth.api'
 import Button from '../../../components/ui/Button'
@@ -15,7 +15,8 @@ export default function Login() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    const location = useLocation();
+    const redirectPath = location.state?.from || "/";
     const handleLogin = async (e) => {
         e.preventDefault();
 
@@ -40,8 +41,7 @@ export default function Login() {
             localStorage.setItem("token", token);
             localStorage.setItem("user", JSON.stringify(user));
             localStorage.setItem("role", user?.roles?.[0]?.name || "user");
-
-            navigate("/createRendezVous");
+            navigate(redirectPath);
 
         } catch (error) {
             console.log(error);
