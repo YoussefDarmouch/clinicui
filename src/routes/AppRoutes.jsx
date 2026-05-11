@@ -5,6 +5,7 @@ import Login from "../features/auth/pages/Login"
 import Register from "../features/auth/pages/Register"
 import ForgotPassword from "../features/auth/pages/ForgotPassword"
 import ResetPassword from "../features/auth/pages/ResetPassword"
+import AdminLayout from "../components/layout/AdminLayout";
 
 // Public Pages
 import Home from "../features/public/pages/Home"
@@ -13,11 +14,16 @@ import DoctorDetails from "../features/public/pages/DoctorDetails"
 import Specialities from "../features/public/pages/Specialities"
 import CreateRendezVous from "../features/public/pages/CreateRendezVous"
 import Medicaments from "../features/public/pages/Medicaments"
+import Dashboard from "../features/admin/dashboard/Dashboard";
 
 export default function AppRoutes() {
     return (
 
         <Routes>
+            {/* {admin dashboard} */}
+            <Route path="/admin" element={<AdminLayout />}>
+                <Route path="dashboard" element={<Dashboard />} />
+            </Route>
             {/* Public Routes */}
             <Route path="/" element={<Home />} />
             <Route path="/doctors" element={<Doctors />} />

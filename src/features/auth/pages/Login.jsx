@@ -41,7 +41,20 @@ export default function Login() {
             localStorage.setItem("token", token);
             localStorage.setItem("user", JSON.stringify(user));
             localStorage.setItem("role", user?.roles?.[0]?.name || "user");
-            navigate(redirectPath);
+            const role = user?.roles?.[0]?.name || "user";
+
+            if (role === "admin") {
+                navigate("/admin/dashboard");
+            }
+            // } else if (role === "medecin") {
+            //     navigate("/medecin/dashboard");
+            // }
+            // else if (role === "patient") {
+            //     navigate("/patient/dashboard");
+            // }
+            else {
+                navigate(redirectPath);
+            }
 
         } catch (error) {
             console.log(error);
