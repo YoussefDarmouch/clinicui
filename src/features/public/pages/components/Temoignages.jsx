@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { getTemoignagesService } from "../../services/public.service";
 
 // SWIPER
@@ -51,7 +51,7 @@ function Temoignages() {
             {/* Header */}
             <div className="text-center mb-14">
 
-                <p className="text-blue-600 font-semibold mb-3">
+                <p className="text-primary-600 font-semibold mb-3">
                     Testimonials
                 </p>
 
@@ -90,7 +90,7 @@ function Temoignages() {
 
                     <SwiperSlide key={item.id}>
 
-                        <div className="bg-blue-50 rounded-3xl p-7 shadow-md hover:shadow-2xl transition duration-500 h-full">
+                        <div className="bg-primary-50 rounded-3xl p-7 shadow-md hover:shadow-2xl transition duration-500 h-full">
 
                             {/* Stars */}
                             <div className="text-yellow-400 mb-4 text-xl">
@@ -125,7 +125,7 @@ function Temoignages() {
                                         Doctor
                                     </p>
 
-                                    <p className="font-semibold text-blue-600 text-sm">
+                                    <p className="font-semibold text-primary-600 text-sm">
                                         {item.medecin?.user?.name}
                                     </p>
 
@@ -146,3 +146,4 @@ function Temoignages() {
 }
 
 export default Temoignages;
+

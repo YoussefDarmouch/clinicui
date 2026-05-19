@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+﻿import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { createSpecialiteService, getSpecialiteService, updateSpecialiteService } from '../services/admin.service'
 
@@ -59,7 +59,7 @@ export default function SpecialiteForm() {
                 </div>
 
                 <form onSubmit={handleSubmit} className="mt-6 grid gap-4">
-                    {error && <p className="text-sm text-rose-600">{error}</p>}
+                    {error && <p className="text-sm text-primary-600">{error}</p>}
 
                     <div>
                         <label className="text-sm text-slate-600">Nom</label>
@@ -81,7 +81,7 @@ export default function SpecialiteForm() {
                     </div>
 
                     <div className="flex items-center gap-3">
-                        <button type="submit" disabled={loading} className="inline-flex items-center rounded-2xl bg-sky-600 px-5 py-3 text-sm font-semibold text-white hover:bg-sky-700">
+                        <button type="submit" disabled={loading} className="inline-flex items-center rounded-2xl bg-primary-600 px-5 py-3 text-sm font-semibold text-white hover:bg-primary-700">
                             {loading ? 'Enregistrement...' : 'Enregistrer'}
                         </button>
                         <button type="button" onClick={() => navigate('/admin/specialites')} className="inline-flex items-center rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-medium text-slate-700 hover:bg-slate-50">
@@ -93,3 +93,5 @@ export default function SpecialiteForm() {
         </div>
     )
 }
+
+

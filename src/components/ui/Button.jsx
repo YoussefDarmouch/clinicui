@@ -1,4 +1,4 @@
-export default function Button({
+﻿export default function Button({
     children,
     type = "button",
     onClick,
@@ -10,9 +10,10 @@ export default function Button({
             type={type}
             onClick={onClick}
             disabled={disabled}
-            className={`px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 ${className}`}
+            className={`px-4 py-2 rounded bg-primary-600 text-white hover:bg-primary-700 disabled:opacity-50 ${className}`}
         >
             {children}
         </button>
     );
 }
+

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+﻿import { useEffect, useState } from 'react'
 import { getDossierMedicalService } from '../services/admin.service'
 
 export default function DossierMedical({ patientId }) {
@@ -44,8 +44,8 @@ export default function DossierMedical({ patientId }) {
 
     if (error) {
         return (
-            <section className="rounded-3xl border border-rose-200 bg-rose-50 p-6 shadow-sm">
-                <p className="text-sm text-rose-700">
+            <section className="rounded-3xl border border-primary-100 bg-primary-50 p-6 shadow-sm">
+                <p className="text-sm text-primary-700">
                     {error}
                 </p>
             </section>
@@ -156,3 +156,4 @@ export default function DossierMedical({ patientId }) {
         </section>
     )
 }
+

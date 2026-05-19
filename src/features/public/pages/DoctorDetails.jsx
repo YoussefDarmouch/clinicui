@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import {
@@ -75,7 +75,7 @@ const DoctorDetails = () => {
 
                 <div className="min-h-screen flex items-center justify-center">
                     <div className="text-center">
-                        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto"></div>
+                        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary-600 mx-auto"></div>
 
                         <p className="mt-4 text-gray-600">
                             Loading doctor details...
@@ -123,7 +123,7 @@ const DoctorDetails = () => {
                                         : '/default-doctor.png'
                                 }
                                 alt={doctor.user?.name}
-                                className="w-full h-full object-cover rounded-full border-4 border-blue-100"
+                                className="w-full h-full object-cover rounded-full border-4 border-primary-100"
                             />
                         </div>
 
@@ -134,15 +134,15 @@ const DoctorDetails = () => {
                                 {doctor.user?.name}
                             </h1>
 
-                            <p className="text-xl text-blue-600 font-medium mb-6">
+                            <p className="text-xl text-primary-600 font-medium mb-6">
                                 {doctor.specialite?.name}
                             </p>
 
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 
                                 {/* EXPERIENCE */}
-                                <div className="bg-blue-50 p-4 rounded-lg">
-                                    <div className="text-2xl font-bold text-blue-600">
+                                <div className="bg-primary-50 p-4 rounded-lg">
+                                    <div className="text-2xl font-bold text-primary-600">
                                         {doctor.annees_experience}
                                     </div>
 
@@ -152,8 +152,8 @@ const DoctorDetails = () => {
                                 </div>
 
                                 {/* PHONE */}
-                                <div className="bg-green-50 p-4 rounded-lg">
-                                    <div className="text-lg font-bold text-green-600">
+                                <div className="bg-primary-50 p-4 rounded-lg">
+                                    <div className="text-lg font-bold text-primary-600">
                                         {doctor.user?.phone}
                                     </div>
 
@@ -163,8 +163,8 @@ const DoctorDetails = () => {
                                 </div>
 
                                 {/* ADDRESS */}
-                                <div className="bg-purple-50 p-4 rounded-lg">
-                                    <div className="text-lg font-bold text-purple-600">
+                                <div className="bg-primary-50 p-4 rounded-lg">
+                                    <div className="text-lg font-bold text-primary-600">
                                         {doctor.user?.address}
                                     </div>
 
@@ -235,7 +235,7 @@ const DoctorDetails = () => {
                                     onChange={(e) =>
                                         setSelectedDate(e.target.value)
                                     }
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500/10"
                                 />
 
                             </div>
@@ -250,7 +250,7 @@ const DoctorDetails = () => {
                                 {slotsLoading ? (
                                     <div className="text-center py-4">
 
-                                        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600 mx-auto"></div>
+                                        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary-600 mx-auto"></div>
 
                                         <p className="text-sm text-gray-600 mt-2">
                                             Loading slots...
@@ -273,7 +273,7 @@ const DoctorDetails = () => {
                                                     onClick={() =>
                                                         handleBookAppointment(slot)
                                                     }
-                                                    className="w-full text-left px-4 py-3 border border-gray-200 rounded-lg hover:bg-blue-50 hover:border-blue-300 transition"
+                                                    className="w-full text-left px-4 py-3 border border-gray-200 rounded-lg hover:bg-primary-50 hover:border-primary-700 transition"
                                                 >
                                                     <div className="font-semibold text-gray-900">
                                                         {time}
@@ -301,3 +301,6 @@ const DoctorDetails = () => {
 };
 
 export default DoctorDetails;
+
+
+

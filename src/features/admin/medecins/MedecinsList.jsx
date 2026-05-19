@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+﻿import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Modal from '../../../components/ui/Modal'
 import { getMedecinsService, deleteMedecinService } from '../services/admin.service'
@@ -78,11 +78,11 @@ export default function MedecinsList() {
                                 setPage(1)
                             }}
                             placeholder="Rechercher un médecin..."
-                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200 sm:w-72"
+                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10 sm:w-72"
                         />
                         <Link
                             to="/admin/medecins/new"
-                            className="inline-flex items-center justify-center rounded-2xl bg-sky-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-sky-700"
+                            className="inline-flex items-center justify-center rounded-2xl bg-primary-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-primary-700"
                         >
                             Nouveau médecin
                         </Link>
@@ -94,7 +94,7 @@ export default function MedecinsList() {
                 {loading ? (
                     <p className="text-sm text-slate-500">Chargement des médecins...</p>
                 ) : error ? (
-                    <p className="text-sm text-rose-600">{error}</p>
+                    <p className="text-sm text-primary-600">{error}</p>
                 ) : (
                     <>
                         <div className="overflow-x-auto">
@@ -125,7 +125,7 @@ export default function MedecinsList() {
                                                             {medecin.user?.name?.split(' ').slice(0, 2).map((part) => part[0]).join('')}
                                                         </div>
                                                         <div>
-                                                            <Link to={`/admin/medecins/${medecin.id}`} className="font-semibold text-slate-900 hover:text-sky-600">
+                                                            <Link to={`/admin/medecins/${medecin.id}`} className="font-semibold text-slate-900 hover:text-primary-700">
                                                                 {medecin.user?.name || 'Médecin inconnu'}
                                                             </Link>
                                                             <p className="text-xs text-slate-500">{medecin.user?.email || '—'}</p>
@@ -136,7 +136,7 @@ export default function MedecinsList() {
                                                 <td className="px-4 py-4">{medecin.specialite?.name || '—'}</td>
                                                 <td className="px-4 py-4">{medecin.annees_experience ?? '—'} ans</td>
                                                 <td className="px-4 py-4">
-                                                    <span className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${medecin.user.is_active ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}`}>
+                                                    <span className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${medecin.user.is_active ? 'bg-primary-100 text-primary-700' : 'bg-primary-100 text-primary-700'}`}>
                                                         {medecin.user.is_active ? 'Actif' : 'Inactif'}
                                                     </span>
                                                 </td>
@@ -149,7 +149,7 @@ export default function MedecinsList() {
                                                     </Link>
                                                     <button
                                                         onClick={() => setConfirmDelete({ id: medecin.id, name: medecin.user?.name || medecin.numero_licence })}
-                                                        className="rounded-2xl bg-rose-100 px-3 py-2 text-xs font-semibold text-rose-700 hover:bg-rose-200"
+                                                        className="rounded-2xl bg-primary-100 px-3 py-2 text-xs font-semibold text-primary-700 hover:bg-primary-100"
                                                     >
                                                         Supprimer
                                                     </button>
@@ -209,7 +209,7 @@ export default function MedecinsList() {
                             <button
                                 type="button"
                                 onClick={handleDelete}
-                                className="rounded-2xl bg-rose-600 px-5 py-3 text-sm font-semibold text-white hover:bg-rose-700"
+                                className="rounded-2xl bg-primary-600 px-5 py-3 text-sm font-semibold text-white hover:bg-primary-700"
                             >
                                 Supprimer
                             </button>
@@ -220,3 +220,7 @@ export default function MedecinsList() {
         </div>
     )
 }
+
+
+
+

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+﻿import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Modal from '../../../components/ui/Modal'
 import { getPatientsService, deletePatientService } from '../services/admin.service'
@@ -77,11 +77,11 @@ export default function PatientsList() {
                                 setPage(1)
                             }}
                             placeholder="Rechercher un patient..."
-                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200 sm:w-72"
+                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10 sm:w-72"
                         />
                         <Link
                             to="/admin/patients/new"
-                            className="inline-flex items-center justify-center rounded-2xl bg-sky-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-sky-700"
+                            className="inline-flex items-center justify-center rounded-2xl bg-primary-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-primary-700"
                         >
                             Nouveau patient
                         </Link>
@@ -93,7 +93,7 @@ export default function PatientsList() {
                 {loading ? (
                     <p className="text-sm text-slate-500">Chargement des patients...</p>
                 ) : error ? (
-                    <p className="text-sm text-rose-600">{error}</p>
+                    <p className="text-sm text-primary-600">{error}</p>
                 ) : (
                     <>
                         <div className="overflow-x-auto">
@@ -129,7 +129,7 @@ export default function PatientsList() {
                                                                 {initials}
                                                             </div>
                                                             <div>
-                                                                <Link to={`/admin/patients/${patient.id}`} className="font-semibold text-slate-900 hover:text-sky-600">
+                                                                <Link to={`/admin/patients/${patient.id}`} className="font-semibold text-slate-900 hover:text-primary-700">
                                                                     {name}
                                                                 </Link>
                                                                 <p className="text-xs text-slate-500">{phone}</p>
@@ -149,7 +149,7 @@ export default function PatientsList() {
                                                         </Link>
                                                         <button
                                                             onClick={() => setConfirmDelete({ id: patient.id, name })}
-                                                            className="rounded-2xl bg-rose-100 px-3 py-2 text-xs font-semibold text-rose-700 hover:bg-rose-200"
+                                                            className="rounded-2xl bg-primary-100 px-3 py-2 text-xs font-semibold text-primary-700 hover:bg-primary-100"
                                                         >
                                                             Supprimer
                                                         </button>
@@ -210,7 +210,7 @@ export default function PatientsList() {
                             <button
                                 type="button"
                                 onClick={handleDelete}
-                                className="rounded-2xl bg-rose-600 px-5 py-3 text-sm font-semibold text-white hover:bg-rose-700"
+                                className="rounded-2xl bg-primary-600 px-5 py-3 text-sm font-semibold text-white hover:bg-primary-700"
                             >
                                 Supprimer
                             </button>
@@ -221,3 +221,7 @@ export default function PatientsList() {
         </div>
     )
 }
+
+
+
+

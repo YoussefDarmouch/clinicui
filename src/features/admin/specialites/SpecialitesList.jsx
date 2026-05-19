@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+﻿import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getSpecialitesService, deleteSpecialiteService } from '../services/admin.service'
 
@@ -57,11 +57,11 @@ export default function SpecialitesList() {
                             value={query}
                             onChange={(e) => setQuery(e.target.value)}
                             placeholder="Rechercher une spécialité..."
-                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200 sm:w-72"
+                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10 sm:w-72"
                         />
                         <Link
                             to="/admin/specialites/new"
-                            className="inline-flex items-center justify-center rounded-2xl bg-sky-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-sky-700"
+                            className="inline-flex items-center justify-center rounded-2xl bg-primary-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-primary-700"
                         >
                             Nouvelle spécialité
                         </Link>
@@ -73,7 +73,7 @@ export default function SpecialitesList() {
                 {loading ? (
                     <p className="text-sm text-slate-500">Chargement des spécialités...</p>
                 ) : error ? (
-                    <p className="text-sm text-rose-600">{error}</p>
+                    <p className="text-sm text-primary-600">{error}</p>
                 ) : (
                     <div className="overflow-x-auto">
                         <table className="min-w-full divide-y divide-slate-200 text-left text-sm text-slate-600">
@@ -95,7 +95,7 @@ export default function SpecialitesList() {
                                     filtered.map((s) => (
                                         <tr key={s.id} className="transition hover:bg-slate-50">
                                             <td className="px-4 py-4">
-                                                <Link to={`/admin/specialites/${s.id}`} className="font-semibold text-slate-900 hover:text-sky-600">
+                                                <Link to={`/admin/specialites/${s.id}`} className="font-semibold text-slate-900 hover:text-primary-700">
                                                     {s.name}
                                                 </Link>
                                             </td>
@@ -109,7 +109,7 @@ export default function SpecialitesList() {
                                                 </Link>
                                                 <button
                                                     onClick={() => handleDelete(s.id)}
-                                                    className="rounded-2xl bg-rose-100 px-3 py-2 text-xs font-semibold text-rose-700 hover:bg-rose-200"
+                                                    className="rounded-2xl bg-primary-100 px-3 py-2 text-xs font-semibold text-primary-700 hover:bg-primary-100"
                                                 >
                                                     Supprimer
                                                 </button>
@@ -125,3 +125,7 @@ export default function SpecialitesList() {
         </div>
     )
 }
+
+
+
+

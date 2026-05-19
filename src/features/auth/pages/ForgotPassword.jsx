@@ -1,4 +1,5 @@
-import { useState } from "react";
+﻿import { useState } from "react";
+import { Link } from "react-router-dom";
 import { forgotPasswordService } from "../services/auth.service";
 import AuthForm from "../components/AuthForm";
 
@@ -28,25 +29,35 @@ export default function ForgotPassword() {
     };
 
     return (
-        <div>
-            <AuthForm
-                title="Forgot Password"
-                buttonText="Send reset link"
-                loading={loading}
-                onSubmit={handleSubmit}
-                onChange={handleChange}
-                fields={[
-                    {
-                        name: "email",
-                        label: "Email",
-                        type: "email",
-                        value: form.email,
-                        placeholder: "Enter your email"
-                    }
-                ]}
-            />
-
-            {message && <p>{message}</p>}
-        </div>
+        <AuthForm
+            title="Forgot Password"
+            subtitle="Reset your password"
+            description="Enter your email address and we will send a password reset link."
+            buttonText="Send reset link"
+            loading={loading}
+            onSubmit={handleSubmit}
+            onChange={handleChange}
+            fields={[
+                {
+                    name: "email",
+                    label: "Email",
+                    type: "email",
+                    value: form.email,
+                    placeholder: "Enter your email"
+                }
+            ]}
+            footer={
+                <div className="space-y-4 text-sm text-slate-600">
+                    {message && <p className="text-sm text-slate-600">{message}</p>}
+                    <p className="text-center">
+                        Remembered your password?{' '}
+                        <Link to="/login" className="font-semibold text-primary-600 hover:text-primary-700">
+                            Login
+                        </Link>
+                    </p>
+                </div>
+            }
+        />
     );
 }
+

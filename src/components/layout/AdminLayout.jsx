@@ -1,4 +1,4 @@
-import Sidebar from "./Sidebar";
+﻿import Sidebar from "./Sidebar";
 import { Outlet, Link } from "react-router-dom";
 
 export default function AdminLayout() {
@@ -17,7 +17,7 @@ export default function AdminLayout() {
                             <Link to="/" className="inline-flex items-center rounded-full border border-slate-200 bg-slate-100 px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-200">
                                 Accueil
                             </Link>
-                            <Link to="/admin/profile" className="inline-flex items-center rounded-full bg-sky-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-sky-700">
+                            <Link to="/admin/profile" className="inline-flex items-center rounded-full bg-primary-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-primary-700">
                                 Profil
                             </Link>
                         </div>
@@ -31,3 +31,4 @@ export default function AdminLayout() {
         </div>
     );
 }
+

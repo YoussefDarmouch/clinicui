@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../app/slices/authSlice";
@@ -32,7 +32,7 @@ export default function Navbar() {
     const closeMenu = () => setIsMenuOpen(false);
 
     return (
-        <div className="bg-blue-600 text-white shadow-md">
+        <div className="bg-primary-600 text-white shadow-md">
 
             {/* TOP BAR */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,7 +41,7 @@ export default function Navbar() {
                     {/* LOGO */}
                     <Link
                         to="/"
-                        className="text-2xl font-bold hover:text-blue-100"
+                        className="text-2xl font-bold hover:text-primary-100"
                     >
                         Clinic System
                     </Link>
@@ -59,7 +59,7 @@ export default function Navbar() {
                         )}
                         <button
                             onClick={handleRendezvous}
-                            className="bg-white text-blue-600 px-4 py-2 rounded-full font-semibold"
+                            className="bg-white text-primary-600 px-4 py-2 rounded-full font-semibold"
                         >
                             Create RendezVous
                         </button>
@@ -67,14 +67,14 @@ export default function Navbar() {
                         {isAuthenticated ? (
                             <button
                                 onClick={handleLogout}
-                                className="bg-red-500 px-4 py-2 rounded-full"
+                                className="bg-primary-500 px-4 py-2 rounded-full"
                             >
                                 Logout
                             </button>
                         ) : (
                             <Link
                                 to="/login"
-                                className="bg-white text-blue-600 px-4 py-2 rounded-full"
+                                className="bg-white text-primary-600 px-4 py-2 rounded-full"
                             >
                                 Login
                             </Link>
@@ -93,7 +93,7 @@ export default function Navbar() {
             </div>
 
             {/* MOBILE MENU */}
-            <div className={`${isMenuOpen ? "block" : "hidden"} md:hidden bg-blue-700`}>
+            <div className={`${isMenuOpen ? "block" : "hidden"} md:hidden bg-primary-700`}>
 
                 <div className="px-4 py-3 space-y-2">
 
@@ -109,7 +109,7 @@ export default function Navbar() {
                             handleRendezvous();
                             closeMenu();
                         }}
-                        className="bg-white text-blue-600 px-4 py-2 rounded-full font-semibold w-full"
+                        className="bg-white text-primary-600 px-4 py-2 rounded-full font-semibold w-full"
                     >
                         Create RendezVous
                     </button>
@@ -117,14 +117,14 @@ export default function Navbar() {
                     {isAuthenticated ? (
                         <button
                             onClick={handleLogout}
-                            className="bg-red-500 px-4 py-2 rounded-full"
+                            className="bg-primary-500 px-4 py-2 rounded-full"
                         >
                             Logout
                         </button>
                     ) : (
                         <Link
                             to="/login"
-                            className="bg-white text-blue-600 px-4 py-2 rounded-full"
+                            className="bg-white text-primary-600 px-4 py-2 rounded-full"
                         >
                             Login
                         </Link>
@@ -137,3 +137,4 @@ export default function Navbar() {
         </div>
     );
 }
+

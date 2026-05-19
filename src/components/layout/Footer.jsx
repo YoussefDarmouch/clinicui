@@ -1,8 +1,8 @@
-import React from 'react'
+﻿import React from 'react'
 import { Link } from 'react-router-dom'
 export default function Footer() {
     return (
-        <footer className="bg-blue-700 text-white px-8 py-12">
+        <footer className="bg-primary-700 text-white px-8 py-12">
 
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
 
@@ -84,10 +84,12 @@ export default function Footer() {
             </div>
 
             {/* Bottom Footer */}
-            <div className="border-t border-blue-500 mt-10 pt-6 text-center text-sm text-gray-200">
+            <div className="border-t border-primary-500 mt-10 pt-6 text-center text-sm text-gray-200">
                 © 2025 Clinic System. All rights reserved.
             </div>
 
         </footer>
     )
 }
+
+

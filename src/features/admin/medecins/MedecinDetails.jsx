@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+﻿import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import Modal from '../../../components/ui/Modal'
 import MedecinForm from './MedecinForm'
@@ -59,8 +59,8 @@ export default function MedecinDetails() {
 
     if (error) {
         return (
-            <div className="rounded-3xl border border-rose-200 bg-rose-50 p-6 shadow-sm">
-                <p className="text-sm text-rose-700">{error}</p>
+            <div className="rounded-3xl border border-primary-100 bg-primary-50 p-6 shadow-sm">
+                <p className="text-sm text-primary-700">{error}</p>
             </div>
         )
     }
@@ -87,7 +87,7 @@ export default function MedecinDetails() {
                     <button
                         type="button"
                         onClick={() => setConfirmDelete(true)}
-                        className="rounded-2xl bg-rose-100 px-5 py-3 text-sm font-semibold text-rose-700 transition hover:bg-rose-200"
+                        className="rounded-2xl bg-primary-100 px-5 py-3 text-sm font-semibold text-primary-700 transition hover:bg-primary-100"
                     >
                         Supprimer
                     </button>
@@ -140,7 +140,7 @@ export default function MedecinDetails() {
                             </div>
                             <div>
                                 <p className="text-sm text-slate-500">Statut</p>
-                                <span className={`mt-2 inline-flex rounded-full px-3 py-1 text-sm font-semibold ${medecin.user.is_active ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}`}>
+                                <span className={`mt-2 inline-flex rounded-full px-3 py-1 text-sm font-semibold ${medecin.user.is_active ? 'bg-primary-100 text-primary-700' : 'bg-primary-100 text-primary-700'}`}>
                                     {medecin.user.is_active ? 'Actif' : 'Inactif'}
                                 </span>
                             </div>
@@ -196,7 +196,7 @@ export default function MedecinDetails() {
                             <button
                                 type="button"
                                 onClick={handleDelete}
-                                className="rounded-2xl bg-rose-600 px-5 py-3 text-sm font-semibold text-white hover:bg-rose-700"
+                                className="rounded-2xl bg-primary-600 px-5 py-3 text-sm font-semibold text-white hover:bg-primary-700"
                             >
                                 Supprimer
                             </button>
@@ -207,3 +207,5 @@ export default function MedecinDetails() {
         </div>
     )
 }
+
+

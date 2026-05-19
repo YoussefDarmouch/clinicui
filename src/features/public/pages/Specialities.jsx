@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { getSpecialitesService, getMedecinsBySpecialiteService } from '../services/public.service';
 import Navbar from '../../../components/layout/Navbar';
 import Footer from '../../../components/layout/Footer';
@@ -51,7 +51,7 @@ const Specialities = () => {
                 <Navbar />
                 <div className="min-h-screen flex items-center justify-center">
                     <div className="text-center">
-                        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
+                        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-600 mx-auto"></div>
                         <p className="mt-4 text-gray-600">Loading specialities...</p>
                     </div>
                 </div>
@@ -101,8 +101,8 @@ const Specialities = () => {
                                 className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden cursor-pointer group"
                             >
                                 <div className="p-6">
-                                    <div className="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-200 transition-colors">
-                                        <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div className="w-16 h-16 mx-auto mb-4 bg-primary-100 rounded-full flex items-center justify-center group-hover:bg-primary-100 transition-colors">
+                                        <svg className="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                                         </svg>
                                     </div>
@@ -113,7 +113,7 @@ const Specialities = () => {
                                         <p className="text-gray-600 text-sm mb-4">
                                             {speciality.description || 'Specialized medical care and treatment services.'}
                                         </p>
-                                        <span className="inline-flex items-center text-blue-600 font-medium text-sm group-hover:text-blue-700">
+                                        <span className="inline-flex items-center text-primary-600 font-medium text-sm group-hover:text-primary-700">
                                             View Doctors →
                                         </span>
                                     </div>
@@ -126,7 +126,7 @@ const Specialities = () => {
                     <div>
                         {doctorsLoading ? (
                             <div className="text-center py-12">
-                                <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto"></div>
+                                <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary-600 mx-auto"></div>
                                 <p className="mt-4 text-gray-600">Loading doctors...</p>
                             </div>
                         ) : doctors.length === 0 ? (
@@ -149,7 +149,7 @@ const Specialities = () => {
                                                 <h3 className="text-lg font-semibold text-gray-900">
                                                     Dr. {doctor.name}
                                                 </h3>
-                                                <p className="text-blue-600 font-medium mb-2">
+                                                <p className="text-primary-600 font-medium mb-2">
                                                     {doctor.specialite?.name}
                                                 </p>
                                                 <p className="text-sm text-gray-600 mb-4">
@@ -157,7 +157,7 @@ const Specialities = () => {
                                                 </p>
                                                 <button
                                                     onClick={() => window.location.href = `/doctors/${doctor.id}`}
-                                                    className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+                                                    className="w-full bg-primary-600 text-white py-2 px-4 rounded-lg hover:bg-primary-700 transition-colors"
                                                 >
                                                     View Profile
                                                 </button>
@@ -177,3 +177,4 @@ const Specialities = () => {
 };
 
 export default Specialities;
+

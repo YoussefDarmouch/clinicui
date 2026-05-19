@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+﻿import { useEffect, useState } from 'react'
 import { getMedecinRendezVousService } from '../services/admin.service'
 
 export default function RendezVous({ medecinId }) {
@@ -55,7 +55,7 @@ export default function RendezVous({ medecinId }) {
                     Chargement des rendez-vous...
                 </p>
             ) : error ? (
-                <p className="mt-6 text-sm text-rose-600">
+                <p className="mt-6 text-sm text-primary-600">
                     {error}
                 </p>
             ) : rendezvous.length === 0 ? (
@@ -141,3 +141,4 @@ export default function RendezVous({ medecinId }) {
         </section>
     )
 }
+

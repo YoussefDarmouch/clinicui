@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { getSpecialitesService } from "../../services/public.service";
 
 function Specialities() {
@@ -27,7 +27,7 @@ function Specialities() {
             {/* Header */}
             <div className="text-center mb-14">
 
-                <p className="text-blue-600 font-semibold mb-3">
+                <p className="text-primary-600 font-semibold mb-3">
                     Our Specialities
                 </p>
 
@@ -48,11 +48,11 @@ function Specialities() {
 
                     <div
                         key={item.id}
-                        className="bg-blue-50 rounded-2xl p-6 shadow-sm hover:shadow-lg transition"
+                        className="bg-primary-50 rounded-2xl p-6 shadow-sm hover:shadow-lg transition"
                     >
 
                         {/* Icon */}
-                        <div className="w-14 h-14 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl mb-5">
+                        <div className="w-14 h-14 bg-primary-600 text-white rounded-full flex items-center justify-center text-2xl mb-5">
                             🏥
                         </div>
 
@@ -77,3 +77,4 @@ function Specialities() {
 }
 
 export default Specialities;
+

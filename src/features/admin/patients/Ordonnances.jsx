@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+﻿import { useEffect, useState } from 'react'
 import { getPatientOrdonnancesService } from '../services/admin.service'
 
 export default function Ordonnances({ patientId }) {
@@ -57,7 +57,7 @@ export default function Ordonnances({ patientId }) {
                     Chargement des ordonnances...
                 </p>
             ) : error ? (
-                <p className="mt-6 text-sm text-rose-600">
+                <p className="mt-6 text-sm text-primary-600">
                     {error}
                 </p>
             ) : ordonnances.length === 0 ? (
@@ -132,9 +132,9 @@ export default function Ordonnances({ patientId }) {
                                     <td className="px-4 py-4">
                                         <span
                                             className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${ordonnance.statut === 'active'
-                                                ? 'bg-emerald-100 text-emerald-700'
+                                                ? 'bg-primary-100 text-primary-700'
                                                 : ordonnance.statut === 'cancelled'
-                                                    ? 'bg-rose-100 text-rose-700'
+                                                    ? 'bg-primary-100 text-primary-700'
                                                     : 'bg-slate-100 text-slate-700'
                                                 }`}
                                         >
@@ -150,3 +150,4 @@ export default function Ordonnances({ patientId }) {
         </section>
     )
 }
+

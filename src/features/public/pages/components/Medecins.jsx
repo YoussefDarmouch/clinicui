@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { getMedecinsService } from "../../services/public.service";
 
 // SWIPER
@@ -45,12 +45,12 @@ function Medecins() {
     }
 
     return (
-        <section className="py-20 px-6 bg-blue-50 overflow-hidden">
+        <section className="py-20 px-6 bg-primary-50 overflow-hidden">
 
             {/* Header */}
             <div className="text-center mb-14">
 
-                <p className="text-blue-600 font-semibold mb-3">
+                <p className="text-primary-600 font-semibold mb-3">
                     Our Doctors
                 </p>
 
@@ -98,7 +98,7 @@ function Medecins() {
                             <img
                                 src={`http://localhost:8000/${doc.image_medecin}`}
                                 alt={doc.user?.name}
-                                className="w-28 h-28 mx-auto rounded-full object-cover border-4 border-blue-200 mb-4"
+                                className="w-28 h-28 mx-auto rounded-full object-cover border-4 border-primary-100 mb-4"
                             />
 
                             {/* Name */}
@@ -107,7 +107,7 @@ function Medecins() {
                             </h2>
 
                             {/* Speciality */}
-                            <p className="text-blue-600 text-sm mt-1">
+                            <p className="text-primary-600 text-sm mt-1">
                                 {doc.specialite?.name}
                             </p>
 
@@ -121,7 +121,7 @@ function Medecins() {
                             </p>
 
                             {/* Button */}
-                            <button className="mt-5 bg-blue-600 text-white px-5 py-2 rounded-full text-sm hover:bg-blue-700 transition">
+                            <button className="mt-5 bg-primary-600 text-white px-5 py-2 rounded-full text-sm hover:bg-primary-700 transition">
                                 Book Appointment
                             </button>
 
@@ -138,3 +138,4 @@ function Medecins() {
 }
 
 export default Medecins;
+

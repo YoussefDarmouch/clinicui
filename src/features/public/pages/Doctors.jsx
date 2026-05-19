@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+﻿import React, { useEffect, useMemo, useState } from 'react';
 import { getMedecinsService } from '../services/public.service';
 import { useNavigate } from 'react-router-dom';
 
@@ -77,7 +77,7 @@ const Doctors = () => {
                 <Navbar />
                 <div className="min-h-screen flex items-center justify-center">
                     <div className="text-center">
-                        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto"></div>
+                        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary-600 mx-auto"></div>
                         <p className="mt-4 text-gray-600">Loading doctors...</p>
                     </div>
                 </div>
@@ -164,7 +164,7 @@ const Doctors = () => {
                                 </h3>
 
                                 {/* SPECIALITY */}
-                                <p className="text-center text-blue-600">
+                                <p className="text-center text-primary-600">
                                     {doctor.specialite?.name}
                                 </p>
 
@@ -178,7 +178,7 @@ const Doctors = () => {
                                     onClick={() =>
                                         navigate(`/doctors/${doctor.id}`)
                                     }
-                                    className="w-full mt-4 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
+                                    className="w-full mt-4 bg-primary-600 text-white py-2 rounded-lg hover:bg-primary-700"
                                 >
                                     View Profile
                                 </button>
@@ -197,3 +197,4 @@ const Doctors = () => {
 };
 
 export default Doctors;
+

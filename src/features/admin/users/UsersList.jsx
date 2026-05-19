@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+﻿import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getUsersService, deleteUserService } from '../services/admin.service'
 
@@ -60,11 +60,11 @@ export default function UsersList() {
                             value={query}
                             onChange={(event) => setQuery(event.target.value)}
                             placeholder="Rechercher un utilisateur..."
-                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200 sm:w-72"
+                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10 sm:w-72"
                         />
                         <Link
                             to="/admin/users/new"
-                            className="inline-flex items-center justify-center rounded-2xl bg-sky-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-sky-700"
+                            className="inline-flex items-center justify-center rounded-2xl bg-primary-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-primary-700"
                         >
                             Nouveau utilisateur
                         </Link>
@@ -76,7 +76,7 @@ export default function UsersList() {
                 {loading ? (
                     <p className="text-sm text-slate-500">Chargement des utilisateurs...</p>
                 ) : error ? (
-                    <p className="text-sm text-rose-600">{error}</p>
+                    <p className="text-sm text-primary-600">{error}</p>
                 ) : (
                     <div className="overflow-x-auto">
                         <table className="min-w-full divide-y divide-slate-200 text-left text-sm text-slate-600">
@@ -106,7 +106,7 @@ export default function UsersList() {
                                                         {user.name?.split(' ').slice(0, 2).map((part) => part[0]).join('')}
                                                     </div>
                                                     <div>
-                                                        <Link to={`/admin/users/${user.id}`} className="font-semibold text-slate-900 hover:text-sky-600">
+                                                        <Link to={`/admin/users/${user.id}`} className="font-semibold text-slate-900 hover:text-primary-700">
                                                             {user.name}
                                                         </Link>
                                                         <p className="text-xs text-slate-500">{user.phone || '—'}</p>
@@ -120,7 +120,7 @@ export default function UsersList() {
                                                 </span>
                                             </td>
                                             <td className="px-4 py-4">
-                                                <span className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${user.is_active ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}`}>
+                                                <span className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${user.is_active ? 'bg-primary-100 text-primary-700' : 'bg-primary-100 text-primary-700'}`}>
                                                     {user.is_active ? 'Actif' : 'Inactif'}
                                                 </span>
                                             </td>
@@ -134,7 +134,7 @@ export default function UsersList() {
                                                 </Link>
                                                 <button
                                                     onClick={() => handleDelete(user.id)}
-                                                    className="rounded-2xl bg-rose-100 px-3 py-2 text-xs font-semibold text-rose-700 hover:bg-rose-200"
+                                                    className="rounded-2xl bg-primary-100 px-3 py-2 text-xs font-semibold text-primary-700 hover:bg-primary-100"
                                                 >
                                                     Supprimer
                                                 </button>
@@ -150,3 +150,7 @@ export default function UsersList() {
         </div>
     )
 }
+
+
+
+

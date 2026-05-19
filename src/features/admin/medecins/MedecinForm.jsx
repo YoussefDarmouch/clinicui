@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+﻿import { useEffect, useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
     createMedecinService,
@@ -163,7 +163,7 @@ export default function MedecinForm({ medecin: initialMedecin, onSuccess, onCanc
                 </div>
 
                 {serverError && (
-                    <div className="mb-4 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
+                    <div className="mb-4 rounded-2xl border border-primary-100 bg-primary-50 px-4 py-3 text-sm text-primary-700">
                         {serverError}
                     </div>
                 )}
@@ -175,7 +175,7 @@ export default function MedecinForm({ medecin: initialMedecin, onSuccess, onCanc
                             <select
                                 value={formData.user_id}
                                 onChange={handleChange('user_id')}
-                                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+                                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10"
                             >
                                 <option value="">Sélectionner un utilisateur</option>
                                 {userOptions.map((user) => (
@@ -184,7 +184,7 @@ export default function MedecinForm({ medecin: initialMedecin, onSuccess, onCanc
                                     </option>
                                 ))}
                             </select>
-                            {getFieldError('user_id') && <p className="text-xs text-rose-600">{getFieldError('user_id')}</p>}
+                            {getFieldError('user_id') && <p className="text-xs text-primary-600">{getFieldError('user_id')}</p>}
                         </label>
 
                         <label className="space-y-2">
@@ -192,7 +192,7 @@ export default function MedecinForm({ medecin: initialMedecin, onSuccess, onCanc
                             <select
                                 value={formData.specialite_id}
                                 onChange={handleChange('specialite_id')}
-                                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+                                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10"
                             >
                                 <option value="">Sélectionner une spécialité</option>
                                 {specialityOptions.map((specialite) => (
@@ -201,7 +201,7 @@ export default function MedecinForm({ medecin: initialMedecin, onSuccess, onCanc
                                     </option>
                                 ))}
                             </select>
-                            {getFieldError('specialite_id') && <p className="text-xs text-rose-600">{getFieldError('specialite_id')}</p>}
+                            {getFieldError('specialite_id') && <p className="text-xs text-primary-600">{getFieldError('specialite_id')}</p>}
                         </label>
                     </div>
 
@@ -212,9 +212,9 @@ export default function MedecinForm({ medecin: initialMedecin, onSuccess, onCanc
                                 type="text"
                                 value={formData.numero_licence}
                                 onChange={handleChange('numero_licence')}
-                                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+                                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10"
                             />
-                            {getFieldError('numero_licence') && <p className="text-xs text-rose-600">{getFieldError('numero_licence')}</p>}
+                            {getFieldError('numero_licence') && <p className="text-xs text-primary-600">{getFieldError('numero_licence')}</p>}
                         </label>
 
                         <label className="space-y-2">
@@ -224,9 +224,9 @@ export default function MedecinForm({ medecin: initialMedecin, onSuccess, onCanc
                                 min="0"
                                 value={formData.annees_experience}
                                 onChange={handleChange('annees_experience')}
-                                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+                                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10"
                             />
-                            {getFieldError('annees_experience') && <p className="text-xs text-rose-600">{getFieldError('annees_experience')}</p>}
+                            {getFieldError('annees_experience') && <p className="text-xs text-primary-600">{getFieldError('annees_experience')}</p>}
                         </label>
                     </div>
 
@@ -238,9 +238,9 @@ export default function MedecinForm({ medecin: initialMedecin, onSuccess, onCanc
                                 value={formData.image_medecin}
                                 onChange={handleChange('image_medecin')}
                                 placeholder="https://..."
-                                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+                                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10"
                             />
-                            {getFieldError('image_medecin') && <p className="text-xs text-rose-600">{getFieldError('image_medecin')}</p>}
+                            {getFieldError('image_medecin') && <p className="text-xs text-primary-600">{getFieldError('image_medecin')}</p>}
                         </label>
 
                         {formData.image_medecin && (
@@ -259,7 +259,7 @@ export default function MedecinForm({ medecin: initialMedecin, onSuccess, onCanc
                         <button
                             type="submit"
                             disabled={submitting}
-                            className="inline-flex justify-center rounded-2xl bg-sky-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-sky-700 disabled:cursor-not-allowed disabled:opacity-60"
+                            className="inline-flex justify-center rounded-2xl bg-primary-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-primary-700 disabled:cursor-not-allowed disabled:opacity-60"
                         >
                             {submitting ? 'Enregistrement...' : actionLabel}
                         </button>
@@ -278,3 +278,6 @@ export default function MedecinForm({ medecin: initialMedecin, onSuccess, onCanc
         </div>
     )
 }
+
+
+

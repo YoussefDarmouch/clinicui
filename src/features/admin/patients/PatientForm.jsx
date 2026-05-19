@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+﻿import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
     createPatientService,
@@ -156,7 +156,7 @@ export default function PatientForm({ patient: initialPatient, onSuccess, onCanc
             </div>
 
             {serverError && (
-                <div className="mb-4 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
+                <div className="mb-4 rounded-2xl border border-primary-100 bg-primary-50 px-4 py-3 text-sm text-primary-700">
                     {serverError}
                 </div>
             )}
@@ -168,7 +168,7 @@ export default function PatientForm({ patient: initialPatient, onSuccess, onCanc
                         <select
                             value={formData.user_id}
                             onChange={handleChange('user_id')}
-                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10"
                         >
                             <option value="">Aucun</option>
                             {users.map((user) => (
@@ -177,7 +177,7 @@ export default function PatientForm({ patient: initialPatient, onSuccess, onCanc
                                 </option>
                             ))}
                         </select>
-                        {getFieldError('user_id') && <p className="text-xs text-rose-600">{getFieldError('user_id')}</p>}
+                        {getFieldError('user_id') && <p className="text-xs text-primary-600">{getFieldError('user_id')}</p>}
                     </label>
 
                     <label className="space-y-2">
@@ -186,9 +186,9 @@ export default function PatientForm({ patient: initialPatient, onSuccess, onCanc
                             type="date"
                             value={formData.date_naissance}
                             onChange={handleChange('date_naissance')}
-                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10"
                         />
-                        {getFieldError('date_naissance') && <p className="text-xs text-rose-600">{getFieldError('date_naissance')}</p>}
+                        {getFieldError('date_naissance') && <p className="text-xs text-primary-600">{getFieldError('date_naissance')}</p>}
                     </label>
                 </div>
 
@@ -198,12 +198,12 @@ export default function PatientForm({ patient: initialPatient, onSuccess, onCanc
                         <select
                             value={formData.sexe}
                             onChange={handleChange('sexe')}
-                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10"
                         >
                             <option value="M">Masculin</option>
                             <option value="F">Féminin</option>
                         </select>
-                        {getFieldError('sexe') && <p className="text-xs text-rose-600">{getFieldError('sexe')}</p>}
+                        {getFieldError('sexe') && <p className="text-xs text-primary-600">{getFieldError('sexe')}</p>}
                     </label>
 
                     <label className="space-y-2">
@@ -213,9 +213,9 @@ export default function PatientForm({ patient: initialPatient, onSuccess, onCanc
                             value={formData.numero_securite_sociale}
                             onChange={handleChange('numero_securite_sociale')}
                             placeholder="1234567890123"
-                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10"
                         />
-                        {getFieldError('numero_securite_sociale') && <p className="text-xs text-rose-600">{getFieldError('numero_securite_sociale')}</p>}
+                        {getFieldError('numero_securite_sociale') && <p className="text-xs text-primary-600">{getFieldError('numero_securite_sociale')}</p>}
                     </label>
                 </div>
 
@@ -227,9 +227,9 @@ export default function PatientForm({ patient: initialPatient, onSuccess, onCanc
                             value={formData.groupe_sanguin}
                             onChange={handleChange('groupe_sanguin')}
                             placeholder="A+, O-, B+"
-                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10"
                         />
-                        {getFieldError('groupe_sanguin') && <p className="text-xs text-rose-600">{getFieldError('groupe_sanguin')}</p>}
+                        {getFieldError('groupe_sanguin') && <p className="text-xs text-primary-600">{getFieldError('groupe_sanguin')}</p>}
                     </label>
 
                     <label className="space-y-2">
@@ -239,9 +239,9 @@ export default function PatientForm({ patient: initialPatient, onSuccess, onCanc
                             onChange={handleChange('allergies')}
                             rows={4}
                             placeholder="Liste des allergies"
-                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10"
                         />
-                        {getFieldError('allergies') && <p className="text-xs text-rose-600">{getFieldError('allergies')}</p>}
+                        {getFieldError('allergies') && <p className="text-xs text-primary-600">{getFieldError('allergies')}</p>}
                     </label>
                 </div>
 
@@ -256,7 +256,7 @@ export default function PatientForm({ patient: initialPatient, onSuccess, onCanc
                     <button
                         type="submit"
                         disabled={submitting}
-                        className="rounded-2xl bg-sky-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-sky-700 disabled:cursor-not-allowed disabled:opacity-50"
+                        className="rounded-2xl bg-primary-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-primary-700 disabled:cursor-not-allowed disabled:opacity-50"
                     >
                         {submitting ? 'Enregistrement…' : actionLabel}
                     </button>
@@ -265,3 +265,6 @@ export default function PatientForm({ patient: initialPatient, onSuccess, onCanc
         </div>
     )
 }
+
+
+

@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 
 function FAQ() {
 
@@ -28,12 +28,12 @@ function FAQ() {
     };
 
     return (
-        <section className="py-20 px-10 bg-blue-50">
+        <section className="py-20 px-10 bg-primary-50">
 
             {/* Header */}
             <div className="text-center mb-14">
 
-                <p className="text-blue-600 font-semibold mb-3">
+                <p className="text-primary-600 font-semibold mb-3">
                     FAQ
                 </p>
 
@@ -65,7 +65,7 @@ function FAQ() {
                                 {item.question}
                             </h3>
 
-                            <span className="text-blue-600 text-xl">
+                            <span className="text-primary-600 text-xl">
                                 {openIndex === index ? "−" : "+"}
                             </span>
 
@@ -89,3 +89,4 @@ function FAQ() {
 }
 
 export default FAQ;
+

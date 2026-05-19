@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import Navbar from '../../../components/layout/Navbar';
 import Footer from '../../../components/layout/Footer';
@@ -169,7 +169,7 @@ const CreateRendezVous = () => {
                                 <button
                                     key={i}
                                     onClick={() => setSelectedSlot(slot)}
-                                    className={`p-2 border rounded ${selectedSlot === slot ? 'bg-blue-600 text-white' : ''
+                                    className={`p-2 border rounded ${selectedSlot === slot ? 'bg-primary-600 text-white' : ''
                                         }`}
                                 >
                                     {slot}
@@ -202,7 +202,7 @@ const CreateRendezVous = () => {
                     <button
                         onClick={handleCreateRDV}
                         disabled={bookingLoading}
-                        className="w-full bg-blue-600 text-white p-3 rounded"
+                        className="w-full bg-primary-600 text-white p-3 rounded"
                     >
                         {bookingLoading ? "Création..." : "Créer Rendez-vous"}
                     </button>
@@ -215,3 +215,4 @@ const CreateRendezVous = () => {
 };
 
 export default CreateRendezVous;
+

@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -11,7 +11,7 @@ export default function Profile() {
         <div className="space-y-6">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <div>
-                    <p className="text-sm uppercase tracking-[0.28em] text-sky-500">Admin profil</p>
+                    <p className="text-sm uppercase tracking-[0.28em] text-primary-500">Admin profil</p>
                     <h1 className="text-3xl font-semibold text-slate-900">Mon profil</h1>
                     <p className="mt-2 max-w-2xl text-sm text-slate-500">
                         Gérez vos informations de compte et accédez rapidement aux actions administratives.
@@ -107,3 +107,5 @@ export default function Profile() {
         </div>
     );
 }
+
+

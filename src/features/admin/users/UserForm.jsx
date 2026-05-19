@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+﻿import { useEffect, useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
     createUserService,
@@ -177,7 +177,7 @@ export default function UserForm({ user: initialUser, onSuccess, onCancel }) {
             </div>
 
             {serverError && (
-                <div className="mb-4 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
+                <div className="mb-4 rounded-2xl border border-primary-100 bg-primary-50 px-4 py-3 text-sm text-primary-700">
                     {serverError}
                 </div>
             )}
@@ -190,9 +190,9 @@ export default function UserForm({ user: initialUser, onSuccess, onCancel }) {
                             type="text"
                             value={formData.name}
                             onChange={handleChange('name')}
-                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10"
                         />
-                        {errors.name && <p className="text-xs text-rose-600">{errors.name[0]}</p>}
+                        {errors.name && <p className="text-xs text-primary-600">{errors.name[0]}</p>}
                     </label>
 
                     <label className="space-y-2">
@@ -201,9 +201,9 @@ export default function UserForm({ user: initialUser, onSuccess, onCancel }) {
                             type="email"
                             value={formData.email}
                             onChange={handleChange('email')}
-                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10"
                         />
-                        {errors.email && <p className="text-xs text-rose-600">{errors.email[0]}</p>}
+                        {errors.email && <p className="text-xs text-primary-600">{errors.email[0]}</p>}
                     </label>
                 </div>
 
@@ -214,9 +214,9 @@ export default function UserForm({ user: initialUser, onSuccess, onCancel }) {
                             type="text"
                             value={formData.phone}
                             onChange={handleChange('phone')}
-                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10"
                         />
-                        {getFieldError('phone') && <p className="text-xs text-rose-600">{getFieldError('phone')}</p>}
+                        {getFieldError('phone') && <p className="text-xs text-primary-600">{getFieldError('phone')}</p>}
                     </label>
 
                     <label className="space-y-2">
@@ -225,9 +225,9 @@ export default function UserForm({ user: initialUser, onSuccess, onCancel }) {
                             type="text"
                             value={formData.address}
                             onChange={handleChange('address')}
-                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10"
                         />
-                        {getFieldError('address') && <p className="text-xs text-rose-600">{getFieldError('address')}</p>}
+                        {getFieldError('address') && <p className="text-xs text-primary-600">{getFieldError('address')}</p>}
                     </label>
                 </div>
 
@@ -237,7 +237,7 @@ export default function UserForm({ user: initialUser, onSuccess, onCancel }) {
                             type="checkbox"
                             checked={Boolean(formData.is_active)}
                             onChange={(event) => setFormData((current) => ({ ...current, is_active: event.target.checked }))}
-                            className="h-4 w-4 rounded border-slate-300 text-sky-600 focus:ring-sky-500"
+                            className="h-4 w-4 rounded border-slate-300 text-primary-600 focus:ring-primary-500/10"
                         />
                         Actif
                     </label>
@@ -251,9 +251,9 @@ export default function UserForm({ user: initialUser, onSuccess, onCancel }) {
                             type="password"
                             value={formData.password}
                             onChange={handleChange('password')}
-                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10"
                         />
-                        {getFieldError('password') && <p className="text-xs text-rose-600">{getFieldError('password')}</p>}
+                        {getFieldError('password') && <p className="text-xs text-primary-600">{getFieldError('password')}</p>}
                     </label>
 
                     <label className="space-y-2">
@@ -262,9 +262,9 @@ export default function UserForm({ user: initialUser, onSuccess, onCancel }) {
                             type="password"
                             value={formData.password_confirmation}
                             onChange={handleChange('password_confirmation')}
-                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10"
                         />
-                        {getFieldError('password_confirmation') && <p className="text-xs text-rose-600">{getFieldError('password_confirmation')}</p>}
+                        {getFieldError('password_confirmation') && <p className="text-xs text-primary-600">{getFieldError('password_confirmation')}</p>}
                     </label>
                 </div>
 
@@ -272,25 +272,25 @@ export default function UserForm({ user: initialUser, onSuccess, onCancel }) {
                     <p className="text-sm font-semibold text-slate-700">Rôles</p>
                     <div className="mt-4 grid gap-3 sm:grid-cols-3">
                         {availableRoles.map((role) => (
-                            <label key={role.id} className="inline-flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 transition hover:border-sky-300">
+                            <label key={role.id} className="inline-flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 transition hover:border-primary-700">
                                 <input
                                     type="checkbox"
                                     checked={formData.roles.includes(role.id)}
                                     onChange={() => handleRoleToggle(role.id)}
-                                    className="h-4 w-4 rounded border-slate-300 text-sky-600 focus:ring-sky-500"
+                                    className="h-4 w-4 rounded border-slate-300 text-primary-600 focus:ring-primary-500/10"
                                 />
                                 {role.label}
                             </label>
                         ))}
                     </div>
-                    {getFieldError('roles') && <p className="mt-2 text-xs text-rose-600">{getFieldError('roles')}</p>}
+                    {getFieldError('roles') && <p className="mt-2 text-xs text-primary-600">{getFieldError('roles')}</p>}
                 </div>
 
                 <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
                     <button
                         type="submit"
                         disabled={submitting}
-                        className="inline-flex justify-center rounded-2xl bg-sky-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-sky-700 disabled:cursor-not-allowed disabled:opacity-60"
+                        className="inline-flex justify-center rounded-2xl bg-primary-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-primary-700 disabled:cursor-not-allowed disabled:opacity-60"
                     >
                         {submitting ? 'Enregistrement...' : actionLabel}
                     </button>
@@ -308,3 +308,7 @@ export default function UserForm({ user: initialUser, onSuccess, onCancel }) {
         </div>
     )
 }
+
+
+
+

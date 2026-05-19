@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../../app/slices/authSlice'
@@ -28,7 +28,7 @@ export default function Sidebar() {
             <div className="flex h-full flex-col justify-between">
                 <div className="space-y-6 overflow-y-auto pr-1">
                     <div className="mb-8 rounded-2xl bg-white/5 p-5">
-                        <p className="text-xs uppercase tracking-[0.3em] text-sky-300">
+                        <p className="text-xs uppercase tracking-[0.3em] text-primary-500">
                             Espace admin
                         </p>
 
@@ -49,12 +49,12 @@ export default function Sidebar() {
                                     to={link.to}
                                     className={({ isActive }) =>
                                         `flex items-center gap-3 rounded-xl px-4 py-3 transition ${isActive
-                                            ? 'bg-sky-500/20 text-white'
+                                            ? 'bg-primary-500/20 text-white'
                                             : 'text-slate-300 hover:bg-white/5 hover:text-white'
                                         }`
                                     }
                                 >
-                                    <span className="inline-flex h-2.5 w-2.5 rounded-full bg-sky-400 opacity-90" />
+                                    <span className="inline-flex h-2.5 w-2.5 rounded-full bg-primary-500 opacity-90" />
 
                                     <span className="truncate">
                                         {link.label}
@@ -80,7 +80,7 @@ export default function Sidebar() {
                     {auth.isAuthenticated ? (
                         <button
                             onClick={handleLogout}
-                            className="w-full rounded-xl bg-rose-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-rose-400"
+                            className="w-full rounded-xl bg-primary-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-primary-700"
                         >
                             Logout
                         </button>
@@ -97,3 +97,5 @@ export default function Sidebar() {
         </aside>
     )
 }
+
+

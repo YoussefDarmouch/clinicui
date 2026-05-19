@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { getMedicamentsService } from '../services/public.service';
 import Navbar from '../../../components/layout/Navbar';
 import Footer from '../../../components/layout/Footer';
@@ -47,7 +47,7 @@ const Medicaments = () => {
                 <Navbar />
                 <div className="min-h-screen flex items-center justify-center">
                     <div className="text-center">
-                        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
+                        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-600 mx-auto"></div>
                         <p className="mt-4 text-gray-600">Loading medicaments...</p>
                     </div>
                 </div>
@@ -77,7 +77,7 @@ const Medicaments = () => {
                             placeholder="Search medicaments..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500/10 focus:border-transparent"
                         />
                     </div>
                 </div>
@@ -96,8 +96,8 @@ const Medicaments = () => {
                         {filteredMedicaments.map((medicament) => (
                             <div key={medicament.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
                                 <div className="p-6">
-                                    <div className="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center">
-                                        <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div className="w-16 h-16 mx-auto mb-4 bg-primary-100 rounded-full flex items-center justify-center">
+                                        <svg className="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                                         </svg>
                                     </div>
@@ -113,7 +113,7 @@ const Medicaments = () => {
                                                 {medicament.categorie || 'General'}
                                             </span>
                                             {medicament.prix && (
-                                                <span className="font-medium text-blue-600">
+                                                <span className="font-medium text-primary-600">
                                                     ${medicament.prix}
                                                 </span>
                                             )}
@@ -132,3 +132,5 @@ const Medicaments = () => {
 };
 
 export default Medicaments;
+
+

@@ -1,13 +1,13 @@
-import React from 'react'
+﻿import React from 'react'
 import doctorImage from "../../../../../public/doctor.png"
 function Hero() {
     return (
-        <section className="min-h-screen bg-blue-50 flex items-center justify-between px-10 py-16">
+        <section className="min-h-screen bg-primary-50 flex items-center justify-between px-10 py-16">
 
             {/* Left Side */}
             <div className="max-w-xl">
 
-                <p className="text-blue-600 font-semibold mb-4">
+                <p className="text-primary-600 font-semibold mb-4">
                     Trusted Healthcare Platform
                 </p>
 
@@ -24,11 +24,11 @@ function Hero() {
                 {/* Buttons */}
                 <div className="flex gap-4">
 
-                    <button className="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition">
+                    <button className="bg-primary-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-primary-700 transition">
                         Book Appointment
                     </button>
 
-                    <button className="border border-blue-600 text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-blue-100 transition">
+                    <button className="border border-primary-600 text-primary-600 px-6 py-3 rounded-full font-semibold hover:bg-primary-100 transition">
                         Browse Doctors
                     </button>
 
@@ -48,7 +48,7 @@ function Hero() {
 
                 {/* Floating Card 1 */}
                 <div className="absolute top-10 -left-10 bg-white shadow-lg rounded-xl px-6 py-4">
-                    <h2 className="text-2xl font-bold text-blue-600">
+                    <h2 className="text-2xl font-bold text-primary-600">
                         95%
                     </h2>
 
@@ -59,7 +59,7 @@ function Hero() {
 
                 {/* Floating Card 2 */}
                 <div className="absolute bottom-10 -right-10 bg-white shadow-lg rounded-xl px-6 py-4">
-                    <h2 className="text-2xl font-bold text-green-600">
+                    <h2 className="text-2xl font-bold text-primary-600">
                         24/7
                     </h2>
 
@@ -75,3 +75,4 @@ function Hero() {
 }
 
 export default Hero;
+
