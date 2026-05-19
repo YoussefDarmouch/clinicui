@@ -10,7 +10,8 @@ export default function Navbar() {
     const location = useLocation();
 
     // get user 
-    const { isAuthenticated } = useSelector((state) => state.auth);
+    const { isAuthenticated, role } = useSelector((state) => state.auth);
+    const isAdmin = role === "admin";
     const navigate = useNavigate();
     const handleLogout = () => {
         dispatch(logout());
@@ -51,6 +52,11 @@ export default function Navbar() {
                         <Link to="/doctors">Doctors</Link>
                         <Link to="/specialites">Specialities</Link>
                         <Link to="/medicaments">Medicaments</Link>
+                        {isAdmin && (
+                            <Link to="/admin/dashboard" className="font-semibold">
+                                Dashboard Admin
+                            </Link>
+                        )}
                         <button
                             onClick={handleRendezvous}
                             className="bg-white text-blue-600 px-4 py-2 rounded-full font-semibold"
@@ -95,6 +101,9 @@ export default function Navbar() {
                     <Link to="/doctors" onClick={closeMenu}>Doctors</Link>
                     <Link to="/specialites" onClick={closeMenu}>Specialities</Link>
                     <Link to="/medicaments" onClick={closeMenu}>Medicaments</Link>
+                    {isAdmin && (
+                        <Link to="/admin/dashboard" onClick={closeMenu}>Dashboard Admin</Link>
+                    )}
                     <button
                         onClick={() => {
                             handleRendezvous();

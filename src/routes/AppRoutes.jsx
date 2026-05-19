@@ -18,27 +18,53 @@ import Dashboard from "../features/admin/dashboard/Dashboard";
 import UsersList from "../features/admin/users/UsersList";
 import UserDetails from "../features/admin/users/UserDetails";
 import UserForm from "../features/admin/users/UserForm";
+import PatientsList from "../features/admin/patients/PatientsList";
+import PatientDetails from "../features/admin/patients/PatientDetails";
+import PatientForm from "../features/admin/patients/PatientForm";
 import MedecinsList from "../features/admin/medecins/MedecinsList";
 import MedecinDetails from "../features/admin/medecins/MedecinDetails";
 import MedecinForm from "../features/admin/medecins/MedecinForm";
 import Consultations from "../features/admin/medecins/Consultations";
 import RendezVous from "../features/admin/medecins/RendezVous";
-
+import Profile from "../features/admin/profile/Profile";
+//
+import AdminRoute from "./AdminRoute";
 export default function AppRoutes() {
     return (
 
         <Routes>
             {/* {admin dashboard} */}
-            <Route path="/admin" element={<AdminLayout />}>
+            {/* Admin dashboard */}
+            <Route
+                path="/admin"
+                element={
+                    <AdminRoute>
+                        <AdminLayout />
+                    </AdminRoute>
+                }
+            >
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="users" element={<UsersList />} />
                 <Route path="users/new" element={<UserForm />} />
                 <Route path="users/:id" element={<UserDetails />} />
+
+                <Route path="patients" element={<PatientsList />} />
+                <Route path="patients/new" element={<PatientForm />} />
+                <Route path="patients/:id" element={<PatientDetails />} />
+
                 <Route path="medecins" element={<MedecinsList />} />
                 <Route path="medecins/new" element={<MedecinForm />} />
                 <Route path="medecins/:id" element={<MedecinDetails />} />
-                <Route path="medecins/:id/consultations" element={<Consultations />} />
-                <Route path="medecins/:id/rendezvous" element={<RendezVous />} />
+                <Route
+                    path="medecins/:id/consultations"
+                    element={<Consultations />}
+                />
+                <Route
+                    path="medecins/:id/rendezvous"
+                    element={<RendezVous />}
+                />
+
+                <Route path="profile" element={<Profile />} />
             </Route>
             {/* Public Routes */}
             <Route path="/" element={<Home />} />
