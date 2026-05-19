@@ -216,57 +216,57 @@ export default function UserForm({ user: initialUser, onSuccess, onCancel }) {
                             onChange={handleChange('phone')}
                             className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
                         />
-                            {getFieldError('phone') && <p className="text-xs text-rose-600">{getFieldError('phone')}</p>}
-                        </label>
+                        {getFieldError('phone') && <p className="text-xs text-rose-600">{getFieldError('phone')}</p>}
+                    </label>
 
-                        <label className="space-y-2">
-                            <span className="text-sm font-medium text-slate-700">Adresse</span>
-                            <input
-                                type="text"
-                                value={formData.address}
-                                onChange={handleChange('address')}
-                                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
-                            />
-                            {getFieldError('address') && <p className="text-xs text-rose-600">{getFieldError('address')}</p>}
-                        </label>
-                    </div>
+                    <label className="space-y-2">
+                        <span className="text-sm font-medium text-slate-700">Adresse</span>
+                        <input
+                            type="text"
+                            value={formData.address}
+                            onChange={handleChange('address')}
+                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+                        />
+                        {getFieldError('address') && <p className="text-xs text-rose-600">{getFieldError('address')}</p>}
+                    </label>
+                </div>
 
-                    <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-                        <label className="inline-flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
-                            <input
-                                type="checkbox"
-                                checked={Boolean(formData.is_active)}
-                                onChange={(event) => setFormData((current) => ({ ...current, is_active: event.target.checked }))}
-                                className="h-4 w-4 rounded border-slate-300 text-sky-600 focus:ring-sky-500"
-                            />
-                            Actif
-                        </label>
-                        <p className="text-sm text-slate-500">Laisser décoché pour désactiver le compte.</p>
-                    </div>
+                <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                    <label className="inline-flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
+                        <input
+                            type="checkbox"
+                            checked={Boolean(formData.is_active)}
+                            onChange={(event) => setFormData((current) => ({ ...current, is_active: event.target.checked }))}
+                            className="h-4 w-4 rounded border-slate-300 text-sky-600 focus:ring-sky-500"
+                        />
+                        Actif
+                    </label>
+                    <p className="text-sm text-slate-500">Laisser décoché pour désactiver le compte.</p>
+                </div>
 
-                    <div className="grid gap-6 lg:grid-cols-2">
-                        <label className="space-y-2">
-                            <span className="text-sm font-medium text-slate-700">Mot de passe {initialUser ? '(laisser vide pour conserver)' : ''}</span>
-                            <input
-                                type="password"
-                                value={formData.password}
-                                onChange={handleChange('password')}
-                                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
-                            />
-                            {getFieldError('password') && <p className="text-xs text-rose-600">{getFieldError('password')}</p>}
-                        </label>
+                <div className="grid gap-6 lg:grid-cols-2">
+                    <label className="space-y-2">
+                        <span className="text-sm font-medium text-slate-700">Mot de passe {initialUser ? '(laisser vide pour conserver)' : ''}</span>
+                        <input
+                            type="password"
+                            value={formData.password}
+                            onChange={handleChange('password')}
+                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+                        />
+                        {getFieldError('password') && <p className="text-xs text-rose-600">{getFieldError('password')}</p>}
+                    </label>
 
-                        <label className="space-y-2">
-                            <span className="text-sm font-medium text-slate-700">Confirmer le mot de passe</span>
-                            <input
-                                type="password"
-                                value={formData.password_confirmation}
-                                onChange={handleChange('password_confirmation')}
-                                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
-                            />
-                            {getFieldError('password_confirmation') && <p className="text-xs text-rose-600">{getFieldError('password_confirmation')}</p>}
-                        </label>
-                    </div>
+                    <label className="space-y-2">
+                        <span className="text-sm font-medium text-slate-700">Confirmer le mot de passe</span>
+                        <input
+                            type="password"
+                            value={formData.password_confirmation}
+                            onChange={handleChange('password_confirmation')}
+                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+                        />
+                        {getFieldError('password_confirmation') && <p className="text-xs text-rose-600">{getFieldError('password_confirmation')}</p>}
+                    </label>
+                </div>
 
                 <div className="rounded-3xl border border-slate-200 bg-slate-50 p-5">
                     <p className="text-sm font-semibold text-slate-700">Rôles</p>

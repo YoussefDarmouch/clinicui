@@ -18,6 +18,11 @@ import Dashboard from "../features/admin/dashboard/Dashboard";
 import UsersList from "../features/admin/users/UsersList";
 import UserDetails from "../features/admin/users/UserDetails";
 import UserForm from "../features/admin/users/UserForm";
+import MedecinsList from "../features/admin/medecins/MedecinsList";
+import MedecinDetails from "../features/admin/medecins/MedecinDetails";
+import MedecinForm from "../features/admin/medecins/MedecinForm";
+import Consultations from "../features/admin/medecins/Consultations";
+import RendezVous from "../features/admin/medecins/RendezVous";
 
 export default function AppRoutes() {
     return (
@@ -29,6 +34,11 @@ export default function AppRoutes() {
                 <Route path="users" element={<UsersList />} />
                 <Route path="users/new" element={<UserForm />} />
                 <Route path="users/:id" element={<UserDetails />} />
+                <Route path="medecins" element={<MedecinsList />} />
+                <Route path="medecins/new" element={<MedecinForm />} />
+                <Route path="medecins/:id" element={<MedecinDetails />} />
+                <Route path="medecins/:id/consultations" element={<Consultations />} />
+                <Route path="medecins/:id/rendezvous" element={<RendezVous />} />
             </Route>
             {/* Public Routes */}
             <Route path="/" element={<Home />} />
