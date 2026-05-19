@@ -7,6 +7,7 @@ import ForgotPassword from "../features/auth/pages/ForgotPassword"
 import ResetPassword from "../features/auth/pages/ResetPassword"
 import AdminLayout from "../components/layout/AdminLayout";
 
+
 // Public Pages
 import Home from "../features/public/pages/Home"
 import Doctors from "../features/public/pages/Doctors"
@@ -15,7 +16,19 @@ import Specialities from "../features/public/pages/Specialities"
 import CreateRendezVous from "../features/public/pages/CreateRendezVous"
 import Medicaments from "../features/public/pages/Medicaments"
 import Dashboard from "../features/admin/dashboard/Dashboard";
-
+import UsersList from "../features/admin/users/UsersList";
+import UserDetails from "../features/admin/users/UserDetails";
+// admin.medcins
+import MedecinDetails from "../features/admin/medecins/MedecinDetails";
+import MedecinList from "../features/admin/medecins/MedecinsList";
+import Consultations from "../features/admin/medecins/Consultations";
+import RendezVous from "../features/admin/medecins/RendezVous";
+// admin/patient
+import DossierMedical from "../features/admin/patients/DossierMedical";
+import PatientDetails from "../features/admin/patients/PatientDetails";
+import PatientList from "../features/admin/patients/PatientsList";
+import PatientConsultations from "../features/admin/patients/PatientConsultations";
+import PatientOrdonnances from "../features/admin/patients/PatientOrdonnances";
 export default function AppRoutes() {
     return (
 
@@ -23,6 +36,32 @@ export default function AppRoutes() {
             {/* {admin dashboard} */}
             <Route path="/admin" element={<AdminLayout />}>
                 <Route path="dashboard" element={<Dashboard />} />
+                <Route path="users" element={<UsersList />} />
+                <Route path="users/:id" element={<UserDetails />} />
+                <Route path="medecins" element={<MedecinList />} />
+                <Route path="medecins/:id" element={<MedecinDetails />} />
+                <Route path="medecins/:id/consultations" element={<Consultations />} />
+                <Route path="medecins/:id/rendezvous" element={<RendezVous />} />
+                <Route path="/admin/patients" element={<PatientList />} />
+
+                {/* <Route path="/admin/patients/create" element={<PatientForm />} /> */}
+
+                <Route path="/admin/patients/:id" element={<PatientDetails />} />
+
+                <Route
+                    path="/admin/patients/:id/dossier-medical"
+                    element={<DossierMedical />}
+                />
+
+                <Route
+                    path="/admin/patients/:id/consultations"
+                    element={<PatientConsultations />}
+                />
+
+                <Route
+                    path="/admin/patients/:id/ordonnances"
+                    element={<PatientOrdonnances />}
+                />
             </Route>
             {/* Public Routes */}
             <Route path="/" element={<Home />} />

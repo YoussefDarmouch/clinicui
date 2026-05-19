@@ -9,12 +9,31 @@ export default function Sidebar() {
     return (
         <aside className="w-64 h-screen bg-white shadow p-4">
             <h2 className="text-xl font-bold mb-4">Clinic</h2>
+
             {auth.role === "admin" && (
                 <>
-                    <Link to="/admin/dashboard">Dashboard</Link>
-                    <Link to="/admin/users">Users</Link>
-                    <Link to="/admin/medecins">Médecins</Link>
-                    <Link to="/admin/patients">Patients</Link>
+                    <Link to="/admin/dashboard">
+                        Dashboard
+                    </Link>
+                    <br />
+
+                    <Link to="/admin/users">
+                        Users
+                    </Link>
+                    <br />
+
+                    <Link to="/admin/medecins">
+                        Médecins
+                    </Link>
+                    <br />
+
+                    <Link to="/admin/patients">
+                        Patients
+                    </Link>
+
+
+
+
                 </>
             )}
         </aside>

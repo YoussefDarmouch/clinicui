@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../app/slices/authSlice";
 
+
 export default function Navbar() {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,6 +12,8 @@ export default function Navbar() {
 
     // get user 
     const { isAuthenticated } = useSelector((state) => state.auth);
+    const auth = useSelector((state) => state.auth);
+
     const navigate = useNavigate();
     const handleLogout = () => {
         dispatch(logout());
@@ -57,7 +60,11 @@ export default function Navbar() {
                         >
                             Create RendezVous
                         </button>
-
+                        {auth.role === "admin" && (
+                            <Link to="/admin/dashboard">
+                                Dashboard
+                            </Link>
+                        )}
                         {isAuthenticated ? (
                             <button
                                 onClick={handleLogout}
@@ -104,7 +111,11 @@ export default function Navbar() {
                     >
                         Create RendezVous
                     </button>
-
+                    {auth.role === "admin" && (
+                        <Link to="/admin/dashboard">
+                            Dashboard
+                        </Link>
+                    )}
                     {isAuthenticated ? (
                         <button
                             onClick={handleLogout}
@@ -120,6 +131,7 @@ export default function Navbar() {
                             Login
                         </Link>
                     )}
+
 
                 </div>
 
