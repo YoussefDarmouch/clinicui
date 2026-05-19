@@ -24,19 +24,19 @@ export default function Sidebar() {
     }
 
     return (
-        <aside className="sticky top-0 h-screen w-72 flex-shrink-0 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900 px-6 py-8 text-slate-300 shadow-[0_24px_80px_-32px_rgba(15,23,42,0.8)]">
+        <aside className="sticky top-0 h-screen w-72 flex-shrink-0 bg-primary-50 px-6 py-8 text-slate-900 shadow-lg shadow-slate-900/5">
             <div className="flex h-full flex-col justify-between">
                 <div className="space-y-6 overflow-y-auto pr-1">
-                    <div className="mb-8 rounded-2xl bg-white/5 p-5">
-                        <p className="text-xs uppercase tracking-[0.3em] text-primary-500">
+                    <div className="mb-8 rounded-2xl bg-white/90 p-5 shadow-sm">
+                        <p className="text-xs uppercase tracking-[0.3em] text-primary-600">
                             Espace admin
                         </p>
 
-                        <h2 className="mt-3 text-2xl font-bold text-white">
+                        <h2 className="mt-3 text-2xl font-bold text-slate-900">
                             Clinic
                         </h2>
 
-                        <p className="mt-2 text-sm text-slate-400">
+                        <p className="mt-2 text-sm text-slate-600">
                             Navigation rapide pour les modules clés.
                         </p>
                     </div>
@@ -49,12 +49,12 @@ export default function Sidebar() {
                                     to={link.to}
                                     className={({ isActive }) =>
                                         `flex items-center gap-3 rounded-xl px-4 py-3 transition ${isActive
-                                            ? 'bg-primary-500/20 text-white'
-                                            : 'text-slate-300 hover:bg-white/5 hover:text-white'
+                                            ? 'bg-primary-500/20 text-slate-900'
+                                            : 'text-slate-700 hover:bg-primary-100 hover:text-slate-900'
                                         }`
                                     }
                                 >
-                                    <span className="inline-flex h-2.5 w-2.5 rounded-full bg-primary-500 opacity-90" />
+                                    <span className="inline-flex h-2.5 w-2.5 rounded-full bg-primary-600 opacity-90" />
 
                                     <span className="truncate">
                                         {link.label}
@@ -64,12 +64,12 @@ export default function Sidebar() {
                         </nav>
                     )}
 
-                    <div className="mt-8 rounded-2xl bg-white/5 p-4 text-sm text-slate-300">
-                        <p className="font-semibold text-white">
+                    <div className="mt-8 rounded-2xl bg-white/90 p-4 text-sm text-slate-700 shadow-sm">
+                        <p className="font-semibold text-slate-900">
                             Raccourci
                         </p>
 
-                        <p className="mt-2 text-xs text-slate-400">
+                        <p className="mt-2 text-xs text-slate-600">
                             Utilisez cette barre pour accéder rapidement
                             aux modules.
                         </p>

@@ -19,7 +19,7 @@ export default function Profile() {
                 </div>
                 <Link
                     to="/admin/dashboard"
-                    className="inline-flex items-center rounded-full bg-slate-900 px-5 py-2 text-sm font-semibold text-white transition hover:bg-slate-700"
+                    className="nline-flex items-center justify-center rounded-2xl bg-primary-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-primary-700"
                 >
                     Retour au dashboard
                 </Link>
