@@ -15,6 +15,9 @@ import Specialities from "../features/public/pages/Specialities"
 import CreateRendezVous from "../features/public/pages/CreateRendezVous"
 import Medicaments from "../features/public/pages/Medicaments"
 import Dashboard from "../features/admin/dashboard/Dashboard";
+import UsersList from "../features/admin/users/UsersList";
+import UserDetails from "../features/admin/users/UserDetails";
+import UserForm from "../features/admin/users/UserForm";
 
 export default function AppRoutes() {
     return (
@@ -23,6 +26,9 @@ export default function AppRoutes() {
             {/* {admin dashboard} */}
             <Route path="/admin" element={<AdminLayout />}>
                 <Route path="dashboard" element={<Dashboard />} />
+                <Route path="users" element={<UsersList />} />
+                <Route path="users/new" element={<UserForm />} />
+                <Route path="users/:id" element={<UserDetails />} />
             </Route>
             {/* Public Routes */}
             <Route path="/" element={<Home />} />
