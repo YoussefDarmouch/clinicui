@@ -27,6 +27,8 @@ import MedecinForm from "../features/admin/medecins/MedecinForm";
 import Consultations from "../features/admin/medecins/Consultations";
 import RendezVous from "../features/admin/medecins/RendezVous";
 import Profile from "../features/admin/profile/Profile";
+import SpecialitesList from "../features/admin/specialites/SpecialitesList";
+import SpecialiteForm from "../features/admin/specialites/SpecialiteForm";
 //
 import AdminRoute from "./AdminRoute";
 export default function AppRoutes() {
@@ -65,6 +67,9 @@ export default function AppRoutes() {
                 />
 
                 <Route path="profile" element={<Profile />} />
+                <Route path="specialites" element={<SpecialitesList />} />
+                <Route path="specialites/new" element={<SpecialiteForm />} />
+                <Route path="specialites/:id" element={<SpecialiteForm />} />
             </Route>
             {/* Public Routes */}
             <Route path="/" element={<Home />} />

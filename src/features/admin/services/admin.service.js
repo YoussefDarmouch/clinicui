@@ -34,7 +34,14 @@ import {
 
     getDashboardStats,
     getUserStats,
-    getConsultationStats
+    getConsultationStats,
+    getRecentConsultations,
+    getConsultationsByMonth,
+    getConsultationsBySpeciality,
+    getRecentActivities,
+    getTodayStats,
+    getPendingRendezvous,
+
 } from "../../../api/admin.api";
 
 
@@ -204,5 +211,34 @@ export const getUserStatsService = async () => {
 
 export const getConsultationStatsService = async () => {
     const res = await getConsultationStats();
+    return res.data;
+};
+export const getRecentConsultationsService = async () => {
+    const res = await getRecentConsultations();
+    return res.data;
+};
+
+export const getConsultationsByMonthService = async () => {
+    const res = await getConsultationsByMonth();
+    return res.data;
+};
+
+export const getConsultationsBySpecialityService = async () => {
+    const res = await getConsultationsBySpeciality();
+    return res.data;
+};
+
+export const getRecentActivitiesService = async () => {
+    const res = await getRecentActivities();
+    return res.data;
+};
+
+export const getTodayStatsService = async () => {
+    const res = await getTodayStats();
+    return res.data;
+};
+
+export const getPendingRendezvousService = async () => {
+    const res = await getPendingRendezvous();
     return res.data;
 };

@@ -42,4 +42,20 @@ export const deleteSpecialite = (id) => api.delete(`/admin/specialites/${id}`);
 export const getDashboardStats = () => api.get("/admin/statistics/dashboard");
 export const getUserStats = () => api.get("/admin/statistics/users");
 export const getConsultationStats = () => api.get("/admin/statistics/consultations");
+export const getRecentConsultations = () =>
+    api.get("/admin/dashboard/recent-consultations");
 
+export const getConsultationsByMonth = () =>
+    api.get("/admin/dashboard/consultations-by-month");
+
+export const getConsultationsBySpeciality = () =>
+    api.get("/admin/dashboard/consultations-by-speciality");
+
+export const getRecentActivities = () =>
+    api.get("/admin/dashboard/recent-activities");
+
+export const getTodayStats = () =>
+    api.get("/admin/dashboard/today-stats");
+
+export const getPendingRendezvous = () =>
+    api.get("/admin/dashboard/pending-rendezvous");

@@ -1,6 +1,16 @@
 ﻿import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getUserStatsService, getDashboardStatsService } from "../services/admin.service";
+import {
+    getDashboardStatsService,
+    getUserStatsService,
+    getConsultationStatsService,
+    getRecentConsultationsService,
+    getConsultationsByMonthService,
+    getConsultationsBySpecialityService,
+    getRecentActivitiesService,
+    getTodayStatsService,
+    getPendingRendezvousService,
+} from "../services/admin.service";
 
 const summaryCards = [
     { label: 'Admins', valueKey: 'total_admins', accent: 'from-sky-500 to-sky-600' },
@@ -10,27 +20,144 @@ const summaryCards = [
     { label: 'Rendez-vous', valueKey: 'total_rendezvous', accent: 'from-amber-500 to-amber-600' },
 ];
 
+const normalizeValue = (value) => {
+    if (value === undefined || value === null) return 0;
+    if (typeof value === 'number') return value;
+    const parsed = Number(value);
+    return Number.isNaN(parsed) ? 0 : parsed;
+};
+
+const normalizeObject = (value) => value?.data ?? value;
+
+const asArray = (value) => {
+    if (!value) return [];
+    if (Array.isArray(value)) return value;
+    if (Array.isArray(value.data)) return value.data;
+    if (Array.isArray(value.items)) return value.items;
+    if (Array.isArray(value.results)) return value.results;
+    if (Array.isArray(value.months)) return value.months;
+    if (Array.isArray(value.labels) && Array.isArray(value.values)) {
+        return value.labels.map((label, index) => ({ month: label, value: value.values[index] ?? 0 }));
+    }
+    // handle numeric-keyed objects like monthly_activity: {"5": {label: 'May', count: 8}, ...}
+    if (typeof value === 'object') {
+        const keys = Object.keys(value).filter(k => !isNaN(Number(k)));
+        if (keys.length > 0) {
+            return keys
+                .sort((a, b) => Number(a) - Number(b))
+                .map((k) => {
+                    const v = value[k];
+                    if (v && (v.label || v.count !== undefined || v.value !== undefined)) {
+                        return { month: v.label ?? k, value: v.count ?? v.value ?? 0 };
+                    }
+                    return { month: k, value: typeof v === 'number' ? v : (v?.count ?? v?.value ?? 0) };
+                });
+        }
+
+        // fallback: object with keyed entries like { data: [...] }
+        if (value.data && Array.isArray(value.data)) return value.data;
+    }
+
+    return [];
+};
+
+const getLabel = (item, defaultLabel = '—') => {
+    return (
+        item?.speciality ?? item?.specialite ?? item?.name ?? item?.label ?? item?.user?.name ?? defaultLabel
+    );
+};
+
+const getMonthLabel = (item, index) => {
+    return item?.month ?? item?.label ?? item?.name ?? `Mois ${index + 1}`;
+};
+
+const getNumeric = (item) => normalizeValue(item?.count ?? item?.total ?? item?.value ?? item?.y ?? item?.consultations ?? item?.amount ?? item?.count_value);
+
+const formatTimestamp = (item) => {
+    const t = item?.time ?? item?.occurred_at ?? item?.occurredAt ?? item?.created_at ?? item?.updated_at ?? item?.date ?? item;
+    if (!t) return 'Il y a peu';
+    try {
+        return new Date(t).toLocaleString('fr-FR');
+    } catch (e) {
+        return String(t);
+    }
+};
+
+const stringifyName = (v) => {
+    if (v === undefined || v === null) return '—';
+    if (typeof v === 'string' || typeof v === 'number') return String(v);
+    if (typeof v === 'object') {
+        return (
+            v.patient_name ?? v.name ?? v.full_name ?? v.label ?? v.user?.name ?? v.user?.full_name ?? v.user?.username ?? '—'
+        );
+    }
+    return '—';
+};
+
 export default function Dashboard() {
-    const [userStats, setUserStats] = useState(null);
     const [dashboardStats, setDashboardStats] = useState(null);
+    const [userStats, setUserStats] = useState(null);
+    const [consultationStats, setConsultationStats] = useState(null);
+    const [recentConsultations, setRecentConsultations] = useState([]);
+    const [consultationsByMonth, setConsultationsByMonth] = useState([]);
+    const [consultationsBySpeciality, setConsultationsBySpeciality] = useState([]);
+    const [recentActivities, setRecentActivities] = useState([]);
+    const [todayStats, setTodayStats] = useState(null);
+    const [pendingRendezvous, setPendingRendezvous] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchDashboardData = async () => {
             try {
-                const users = await getUserStatsService();
-                const dashboard = await getDashboardStatsService();
-                setUserStats(users.data);
-                setDashboardStats(dashboard.data);
-            } catch (err) {
-                console.error(err);
+                const [dashboard, users, consultation, recent, monthly, speciality, activities, today, pending] = await Promise.all([
+                    getDashboardStatsService(),
+                    getUserStatsService(),
+                    getConsultationStatsService(),
+                    getRecentConsultationsService(),
+                    getConsultationsByMonthService(),
+                    getConsultationsBySpecialityService(),
+                    getRecentActivitiesService(),
+                    getTodayStatsService(),
+                    getPendingRendezvousService(),
+                ]);
+
+                setDashboardStats(normalizeObject(dashboard));
+                setUserStats(normalizeObject(users));
+                setConsultationStats(normalizeObject(consultation));
+                setRecentConsultations(normalizeObject(recent));
+                setConsultationsByMonth(normalizeObject(monthly));
+                setConsultationsBySpeciality(normalizeObject(speciality));
+                setRecentActivities(normalizeObject(activities));
+                setTodayStats(normalizeObject(today));
+                setPendingRendezvous(normalizeObject(pending));
+            } catch (error) {
+                console.error(error);
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchData();
+        fetchDashboardData();
     }, []);
+
+    // prefer nested keys used in dashboard response (recent_rendezvous)
+    const recentConsultationRows = asArray(recentConsultations?.recent_rendezvous ?? recentConsultations ?? dashboardStats?.recent_rendezvous ?? dashboardStats?.recent_consultations);
+    const monthlyData = asArray(consultationsByMonth);
+    const specialityData = asArray(consultationsBySpeciality);
+    const activityRows = asArray(recentActivities);
+
+    const monthValues = monthlyData.map(getNumeric);
+    const maxMonthValue = Math.max(...monthValues, 1);
+
+    const todayConsultations = normalizeValue(
+        todayStats?.consultations_today ?? todayStats?.consultations ?? todayStats?.today_consultations ?? todayStats?.total ?? 0
+    );
+    let pendingCount = 0;
+    if (Array.isArray(pendingRendezvous)) pendingCount = pendingRendezvous.length;
+    else if (pendingRendezvous && Array.isArray(pendingRendezvous.data)) pendingCount = pendingRendezvous.data.length;
+    else pendingCount = normalizeValue(pendingRendezvous?.pending ?? pendingRendezvous?.count ?? pendingRendezvous?.total ?? 0);
+    const totalConsultations = normalizeValue(consultationStats?.total_consultations ?? consultationStats?.count ?? consultationStats?.total ?? 0);
+    const totalUsers = normalizeValue(userStats?.total_users ?? userStats?.count ?? userStats?.users ?? 0);
 
     if (loading) {
         return (
@@ -59,9 +186,19 @@ export default function Dashboard() {
                             </Link>
                         </div>
                     </div>
-                    <div className="rounded-3xl bg-white/10 px-5 py-4 text-slate-200 ring-1 ring-white/10">
-                        <p className="text-xs uppercase tracking-[0.24em] text-slate-400">Statut</p>
-                        <p className="mt-2 text-xl font-semibold">Stable</p>
+                    <div className="grid w-full gap-3 sm:grid-cols-3 lg:w-auto lg:grid-cols-1">
+                        <div className="rounded-3xl bg-white/10 px-5 py-4 text-slate-200 ring-1 ring-white/10">
+                            <p className="text-xs uppercase tracking-[0.24em] text-slate-400">Consultations aujourd’hui</p>
+                            <p className="mt-2 text-2xl font-semibold">{todayConsultations}</p>
+                        </div>
+                        <div className="rounded-3xl bg-white/10 px-5 py-4 text-slate-200 ring-1 ring-white/10">
+                            <p className="text-xs uppercase tracking-[0.24em] text-slate-400">Rendez-vous en attente</p>
+                            <p className="mt-2 text-2xl font-semibold">{pendingCount}</p>
+                        </div>
+                        <div className="rounded-3xl bg-white/10 px-5 py-4 text-slate-200 ring-1 ring-white/10">
+                            <p className="text-xs uppercase tracking-[0.24em] text-slate-400">Total consultations</p>
+                            <p className="mt-2 text-2xl font-semibold">{totalConsultations}</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -74,7 +211,7 @@ export default function Dashboard() {
                     >
                         <p className="text-sm uppercase tracking-[0.24em] text-slate-100/80">{card.label}</p>
                         <p className="mt-5 text-4xl font-semibold">
-                            {dashboardStats?.[card.valueKey] ?? 0}
+                            {normalizeValue(dashboardStats?.[card.valueKey] ?? dashboardStats?.data?.[card.valueKey] ?? 0)}
                         </p>
                         <p className="mt-3 text-sm text-slate-100/80">Comparaison du mois précédent</p>
                     </div>
@@ -95,20 +232,33 @@ export default function Dashboard() {
 
                     <div className="mt-6">
                         <div className="flex h-52 items-end gap-3">
-                            {[380, 450, 520, 600, 660, 740].map((value, index) => (
-                                <div key={index} className="relative flex-1">
-                                    <div className="absolute inset-x-0 bottom-0 h-0.5 bg-slate-200"></div>
-                                    <div
-                                        className="mx-auto h-full w-full rounded-xl bg-gradient-to-t from-sky-600 via-sky-400 to-sky-300"
-                                        style={{ height: `${Math.max(20, Math.min(100, value / 10))}%` }}
-                                    />
-                                </div>
-                            ))}
+                            {monthlyData.length > 0 ? (
+                                monthlyData.map((item, index) => {
+                                    const value = getNumeric(item);
+                                    const height = Math.max(20, Math.min(100, (value / maxMonthValue) * 100));
+
+                                    return (
+                                        <div key={index} className="relative flex-1">
+                                            <div className="absolute inset-x-0 bottom-0 h-0.5 bg-slate-200"></div>
+                                            <div
+                                                className="mx-auto h-full w-full rounded-xl bg-gradient-to-t from-sky-600 via-sky-400 to-sky-300"
+                                                style={{ height: `${height}%` }}
+                                            />
+                                        </div>
+                                    );
+                                })
+                            ) : (
+                                <div className="flex h-52 items-center justify-center text-sm text-slate-400">Aucune donnée de consultation disponible.</div>
+                            )}
                         </div>
                         <div className="mt-4 grid grid-cols-6 gap-2 text-center text-xs uppercase tracking-[0.2em] text-slate-400">
-                            {['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin'].map((month) => (
-                                <span key={month}>{month}</span>
-                            ))}
+                            {monthlyData.length > 0 ? (
+                                monthlyData.map((item, index) => (
+                                    <span key={index}>{getMonthLabel(item, index)}</span>
+                                ))
+                            ) : (
+                                <span className="col-span-6">Aucune période disponible</span>
+                            )}
                         </div>
                     </div>
                 </section>
@@ -128,22 +278,21 @@ export default function Dashboard() {
                             <div className="absolute inset-0 rounded-full border-8 border-sky-500/40" />
                             <div className="absolute inset-x-10 inset-y-10 rounded-full bg-white" />
                             <div className="absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 rounded-full bg-slate-50 shadow-inner">
-                                <span className="absolute inset-0 flex items-center justify-center text-lg font-semibold text-slate-900">2,845</span>
+                                <span className="absolute inset-0 flex items-center justify-center text-lg font-semibold text-slate-900">{normalizeValue(specialityData.reduce((acc, item) => acc + getNumeric(item), 0))}</span>
                             </div>
                         </div>
                         <div className="space-y-3">
-                            {[
-                                { label: 'Cardiologie', color: 'bg-sky-500', value: '32%' },
-                                { label: 'Dermatologie', color: 'bg-emerald-500', value: '21%' },
-                                { label: 'Pédiatrie', color: 'bg-amber-400', value: '18%' },
-                                { label: 'Gynécologie', color: 'bg-violet-500', value: '15%' },
-                            ].map((item) => (
-                                <div key={item.label} className="flex items-center gap-3">
-                                    <span className={`${item.color} h-3.5 w-3.5 rounded-full`} />
-                                    <span className="flex-1 text-sm text-slate-600">{item.label}</span>
-                                    <span className="text-sm font-semibold text-slate-900">{item.value}</span>
-                                </div>
-                            ))}
+                            {specialityData.length > 0 ? (
+                                specialityData.slice(0, 4).map((item, index) => (
+                                    <div key={index} className="flex items-center gap-3">
+                                        <span className={`h-3.5 w-3.5 rounded-full ${['bg-sky-500', 'bg-emerald-500', 'bg-amber-400', 'bg-violet-500'][index] ?? 'bg-slate-400'}`} />
+                                        <span className="flex-1 text-sm text-slate-600">{getLabel(item)}</span>
+                                        <span className="text-sm font-semibold text-slate-900">{normalizeValue(item?.percentage ?? item?.percent ?? item?.value ?? item?.count ?? 0)}%</span>
+                                    </div>
+                                ))
+                            ) : (
+                                <div className="text-sm text-slate-500">Aucune spécialité disponible pour le moment.</div>
+                            )}
                         </div>
                     </div>
                 </section>
@@ -173,22 +322,44 @@ export default function Dashboard() {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-slate-100">
-                                {[
-                                    { patient: 'Amine M.', doctor: 'Dr. Sara Benali', speciality: 'Cardiologie', date: '12/06/2025', status: 'Terminée', badge: 'bg-emerald-100 text-emerald-700' },
-                                    { patient: 'Sarah L.', doctor: 'Dr. Youssef A.', speciality: 'Dermatologie', date: '12/06/2025', status: 'En cours', badge: 'bg-sky-100 text-sky-700' },
-                                    { patient: 'Khalid B.', doctor: 'Dr. Nadia El M.', speciality: 'Pédiatrie', date: '11/06/2025', status: 'Terminée', badge: 'bg-emerald-100 text-emerald-700' },
-                                    { patient: 'Fatima M.', doctor: 'Dr. Ahmed K.', speciality: 'Gynécologie', date: '11/06/2025', status: 'En attente', badge: 'bg-amber-100 text-amber-700' },
-                                ].map((item, idx) => (
-                                    <tr key={idx} className="bg-white">
-                                        <td className="py-4 font-semibold text-slate-900">{item.patient}</td>
-                                        <td className="py-4">{item.doctor}</td>
-                                        <td className="py-4">{item.speciality}</td>
-                                        <td className="py-4">{item.date}</td>
-                                        <td className="py-4">
-                                            <span className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${item.badge}`}>{item.status}</span>
+                                {recentConsultationRows.length > 0 ? (
+                                    recentConsultationRows.map((item, idx) => {
+                                        const rawPatient = item?.patient_name ?? item?.patient ?? item?.client ?? item?.patient_id ?? null;
+                                        const rawDoctor = item?.doctor_name ?? item?.medecin ?? item?.doctor ?? item?.medecin_id ?? null;
+                                        const rawSpeciality = item?.speciality ?? item?.specialite ?? item?.specialty ?? item?.medecin?.specialite ?? null;
+
+                                        const patientName = stringifyName(rawPatient);
+                                        const doctorName = stringifyName(rawDoctor);
+                                        const speciality = stringifyName(rawSpeciality);
+
+                                        const date = item?.date_heure ?? item?.date ?? item?.created_at ?? item?.scheduled_at ?? item?.date_time ?? null;
+                                        const status = item?.statut ?? item?.status ?? item?.etat ?? item?.state ?? '—';
+
+                                        const statusLower = String(status).toLowerCase();
+                                        let badgeClass = 'bg-slate-100 text-slate-700';
+                                        if (statusLower.includes('complete') || statusLower.includes('termin')) badgeClass = 'bg-emerald-100 text-emerald-700';
+                                        if (statusLower.includes('planifi') || statusLower.includes('plan')) badgeClass = 'bg-amber-100 text-amber-700';
+                                        if (statusLower.includes('annul') || statusLower.includes('cancel')) badgeClass = 'bg-rose-100 text-rose-700';
+
+                                        return (
+                                            <tr key={idx} className="bg-white">
+                                                <td className="py-4 font-semibold text-slate-900">{patientName}</td>
+                                                <td className="py-4">{doctorName}</td>
+                                                <td className="py-4">{speciality}</td>
+                                                <td className="py-4">{date ? new Date(date).toLocaleDateString('fr-FR') : '—'}</td>
+                                                <td className="py-4">
+                                                    <span className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${badgeClass}`}>{status}</span>
+                                                </td>
+                                            </tr>
+                                        );
+                                    })
+                                ) : (
+                                    <tr>
+                                        <td colSpan="5" className="py-10 text-center text-sm text-slate-500">
+                                            Aucune consultation récente disponible.
                                         </td>
                                     </tr>
-                                ))}
+                                )}
                             </tbody>
                         </table>
                     </div>
@@ -201,21 +372,36 @@ export default function Dashboard() {
                     </div>
 
                     <div className="mt-6 space-y-4">
-                        {[
-                            { title: 'Nouveau patient inscrit', description: 'Amine M. a été ajouté par Dr. Sara Benali', time: 'Il y a 5 min', color: 'bg-emerald-100 text-emerald-700' },
-                            { title: 'Rendez-vous créé', description: 'Nouveau rendez-vous le 15/06/2025 à 10:00', time: 'Il y a 20 min', color: 'bg-sky-100 text-sky-700' },
-                            { title: 'Ordonnance ajoutée', description: 'Ordonnance pour Sarah L.', time: 'Il y a 1 heure', color: 'bg-amber-100 text-amber-700' },
-                            { title: 'Nouvel utilisateur', description: 'Dr. Mohamed Ali a rejoint la plateforme', time: 'Il y a 2 heures', color: 'bg-violet-100 text-violet-700' },
-                        ].map((item, idx) => (
-                            <div key={idx} className="flex items-start gap-4 rounded-3xl border border-slate-200 bg-slate-50 p-4">
-                                <span className={`${item.color} inline-flex h-10 w-10 items-center justify-center rounded-2xl text-sm font-semibold`}>•</span>
-                                <div className="flex-1">
-                                    <p className="font-semibold text-slate-900">{item.title}</p>
-                                    <p className="mt-1 text-sm text-slate-500">{item.description}</p>
-                                </div>
-                                <p className="text-xs uppercase tracking-[0.2em] text-slate-400">{item.time}</p>
+                        {activityRows.length > 0 ? (
+                            activityRows.map((item, idx) => {
+                                const title = item?.label ?? item?.title ?? item?.action ?? item?.type ?? 'Action récente';
+                                const rawDetails = item?.details ?? item?.message ?? item?.description ?? null;
+                                let description = typeof rawDetails === 'string' ? rawDetails : null;
+                                if (!description && rawDetails) {
+                                    description = stringifyName(rawDetails);
+                                    if (description === '—') description = JSON.stringify(rawDetails);
+                                }
+                                description = description ?? 'Aucune description disponible.';
+                                const time = formatTimestamp(item?.occurred_at ?? item?.occurredAt ?? item?.created_at ?? item?.time ?? item);
+                                const isPositive = /ajout|créé|nouveau|nouvelle|new/i.test((title || '') + ' ' + (description || ''));
+                                const color = isPositive ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-700';
+
+                                return (
+                                    <div key={idx} className="flex items-start gap-4 rounded-3xl border border-slate-200 bg-slate-50 p-4">
+                                        <span className={`${color} inline-flex h-10 w-10 items-center justify-center rounded-2xl text-sm font-semibold`}>•</span>
+                                        <div className="flex-1">
+                                            <p className="font-semibold text-slate-900">{title}</p>
+                                            <p className="mt-1 text-sm text-slate-500">{description}</p>
+                                        </div>
+                                        <p className="text-xs uppercase tracking-[0.2em] text-slate-400">{time}</p>
+                                    </div>
+                                );
+                            })
+                        ) : (
+                            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 text-sm text-slate-500">
+                                Aucune activité récente disponible.
                             </div>
-                        ))}
+                        )}
                     </div>
                 </section>
             </div>
