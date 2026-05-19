@@ -39,14 +39,14 @@ function Temoignages() {
 
     if (loading) {
         return (
-            <div className="text-center py-20 text-gray-500">
+            <div className="text-center py-20 text-slate-600">
                 Loading testimonials...
             </div>
         );
     }
 
     return (
-        <section className="py-20 px-6 bg-white overflow-hidden">
+        <section className="py-20 px-6 bg-primary-50 overflow-hidden">
 
             {/* Header */}
             <div className="text-center mb-14">
@@ -55,11 +55,11 @@ function Temoignages() {
                     Testimonials
                 </p>
 
-                <h1 className="text-4xl font-bold text-gray-800 mb-4">
+                <h1 className="text-4xl font-bold text-slate-900 mb-4">
                     What Our Patients Say
                 </h1>
 
-                <p className="text-gray-600 max-w-2xl mx-auto">
+                <p className="text-slate-600 max-w-2xl mx-auto">
                     Real feedback from patients after consultations with our doctors.
                 </p>
 
@@ -90,7 +90,7 @@ function Temoignages() {
 
                     <SwiperSlide key={item.id}>
 
-                        <div className="bg-primary-50 rounded-3xl p-7 shadow-md hover:shadow-2xl transition duration-500 h-full">
+                        <div className="bg-white/95 rounded-3xl p-7 shadow-sm hover:shadow-2xl transition duration-500 h-full border border-primary-100">
 
                             {/* Stars */}
                             <div className="text-yellow-400 mb-4 text-xl">
@@ -98,7 +98,7 @@ function Temoignages() {
                             </div>
 
                             {/* Comment */}
-                            <p className="text-gray-700 italic mb-6 leading-relaxed min-h-[120px]">
+                            <p className="text-slate-600 italic mb-6 leading-relaxed min-h-[120px]">
                                 "{item.commentaire}"
                             </p>
 
@@ -108,11 +108,11 @@ function Temoignages() {
                                 {/* Patient */}
                                 <div>
 
-                                    <h3 className="font-semibold text-gray-800">
+                                    <h3 className="font-semibold text-slate-900">
                                         {item.patient?.user?.name}
                                     </h3>
 
-                                    <p className="text-xs text-gray-500">
+                                    <p className="text-xs text-slate-500">
                                         Patient
                                     </p>
 
@@ -121,7 +121,7 @@ function Temoignages() {
                                 {/* Doctor */}
                                 <div className="text-right">
 
-                                    <p className="text-xs text-gray-500">
+                                    <p className="text-xs text-slate-500">
                                         Doctor
                                     </p>
 

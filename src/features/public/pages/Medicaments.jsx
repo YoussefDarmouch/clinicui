@@ -43,12 +43,12 @@ const Medicaments = () => {
 
     if (loading) {
         return (
-            <div>
+            <div className="min-h-screen bg-primary-50">
                 <Navbar />
-                <div className="min-h-screen flex items-center justify-center">
+                <div className="min-h-screen flex items-center justify-center px-4 py-12">
                     <div className="text-center">
                         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-600 mx-auto"></div>
-                        <p className="mt-4 text-gray-600">Loading medicaments...</p>
+                        <p className="mt-4 text-slate-600">Loading medicaments...</p>
                     </div>
                 </div>
                 <Footer />
@@ -57,15 +57,15 @@ const Medicaments = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-primary-50">
             <Navbar />
 
             {/* Header */}
-            <div className="bg-white shadow-sm">
+            <div className="bg-primary-50 border-b border-primary-200">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                     <div className="text-center">
-                        <h1 className="text-4xl font-bold text-gray-900 mb-4">Medicaments</h1>
-                        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                        <h1 className="text-4xl font-bold text-slate-900 mb-4">Medicaments</h1>
+                        <p className="text-xl text-slate-600 max-w-2xl mx-auto">
                             Browse our comprehensive catalog of medications and healthcare products.
                         </p>
                     </div>
@@ -77,7 +77,7 @@ const Medicaments = () => {
                             placeholder="Search medicaments..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500/10 focus:border-transparent"
+                            className="w-full px-4 py-3 border border-primary-200 rounded-xl bg-white focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500"
                         />
                     </div>
                 </div>
@@ -87,14 +87,14 @@ const Medicaments = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 {filteredMedicaments.length === 0 ? (
                     <div className="text-center py-12">
-                        <p className="text-gray-500 text-lg">
+                        <p className="text-slate-500 text-lg">
                             {searchTerm ? 'No medicaments found matching your search.' : 'No medicaments available.'}
                         </p>
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                         {filteredMedicaments.map((medicament) => (
-                            <div key={medicament.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+                            <div key={medicament.id} className="bg-primary-50 rounded-3xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-primary-100">
                                 <div className="p-6">
                                     <div className="w-16 h-16 mx-auto mb-4 bg-primary-100 rounded-full flex items-center justify-center">
                                         <svg className="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -102,18 +102,18 @@ const Medicaments = () => {
                                         </svg>
                                     </div>
                                     <div className="text-center">
-                                        <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                                        <h3 className="text-lg font-semibold text-slate-900 mb-2">
                                             {medicament.nom}
                                         </h3>
-                                        <p className="text-gray-600 text-sm mb-4">
+                                        <p className="text-slate-600 text-sm mb-4">
                                             {medicament.description || 'Medical product for healthcare needs.'}
                                         </p>
-                                        <div className="flex items-center justify-center space-x-4 text-sm text-gray-600">
-                                            <span className="bg-gray-100 px-2 py-1 rounded">
+                                        <div className="flex items-center justify-center space-x-4 text-sm text-slate-600">
+                                            <span className="bg-primary-100 text-primary-700 px-2 py-1 rounded-full">
                                                 {medicament.categorie || 'General'}
                                             </span>
                                             {medicament.prix && (
-                                                <span className="font-medium text-primary-600">
+                                                <span className="font-medium text-primary-700">
                                                     ${medicament.prix}
                                                 </span>
                                             )}

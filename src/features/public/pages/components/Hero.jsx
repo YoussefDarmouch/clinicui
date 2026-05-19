@@ -11,11 +11,11 @@ function Hero() {
                     Trusted Healthcare Platform
                 </p>
 
-                <h1 className="text-5xl font-bold leading-tight text-gray-800 mb-6">
+                <h1 className="text-5xl font-bold leading-tight text-slate-900 mb-6">
                     Get trusted medical care anytime, anywhere
                 </h1>
 
-                <p className="text-gray-600 text-lg mb-8 leading-8">
+                <p className="text-slate-600 text-lg mb-8 leading-8">
                     Connect with professional doctors and specialists
                     for online consultations, appointments, and medical
                     support from the comfort of your home.
@@ -47,23 +47,23 @@ function Hero() {
                 />
 
                 {/* Floating Card 1 */}
-                <div className="absolute top-10 -left-10 bg-white shadow-lg rounded-xl px-6 py-4">
+                <div className="absolute top-10 -left-10 bg-white/95 border border-primary-100 shadow-lg rounded-3xl px-6 py-4">
                     <h2 className="text-2xl font-bold text-primary-600">
                         95%
                     </h2>
 
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-slate-600 text-sm">
                         Patient Satisfaction
                     </p>
                 </div>
 
                 {/* Floating Card 2 */}
-                <div className="absolute bottom-10 -right-10 bg-white shadow-lg rounded-xl px-6 py-4">
+                <div className="absolute bottom-10 -right-10 bg-white/95 border border-primary-100 shadow-lg rounded-3xl px-6 py-4">
                     <h2 className="text-2xl font-bold text-primary-600">
                         24/7
                     </h2>
 
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-slate-600 text-sm">
                         Medical Support
                     </p>
                 </div>

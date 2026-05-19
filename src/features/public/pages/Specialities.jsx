@@ -47,12 +47,12 @@ const Specialities = () => {
 
     if (loading) {
         return (
-            <div>
+            <div className="min-h-screen bg-primary-50">
                 <Navbar />
-                <div className="min-h-screen flex items-center justify-center">
+                <div className="min-h-screen flex items-center justify-center px-4 py-12">
                     <div className="text-center">
                         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-600 mx-auto"></div>
-                        <p className="mt-4 text-gray-600">Loading specialities...</p>
+                        <p className="mt-4 text-slate-600">Loading specialities...</p>
                     </div>
                 </div>
                 <Footer />
@@ -61,17 +61,17 @@ const Specialities = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-primary-50">
             <Navbar />
 
             {/* Header */}
-            <div className="bg-white shadow-sm">
+            <div className="bg-primary-50 border-b border-primary-200">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                     <div className="text-center">
-                        <h1 className="text-4xl font-bold text-gray-900 mb-4">
+                        <h1 className="text-4xl font-bold text-slate-900 mb-4">
                             {selectedSpeciality ? `${selectedSpeciality.nom} Specialists` : 'Medical Specialities'}
                         </h1>
-                        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                        <p className="text-xl text-slate-600 max-w-2xl mx-auto">
                             {selectedSpeciality
                                 ? `Meet our expert doctors specializing in ${selectedSpeciality.name.toLowerCase()}.`
                                 : 'Explore our comprehensive range of medical specialities and connect with specialists.'
@@ -80,7 +80,7 @@ const Specialities = () => {
                         {selectedSpeciality && (
                             <button
                                 onClick={handleBackToSpecialities}
-                                className="mt-4 inline-flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors"
+                                className="mt-4 inline-flex items-center px-4 py-2 rounded-full text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 transition"
                             >
                                 ← Back to Specialities
                             </button>
@@ -98,7 +98,7 @@ const Specialities = () => {
                             <div
                                 key={speciality.id}
                                 onClick={() => handleSpecialityClick(speciality)}
-                                className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden cursor-pointer group"
+                                className="bg-white rounded-3xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden cursor-pointer group border border-primary-100"
                             >
                                 <div className="p-6">
                                     <div className="w-16 h-16 mx-auto mb-4 bg-primary-100 rounded-full flex items-center justify-center group-hover:bg-primary-100 transition-colors">
@@ -107,10 +107,10 @@ const Specialities = () => {
                                         </svg>
                                     </div>
                                     <div className="text-center">
-                                        <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                                        <h3 className="text-lg font-semibold text-slate-900 mb-2">
                                             {speciality.name}
                                         </h3>
-                                        <p className="text-gray-600 text-sm mb-4">
+                                        <p className="text-slate-600 text-sm mb-4">
                                             {speciality.description || 'Specialized medical care and treatment services.'}
                                         </p>
                                         <span className="inline-flex items-center text-primary-600 font-medium text-sm group-hover:text-primary-700">
@@ -127,16 +127,16 @@ const Specialities = () => {
                         {doctorsLoading ? (
                             <div className="text-center py-12">
                                 <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary-600 mx-auto"></div>
-                                <p className="mt-4 text-gray-600">Loading doctors...</p>
+                                <p className="mt-4 text-slate-600">Loading doctors...</p>
                             </div>
                         ) : doctors.length === 0 ? (
                             <div className="text-center py-12">
-                                <p className="text-gray-500 text-lg">No doctors found for this speciality.</p>
+                                <p className="text-slate-500 text-lg">No doctors found for this speciality.</p>
                             </div>
                         ) : (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                                 {doctors.map((doctor) => (
-                                    <div key={doctor.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+                                    <div key={doctor.id} className="bg-white/95 rounded-3xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-primary-100">
                                         <div className="p-6">
                                             <div className="w-24 h-24 mx-auto mb-4">
                                                 <img
@@ -146,18 +146,18 @@ const Specialities = () => {
                                                 />
                                             </div>
                                             <div className="text-center">
-                                                <h3 className="text-lg font-semibold text-gray-900">
+                                                <h3 className="text-lg font-semibold text-slate-900">
                                                     Dr. {doctor.name}
                                                 </h3>
                                                 <p className="text-primary-600 font-medium mb-2">
                                                     {doctor.specialite?.name}
                                                 </p>
-                                                <p className="text-sm text-gray-600 mb-4">
+                                                <p className="text-sm text-slate-600 mb-4">
                                                     {doctor.experience || 'Experienced'} years of experience
                                                 </p>
                                                 <button
                                                     onClick={() => window.location.href = `/doctors/${doctor.id}`}
-                                                    className="w-full bg-primary-600 text-white py-2 px-4 rounded-lg hover:bg-primary-700 transition-colors"
+                                                    className="w-full bg-primary-600 text-white py-3 rounded-full hover:bg-primary-700 transition-colors"
                                                 >
                                                     View Profile
                                                 </button>

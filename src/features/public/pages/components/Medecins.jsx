@@ -38,7 +38,7 @@ function Medecins() {
 
     if (loading) {
         return (
-            <div className="text-center py-20 text-gray-500">
+            <div className="text-center py-20 text-slate-600">
                 Loading doctors...
             </div>
         );
@@ -54,11 +54,11 @@ function Medecins() {
                     Our Doctors
                 </p>
 
-                <h1 className="text-4xl font-bold text-gray-800 mb-4">
+                <h1 className="text-4xl font-bold text-slate-900 mb-4">
                     Meet Our Specialists
                 </h1>
 
-                <p className="text-gray-600 max-w-2xl mx-auto">
+                <p className="text-slate-600 max-w-2xl mx-auto">
                     Professional doctors with experience and specialization.
                 </p>
 
@@ -92,7 +92,7 @@ function Medecins() {
 
                     <SwiperSlide key={doc.id}>
 
-                        <div className="bg-white rounded-3xl shadow-md hover:shadow-2xl transition duration-500 p-6 text-center hover:-translate-y-2">
+                        <div className="bg-white/95 rounded-3xl shadow-sm hover:shadow-lg transition duration-500 p-6 text-center hover:-translate-y-2 border border-primary-100">
 
                             {/* Image */}
                             <img
@@ -102,7 +102,7 @@ function Medecins() {
                             />
 
                             {/* Name */}
-                            <h2 className="text-xl font-bold text-gray-800">
+                            <h2 className="text-xl font-bold text-slate-900">
                                 {doc.user?.name}
                             </h2>
 
@@ -112,11 +112,11 @@ function Medecins() {
                             </p>
 
                             {/* Experience */}
-                            <p className="text-gray-600 text-sm mt-3">
+                            <p className="text-slate-600 text-sm mt-3">
                                 {doc.annees_experience} years experience
                             </p>
 
-                            <p className="text-gray-500 text-xs mt-1">
+                            <p className="text-slate-500 text-xs mt-1">
                                 {doc.user?.address}
                             </p>
 

@@ -22,7 +22,7 @@ function Specialities() {
     };
 
     return (
-        <section className="py-20 px-10 bg-white">
+        <section className="py-20 px-10 bg-primary-50">
 
             {/* Header */}
             <div className="text-center mb-14">
@@ -31,11 +31,11 @@ function Specialities() {
                     Our Specialities
                 </p>
 
-                <h1 className="text-4xl font-bold text-gray-800 mb-4">
+                <h1 className="text-4xl font-bold text-slate-900 mb-4">
                     Medical Specialities
                 </h1>
 
-                <p className="text-gray-600 max-w-2xl mx-auto">
+                <p className="text-slate-600 max-w-2xl mx-auto">
                     Explore our medical departments and connect with specialists.
                 </p>
 
@@ -48,7 +48,7 @@ function Specialities() {
 
                     <div
                         key={item.id}
-                        className="bg-primary-50 rounded-2xl p-6 shadow-sm hover:shadow-lg transition"
+                        className="bg-white/95 rounded-3xl p-6 shadow-sm hover:shadow-lg transition border border-primary-100"
                     >
 
                         {/* Icon */}
@@ -57,12 +57,12 @@ function Specialities() {
                         </div>
 
                         {/* Name */}
-                        <h2 className="text-xl font-bold text-gray-800 mb-2">
+                        <h2 className="text-xl font-bold text-slate-900 mb-2">
                             {item.name}
                         </h2>
 
                         {/* Description */}
-                        <p className="text-gray-600 text-sm leading-6">
+                        <p className="text-slate-600 text-sm leading-6">
                             {item.description}
                         </p>
 

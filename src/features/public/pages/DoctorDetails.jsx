@@ -70,14 +70,14 @@ const DoctorDetails = () => {
 
     if (loading) {
         return (
-            <div>
+            <div className="min-h-screen bg-primary-50">
                 <Navbar />
 
-                <div className="min-h-screen flex items-center justify-center">
+                <div className="min-h-screen flex items-center justify-center px-4 py-12">
                     <div className="text-center">
                         <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary-600 mx-auto"></div>
 
-                        <p className="mt-4 text-gray-600">
+                        <p className="mt-4 text-slate-600">
                             Loading doctor details...
                         </p>
                     </div>
@@ -90,11 +90,11 @@ const DoctorDetails = () => {
 
     if (!doctor) {
         return (
-            <div>
+            <div className="min-h-screen bg-primary-50">
                 <Navbar />
 
-                <div className="min-h-screen flex items-center justify-center">
-                    <p className="text-gray-500 text-lg">
+                <div className="min-h-screen flex items-center justify-center px-4 py-12">
+                    <p className="text-slate-500 text-lg">
                         Doctor not found
                     </p>
                 </div>
@@ -105,11 +105,11 @@ const DoctorDetails = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-primary-50">
             <Navbar />
 
             {/* HEADER */}
-            <div className="bg-white shadow-sm">
+            <div className="bg-primary-50 border-b border-primary-200">
                 <div className="max-w-7xl mx-auto px-4 py-12">
 
                     <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
@@ -130,7 +130,7 @@ const DoctorDetails = () => {
                         {/* INFO */}
                         <div className="flex-1 text-center md:text-left">
 
-                            <h1 className="text-4xl font-bold text-gray-900 mb-2">
+                            <h1 className="text-4xl font-bold text-slate-900 mb-2">
                                 {doctor.user?.name}
                             </h1>
 
@@ -146,7 +146,7 @@ const DoctorDetails = () => {
                                         {doctor.annees_experience}
                                     </div>
 
-                                    <div className="text-sm text-gray-600">
+                                    <div className="text-sm text-slate-600">
                                         Years Experience
                                     </div>
                                 </div>
@@ -157,7 +157,7 @@ const DoctorDetails = () => {
                                         {doctor.user?.phone}
                                     </div>
 
-                                    <div className="text-sm text-gray-600">
+                                    <div className="text-sm text-slate-600">
                                         Phone Number
                                     </div>
                                 </div>
@@ -168,7 +168,7 @@ const DoctorDetails = () => {
                                         {doctor.user?.address}
                                     </div>
 
-                                    <div className="text-sm text-gray-600">
+                                    <div className="text-sm text-slate-600">
                                         Address
                                     </div>
                                 </div>
@@ -190,13 +190,13 @@ const DoctorDetails = () => {
                     {/* LEFT SIDE */}
                     <div className="lg:col-span-2">
 
-                        <div className="bg-white rounded-lg shadow-md p-6">
+                        <div className="bg-white/95 rounded-3xl shadow-sm p-6 border border-primary-100">
 
-                            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                            <h2 className="text-2xl font-bold text-slate-900 mb-4">
                                 About Doctor
                             </h2>
 
-                            <p className="text-gray-600 leading-relaxed">
+                            <p className="text-slate-600 leading-relaxed">
                                 Specialist in{' '}
                                 <span className="font-semibold">
                                     {doctor.specialite?.name}
@@ -215,16 +215,16 @@ const DoctorDetails = () => {
                     {/* RIGHT SIDE */}
                     <div>
 
-                        <div className="bg-white rounded-lg shadow-md p-6 sticky top-6">
+                        <div className="bg-white/95 rounded-3xl shadow-sm p-6 border border-primary-100 sticky top-6">
 
-                            <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                            <h2 className="text-2xl font-bold text-slate-900 mb-6">
                                 Book Appointment
                             </h2>
 
                             {/* DATE */}
                             <div className="mb-6">
 
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                <label className="block text-sm font-medium text-slate-700 mb-2">
                                     Select Date
                                 </label>
 
@@ -235,7 +235,7 @@ const DoctorDetails = () => {
                                     onChange={(e) =>
                                         setSelectedDate(e.target.value)
                                     }
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500/10"
+                                    className="w-full px-3 py-2 border border-primary-200 rounded-md bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                                 />
 
                             </div>
@@ -243,7 +243,7 @@ const DoctorDetails = () => {
                             {/* SLOTS */}
                             <div>
 
-                                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                                <h3 className="text-lg font-semibold text-slate-900 mb-4">
                                     Available Times
                                 </h3>
 
@@ -252,13 +252,13 @@ const DoctorDetails = () => {
 
                                         <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary-600 mx-auto"></div>
 
-                                        <p className="text-sm text-gray-600 mt-2">
+                                        <p className="text-sm text-slate-600 mt-2">
                                             Loading slots...
                                         </p>
 
                                     </div>
                                 ) : availableSlots.length === 0 ? (
-                                    <p className="text-gray-500 text-sm">
+                                    <p className="text-slate-500 text-sm">
                                         No available slots for this date.
                                     </p>
                                 ) : (
@@ -273,9 +273,9 @@ const DoctorDetails = () => {
                                                     onClick={() =>
                                                         handleBookAppointment(slot)
                                                     }
-                                                    className="w-full text-left px-4 py-3 border border-gray-200 rounded-lg hover:bg-primary-50 hover:border-primary-700 transition"
+                                                    className="w-full text-left px-4 py-3 border border-primary-200 rounded-xl bg-white hover:bg-primary-50 hover:border-primary-700 transition"
                                                 >
-                                                    <div className="font-semibold text-gray-900">
+                                                    <div className="font-semibold text-slate-900">
                                                         {time}
                                                     </div>
                                                 </button>

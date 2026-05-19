@@ -37,11 +37,11 @@ function FAQ() {
                     FAQ
                 </p>
 
-                <h1 className="text-4xl font-bold text-gray-800 mb-4">
+                <h1 className="text-4xl font-bold text-slate-900 mb-4">
                     Frequently Asked Questions
                 </h1>
 
-                <p className="text-gray-600 max-w-2xl mx-auto">
+                <p className="text-slate-600 max-w-2xl mx-auto">
                     Find answers to the most common questions about our medical platform.
                 </p>
 
@@ -54,14 +54,14 @@ function FAQ() {
 
                     <div
                         key={index}
-                        className="bg-white rounded-xl shadow-sm p-5 cursor-pointer"
+                        className="bg-white/95 rounded-3xl shadow-sm p-5 cursor-pointer border border-primary-100"
                         onClick={() => toggleFAQ(index)}
                     >
 
                         {/* Question */}
                         <div className="flex justify-between items-center">
 
-                            <h3 className="font-semibold text-gray-800">
+                            <h3 className="font-semibold text-slate-900">
                                 {item.question}
                             </h3>
 
@@ -73,7 +73,7 @@ function FAQ() {
 
                         {/* Answer */}
                         {openIndex === index && (
-                            <p className="text-gray-600 mt-3 text-sm leading-6">
+                            <p className="text-slate-600 mt-3 text-sm leading-6">
                                 {item.answer}
                             </p>
                         )}

@@ -116,9 +116,9 @@ const CreateRendezVous = () => {
 
     if (loading) {
         return (
-            <div>
+            <div className="min-h-screen bg-primary-50">
                 <Navbar />
-                <div className="min-h-screen flex items-center justify-center">
+                <div className="min-h-screen flex items-center justify-center px-4 py-12 text-slate-600">
                     Loading...
                 </div>
                 <Footer />
@@ -127,14 +127,14 @@ const CreateRendezVous = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-primary-50">
             <Navbar />
 
-            <div className="text-center p-8 bg-white shadow">
-                <h1 className="text-3xl font-bold">Créer Rendez-vous</h1>
+            <div className="text-center p-8 bg-primary-50 border-b border-primary-200">
+                <h1 className="text-3xl font-bold text-slate-900">Créer Rendez-vous</h1>
             </div>
 
-            <div className="max-w-5xl mx-auto p-6 grid grid-cols-2 gap-8">
+            <div className="max-w-5xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-2 gap-8">
 
                 {/* LEFT */}
                 <div>
@@ -143,7 +143,7 @@ const CreateRendezVous = () => {
                     <select
                         value={selectedDoctor}
                         onChange={(e) => setSelectedDoctor(e.target.value)}
-                        className="w-full p-2 border mb-4"
+                        className="w-full p-3 border border-primary-200 rounded-xl mb-4 bg-white focus:ring-2 focus:ring-primary-500/20"
                     >
                         <option value="">Select doctor</option>
                         {doctors.map(doc => (
@@ -157,20 +157,19 @@ const CreateRendezVous = () => {
                         type="date"
                         value={selectedDate}
                         onChange={(e) => setSelectedDate(e.target.value)}
-                        className="w-full p-2 border mb-4"
+                        className="w-full p-3 border border-primary-200 rounded-xl mb-4 bg-white focus:ring-2 focus:ring-primary-500/20"
                     />
 
                     {/* SLOTS */}
                     <div className="grid grid-cols-3 gap-2">
                         {slotsLoading ? (
-                            <p>Loading slots...</p>
+                            <p className="text-slate-600">Loading slots...</p>
                         ) : (
                             availableSlots.map((slot, i) => (
                                 <button
                                     key={i}
                                     onClick={() => setSelectedSlot(slot)}
-                                    className={`p-2 border rounded ${selectedSlot === slot ? 'bg-primary-600 text-white' : ''
-                                        }`}
+                                    className={`p-3 rounded-xl border border-primary-200 text-sm font-medium transition ${selectedSlot === slot ? 'bg-primary-600 text-white' : 'bg-white hover:bg-primary-50 text-slate-700'}`}
                                 >
                                     {slot}
                                 </button>
@@ -188,7 +187,7 @@ const CreateRendezVous = () => {
                         placeholder="Motif"
                         value={form.motif}
                         onChange={handleChange}
-                        className="w-full p-2 border mb-3"
+                        className="w-full p-3 border border-primary-200 rounded-xl mb-3 bg-white focus:ring-2 focus:ring-primary-500/20"
                     />
 
                     <textarea
@@ -196,7 +195,7 @@ const CreateRendezVous = () => {
                         placeholder="Notes"
                         value={form.notes}
                         onChange={handleChange}
-                        className="w-full p-2 border mb-3"
+                        className="w-full p-3 border border-primary-200 rounded-xl mb-3 bg-white focus:ring-2 focus:ring-primary-500/20"
                     />
 
                     <button

@@ -78,7 +78,7 @@ const Doctors = () => {
                 <div className="min-h-screen flex items-center justify-center">
                     <div className="text-center">
                         <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary-600 mx-auto"></div>
-                        <p className="mt-4 text-gray-600">Loading doctors...</p>
+                        <p className="mt-4 text-slate-600">Loading doctors...</p>
                     </div>
                 </div>
                 <Footer />
@@ -87,17 +87,17 @@ const Doctors = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-primary-50">
             <Navbar />
 
             {/* HEADER */}
-            <div className="bg-white shadow-sm">
+            <div className="bg-primary-50 border-b border-primary-200">
                 <div className="max-w-7xl mx-auto px-4 py-12 text-center">
-                    <h1 className="text-4xl font-bold mb-4">
+                    <h1 className="text-4xl font-bold mb-4 text-slate-900">
                         Our Doctors
                     </h1>
 
-                    <p className="text-gray-600">
+                    <p className="text-slate-600">
                         Find and book appointments with top specialists
                     </p>
 
@@ -111,7 +111,7 @@ const Doctors = () => {
                             onChange={(e) =>
                                 setSearchTerm(e.target.value)
                             }
-                            className="flex-1 px-4 py-3 border rounded-lg"
+                            className="flex-1 px-4 py-3 border border-primary-200 bg-white/90 rounded-xl focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                         />
 
                         <select
@@ -119,7 +119,7 @@ const Doctors = () => {
                             onChange={(e) =>
                                 setSelectedSpeciality(e.target.value)
                             }
-                            className="px-4 py-3 border rounded-lg"
+                            className="px-4 py-3 border border-primary-200 bg-white/90 rounded-xl focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                         >
                             <option value="">
                                 All Specialities
@@ -140,7 +140,7 @@ const Doctors = () => {
             <div className="max-w-7xl mx-auto px-4 py-12">
 
                 {filteredDoctors.length === 0 ? (
-                    <p className="text-center text-gray-500">
+                    <p className="text-center text-slate-500">
                         No doctors found
                     </p>
                 ) : (
@@ -149,7 +149,7 @@ const Doctors = () => {
                         {filteredDoctors.map((doctor) => (
                             <div
                                 key={doctor.id}
-                                className="bg-white rounded-lg shadow hover:shadow-lg transition p-6"
+                                className="bg-white rounded-3xl shadow-sm hover:shadow-lg transition p-6 border border-primary-100"
                             >
                                 {/* IMAGE */}
                                 <img
@@ -169,7 +169,7 @@ const Doctors = () => {
                                 </p>
 
                                 {/* EXPERIENCE */}
-                                <p className="text-center text-sm text-gray-500 mt-1">
+                                <p className="text-center text-sm text-slate-500 mt-1">
                                     {doctor.annees_experience} years experience
                                 </p>
 
@@ -178,7 +178,7 @@ const Doctors = () => {
                                     onClick={() =>
                                         navigate(`/doctors/${doctor.id}`)
                                     }
-                                    className="w-full mt-4 bg-primary-600 text-white py-2 rounded-lg hover:bg-primary-700"
+                                    className="w-full mt-4 bg-primary-600 text-white py-3 rounded-full font-semibold hover:bg-primary-700 transition"
                                 >
                                     View Profile
                                 </button>

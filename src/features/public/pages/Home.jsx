@@ -8,7 +8,7 @@ import Medecins from './components/Medecins'
 import FAQ from './components/FAQ'
 export default function Home() {
     return (
-        <div>
+        <div className="min-h-screen bg-primary-50">
             <Navbar />
             <Hero />
             <Specialities />
