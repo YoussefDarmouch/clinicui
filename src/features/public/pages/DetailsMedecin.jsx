@@ -9,10 +9,10 @@ import {
 import Navbar from '../../../components/layout/Navbar';
 import Footer from '../../../components/layout/Footer';
 
-const DoctorDetails = () => {
+const DetailsMedecin = () => {
     const { id } = useParams();
 
-    const [doctor, setDoctor] = useState(null);
+    const [medecin, setMedecin] = useState(null);
     const [availableSlots, setAvailableSlots] = useState([]);
 
     const [loading, setLoading] = useState(true);
@@ -23,24 +23,24 @@ const DoctorDetails = () => {
     const [selectedDate, setSelectedDate] = useState(today);
 
     useEffect(() => {
-        fetchDoctor();
+        fetchMedecin();
     }, [id]);
 
     useEffect(() => {
-        if (doctor?.id) {
+        if (medecin?.id) {
             fetchAvailableSlots();
         }
-    }, [doctor, selectedDate]);
+    }, [medecin, selectedDate]);
 
-    const fetchDoctor = async () => {
+    const fetchMedecin = async () => {
         try {
             setLoading(true);
 
             const response = await getMedecinService(id);
 
-            setDoctor(response.data.data);
+            setMedecin(response.data.data);
         } catch (error) {
-            console.error('Error fetching doctor:', error);
+            console.error('Erreur lors du chargement du medecin :', error);
         } finally {
             setLoading(false);
         }
@@ -51,21 +51,21 @@ const DoctorDetails = () => {
             setSlotsLoading(true);
 
             const response = await getAvailableSlotsService(
-                doctor.id,
+                medecin.id,
                 selectedDate
             );
 
             setAvailableSlots(response.data.data || []);
         } catch (error) {
-            console.error('Error fetching slots:', error);
+            console.error('Erreur lors du chargement des creneaux :', error);
             setAvailableSlots([]);
         } finally {
             setSlotsLoading(false);
         }
     };
 
-    const handleBookAppointment = (slot) => {
-        alert(`Booking appointment at ${slot}`);
+    const handlePrendreRendezVous = (slot) => {
+        alert(`Reservation du creneau ${slot}`);
     };
 
     if (loading) {
@@ -78,7 +78,7 @@ const DoctorDetails = () => {
                         <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary-600 mx-auto"></div>
 
                         <p className="mt-4 text-slate-600">
-                            Loading doctor details...
+                            Chargement des details du medecin...
                         </p>
                     </div>
                 </div>
@@ -88,14 +88,14 @@ const DoctorDetails = () => {
         );
     }
 
-    if (!doctor) {
+    if (!medecin) {
         return (
             <div className="min-h-screen bg-primary-50">
                 <Navbar />
 
                 <div className="min-h-screen flex items-center justify-center px-4 py-12">
                     <p className="text-slate-500 text-lg">
-                        Doctor not found
+                        Medecin introuvable
                     </p>
                 </div>
 
@@ -118,11 +118,11 @@ const DoctorDetails = () => {
                         <div className="w-48 h-48">
                             <img
                                 src={
-                                    doctor.image_medecin
-                                        ? `http://127.0.0.1:8000/${doctor.image_medecin}`
+                                    medecin.image_medecin
+                                        ? `http://127.0.0.1:8000/${medecin.image_medecin}`
                                         : '/default-doctor.png'
                                 }
-                                alt={doctor.user?.name}
+                                alt={medecin.user?.name}
                                 className="w-full h-full object-cover rounded-full border-4 border-primary-100"
                             />
                         </div>
@@ -131,11 +131,11 @@ const DoctorDetails = () => {
                         <div className="flex-1 text-center md:text-left">
 
                             <h1 className="text-4xl font-bold text-slate-900 mb-2">
-                                {doctor.user?.name}
+                                {medecin.user?.name}
                             </h1>
 
                             <p className="text-xl text-primary-600 font-medium mb-6">
-                                {doctor.specialite?.name}
+                                {medecin.specialite?.name}
                             </p>
 
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -143,33 +143,33 @@ const DoctorDetails = () => {
                                 {/* EXPERIENCE */}
                                 <div className="bg-primary-50 p-4 rounded-lg">
                                     <div className="text-2xl font-bold text-primary-600">
-                                        {doctor.annees_experience}
+                                        {medecin.annees_experience}
                                     </div>
 
                                     <div className="text-sm text-slate-600">
-                                        Years Experience
+                                        Annees d'experience
                                     </div>
                                 </div>
 
                                 {/* PHONE */}
                                 <div className="bg-primary-50 p-4 rounded-lg">
                                     <div className="text-lg font-bold text-primary-600">
-                                        {doctor.user?.phone}
+                                        {medecin.user?.phone}
                                     </div>
 
                                     <div className="text-sm text-slate-600">
-                                        Phone Number
+                                        Telephone
                                     </div>
                                 </div>
 
                                 {/* ADDRESS */}
                                 <div className="bg-primary-50 p-4 rounded-lg">
                                     <div className="text-lg font-bold text-primary-600">
-                                        {doctor.user?.address}
+                                        {medecin.user?.address}
                                     </div>
 
                                     <div className="text-sm text-slate-600">
-                                        Address
+                                        Adresse
                                     </div>
                                 </div>
 
@@ -193,19 +193,19 @@ const DoctorDetails = () => {
                         <div className="bg-white/95 rounded-3xl shadow-sm p-6 border border-primary-100">
 
                             <h2 className="text-2xl font-bold text-slate-900 mb-4">
-                                About Doctor
+                                A propos du medecin
                             </h2>
 
                             <p className="text-slate-600 leading-relaxed">
-                                Specialist in{' '}
+                                Specialiste en{' '}
                                 <span className="font-semibold">
-                                    {doctor.specialite?.name}
+                                    {medecin.specialite?.name}
                                 </span>{' '}
-                                with{' '}
+                                avec{' '}
                                 <span className="font-semibold">
-                                    {doctor.annees_experience} years
+                                    {medecin.annees_experience} ans
                                 </span>{' '}
-                                of experience.
+                                d'experience.
                             </p>
 
                         </div>
@@ -218,14 +218,14 @@ const DoctorDetails = () => {
                         <div className="bg-white/95 rounded-3xl shadow-sm p-6 border border-primary-100 sticky top-6">
 
                             <h2 className="text-2xl font-bold text-slate-900 mb-6">
-                                Book Appointment
+                                Prendre rendez-vous
                             </h2>
 
                             {/* DATE */}
                             <div className="mb-6">
 
                                 <label className="block text-sm font-medium text-slate-700 mb-2">
-                                    Select Date
+                                    Choisir une date
                                 </label>
 
                                 <input
@@ -244,7 +244,7 @@ const DoctorDetails = () => {
                             <div>
 
                                 <h3 className="text-lg font-semibold text-slate-900 mb-4">
-                                    Available Times
+                                    Creneaux disponibles
                                 </h3>
 
                                 {slotsLoading ? (
@@ -253,13 +253,13 @@ const DoctorDetails = () => {
                                         <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary-600 mx-auto"></div>
 
                                         <p className="text-sm text-slate-600 mt-2">
-                                            Loading slots...
+                                            Chargement des creneaux...
                                         </p>
 
                                     </div>
                                 ) : availableSlots.length === 0 ? (
                                     <p className="text-slate-500 text-sm">
-                                        No available slots for this date.
+                                        Aucun creneau disponible pour cette date.
                                     </p>
                                 ) : (
                                     <div className="space-y-2 max-h-64 overflow-y-auto">
@@ -271,7 +271,7 @@ const DoctorDetails = () => {
                                                 <button
                                                     key={slot}
                                                     onClick={() =>
-                                                        handleBookAppointment(slot)
+                                                        handlePrendreRendezVous(slot)
                                                     }
                                                     className="w-full text-left px-4 py-3 border border-primary-200 rounded-xl bg-white hover:bg-primary-50 hover:border-primary-700 transition"
                                                 >
@@ -300,7 +300,7 @@ const DoctorDetails = () => {
     );
 };
 
-export default DoctorDetails;
+export default DetailsMedecin;
 
 
 

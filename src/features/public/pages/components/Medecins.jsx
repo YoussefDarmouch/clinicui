@@ -39,7 +39,7 @@ function Medecins() {
     if (loading) {
         return (
             <div className="text-center py-20 text-slate-600">
-                Loading doctors...
+                Chargement des medecins...
             </div>
         );
     }
@@ -51,15 +51,15 @@ function Medecins() {
             <div className="text-center mb-14">
 
                 <p className="text-primary-600 font-semibold mb-3">
-                    Our Doctors
+                    Nos medecins
                 </p>
 
                 <h1 className="text-4xl font-bold text-slate-900 mb-4">
-                    Meet Our Specialists
+                    Rencontrez nos specialistes
                 </h1>
 
                 <p className="text-slate-600 max-w-2xl mx-auto">
-                    Professional doctors with experience and specialization.
+                    Des medecins professionnels avec experience et expertise.
                 </p>
 
             </div>
@@ -113,7 +113,7 @@ function Medecins() {
 
                             {/* Experience */}
                             <p className="text-slate-600 text-sm mt-3">
-                                {doc.annees_experience} years experience
+                                {doc.annees_experience} ans d'experience
                             </p>
 
                             <p className="text-slate-500 text-xs mt-1">
@@ -122,7 +122,7 @@ function Medecins() {
 
                             {/* Button */}
                             <button className="mt-5 bg-primary-600 text-white px-5 py-2 rounded-full text-sm hover:bg-primary-700 transition">
-                                Book Appointment
+                                Prendre rendez-vous
                             </button>
 
                         </div>

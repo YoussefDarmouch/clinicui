@@ -13,20 +13,20 @@ export default function Footer() {
                     </h1>
 
                     <p className="text-sm text-gray-200 leading-6">
-                        Trusted medical consultation platform providing
-                        professional healthcare services anytime and anywhere.
+                        Plateforme de consultation medicale de confiance offrant
+                        des services de sante professionnels a tout moment.
                     </p>
                 </div>
 
                 {/* Quick Links */}
                 <div>
                     <h2 className="text-xl font-semibold mb-4">
-                        Quick Links
+                        Liens rapides
                     </h2>
 
                     <ul className="space-y-2 text-gray-200">
                         <li>
-                            <Link to="/">Home</Link>
+                            <Link to="/">Accueil</Link>
                         </li>
 
                         <li>
@@ -34,7 +34,7 @@ export default function Footer() {
                         </li>
 
                         <li>
-                            <Link to="/specialites">Specialities</Link>
+                            <Link to="/specialites">Specialites</Link>
                         </li>
 
                         <li>
@@ -46,12 +46,12 @@ export default function Footer() {
                 {/* Support */}
                 <div>
                     <h2 className="text-xl font-semibold mb-4">
-                        Support
+                        Assistance
                     </h2>
 
                     <ul className="space-y-2 text-gray-200">
                         <li>
-                            <Link to="/about">About Us</Link>
+                            <Link to="/about">A propos</Link>
                         </li>
 
                         <li>
@@ -59,7 +59,7 @@ export default function Footer() {
                         </li>
 
                         <li>
-                            <Link to="/temoignages">Testimonials</Link>
+                            <Link to="/temoignages">Temoignages</Link>
                         </li>
 
                         <li>
@@ -76,8 +76,8 @@ export default function Footer() {
 
                     <div className="space-y-3 text-gray-200 text-sm">
                         <p>Email: clinic@gmail.com</p>
-                        <p>Phone: +212 600000000</p>
-                        <p>Address: Casablanca, Morocco</p>
+                        <p>Telephone: +212 600000000</p>
+                        <p>Adresse: Casablanca, Maroc</p>
                     </div>
                 </div>
 
@@ -85,7 +85,7 @@ export default function Footer() {
 
             {/* Bottom Footer */}
             <div className="border-t border-primary-500 mt-10 pt-6 text-center text-sm text-gray-200">
-                © 2025 Clinic System. All rights reserved.
+                © 2025 Clinic System. Tous droits reserves.
             </div>
 
         </footer>

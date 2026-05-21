@@ -1,7 +1,7 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getSpecialitesService } from "../../services/public.service";
 
-function Specialities() {
+function Specialites() {
 
     const [specialites, setSpecialites] = useState([]);
 
@@ -28,15 +28,15 @@ function Specialities() {
             <div className="text-center mb-14">
 
                 <p className="text-primary-600 font-semibold mb-3">
-                    Our Specialities
+                    Nos specialites
                 </p>
 
                 <h1 className="text-4xl font-bold text-slate-900 mb-4">
-                    Medical Specialities
+                    Specialites medicales
                 </h1>
 
                 <p className="text-slate-600 max-w-2xl mx-auto">
-                    Explore our medical departments and connect with specialists.
+                    Explorez nos specialites et prenez rendez-vous avec nos experts.
                 </p>
 
             </div>
@@ -53,7 +53,7 @@ function Specialities() {
 
                         {/* Icon */}
                         <div className="w-14 h-14 bg-primary-600 text-white rounded-full flex items-center justify-center text-2xl mb-5">
-                            🏥
+                            ??
                         </div>
 
                         {/* Name */}
@@ -76,5 +76,4 @@ function Specialities() {
     );
 }
 
-export default Specialities;
-
+export default Specialites;

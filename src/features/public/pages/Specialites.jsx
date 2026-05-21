@@ -1,48 +1,48 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getSpecialitesService, getMedecinsBySpecialiteService } from '../services/public.service';
 import Navbar from '../../../components/layout/Navbar';
 import Footer from '../../../components/layout/Footer';
 
-const Specialities = () => {
-    const [specialities, setSpecialities] = useState([]);
-    const [selectedSpeciality, setSelectedSpeciality] = useState(null);
-    const [doctors, setDoctors] = useState([]);
+const Specialites = () => {
+    const [specialites, setSpecialites] = useState([]);
+    const [selectedSpecialite, setSelectedSpecialite] = useState(null);
+    const [medecins, setMedecins] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [doctorsLoading, setDoctorsLoading] = useState(false);
+    const [medecinsLoading, setMedecinsLoading] = useState(false);
 
     useEffect(() => {
-        fetchSpecialities();
+        fetchSpecialites();
     }, []);
 
-    const fetchSpecialities = async () => {
+    const fetchSpecialites = async () => {
         try {
             const response = await getSpecialitesService();
-            setSpecialities(response.data.data);
+            setSpecialites(response.data.data);
         } catch (error) {
-            console.error('Error fetching specialities:', error);
+            console.error('Erreur lors du chargement des specialites :', error);
         } finally {
             setLoading(false);
         }
     };
 
-    const handleSpecialityClick = async (speciality) => {
-        setSelectedSpeciality(speciality);
-        setDoctorsLoading(true);
+    const handleSpecialiteClick = async (specialite) => {
+        setSelectedSpecialite(specialite);
+        setMedecinsLoading(true);
+
         try {
-            const response = await getMedecinsBySpecialiteService(speciality.id);
-            setDoctors(response.data.data);
-            console.log(doctors)
+            const response = await getMedecinsBySpecialiteService(specialite.id);
+            setMedecins(response.data.data.data);
         } catch (error) {
-            console.error('Error fetching doctors by speciality:', error);
-            setDoctors([]);
+            console.error('Erreur lors du chargement des medecins par specialite :', error);
+            setMedecins([]);
         } finally {
-            setDoctorsLoading(false);
+            setMedecinsLoading(false);
         }
     };
 
-    const handleBackToSpecialities = () => {
-        setSelectedSpeciality(null);
-        setDoctors([]);
+    const handleRetourSpecialites = () => {
+        setSelectedSpecialite(null);
+        setMedecins([]);
     };
 
     if (loading) {
@@ -52,7 +52,7 @@ const Specialities = () => {
                 <div className="min-h-screen flex items-center justify-center px-4 py-12">
                     <div className="text-center">
                         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-600 mx-auto"></div>
-                        <p className="mt-4 text-slate-600">Loading specialities...</p>
+                        <p className="mt-4 text-slate-600">Chargement des specialites...</p>
                     </div>
                 </div>
                 <Footer />
@@ -69,20 +69,20 @@ const Specialities = () => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                     <div className="text-center">
                         <h1 className="text-4xl font-bold text-slate-900 mb-4">
-                            {selectedSpeciality ? `${selectedSpeciality.nom} Specialists` : 'Medical Specialities'}
+                            {selectedSpecialite ? `${selectedSpecialite.name} - Medecins` : 'Specialites medicales'}
                         </h1>
                         <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-                            {selectedSpeciality
-                                ? `Meet our expert doctors specializing in ${selectedSpeciality.name.toLowerCase()}.`
-                                : 'Explore our comprehensive range of medical specialities and connect with specialists.'
+                            {selectedSpecialite
+                                ? `Decouvrez nos medecins experts en ${selectedSpecialite.name.toLowerCase()}.`
+                                : 'Explorez toutes nos specialites medicales et trouvez le specialiste adapte a vos besoins.'
                             }
                         </p>
-                        {selectedSpeciality && (
+                        {selectedSpecialite && (
                             <button
-                                onClick={handleBackToSpecialities}
+                                onClick={handleRetourSpecialites}
                                 className="mt-4 inline-flex items-center px-4 py-2 rounded-full text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 transition"
                             >
-                                ← Back to Specialities
+                                ? Retour aux specialites
                             </button>
                         )}
                     </div>
@@ -91,13 +91,12 @@ const Specialities = () => {
 
             {/* Content */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                {!selectedSpeciality ? (
-                    /* Specialities Grid */
+                {!selectedSpecialite ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        {specialities.map((speciality) => (
+                        {specialites.map((specialite) => (
                             <div
-                                key={speciality.id}
-                                onClick={() => handleSpecialityClick(speciality)}
+                                key={specialite.id}
+                                onClick={() => handleSpecialiteClick(specialite)}
                                 className="bg-white rounded-3xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden cursor-pointer group border border-primary-100"
                             >
                                 <div className="p-6">
@@ -108,13 +107,13 @@ const Specialities = () => {
                                     </div>
                                     <div className="text-center">
                                         <h3 className="text-lg font-semibold text-slate-900 mb-2">
-                                            {speciality.name}
+                                            {specialite.name}
                                         </h3>
                                         <p className="text-slate-600 text-sm mb-4">
-                                            {speciality.description || 'Specialized medical care and treatment services.'}
+                                            {specialite.description || 'Prise en charge et traitements specialises.'}
                                         </p>
                                         <span className="inline-flex items-center text-primary-600 font-medium text-sm group-hover:text-primary-700">
-                                            View Doctors →
+                                            Voir les medecins ?
                                         </span>
                                     </div>
                                 </div>
@@ -122,44 +121,43 @@ const Specialities = () => {
                         ))}
                     </div>
                 ) : (
-                    /* Doctors Grid for Selected Speciality */
                     <div>
-                        {doctorsLoading ? (
+                        {medecinsLoading ? (
                             <div className="text-center py-12">
                                 <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary-600 mx-auto"></div>
-                                <p className="mt-4 text-slate-600">Loading doctors...</p>
+                                <p className="mt-4 text-slate-600">Chargement des medecins...</p>
                             </div>
-                        ) : doctors.length === 0 ? (
+                        ) : medecins.length === 0 ? (
                             <div className="text-center py-12">
-                                <p className="text-slate-500 text-lg">No doctors found for this speciality.</p>
+                                <p className="text-slate-500 text-lg">Aucun medecin trouve pour cette specialite.</p>
                             </div>
                         ) : (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                                {doctors.map((doctor) => (
-                                    <div key={doctor.id} className="bg-white/95 rounded-3xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-primary-100">
+                                {medecins.map((medecin) => (
+                                    <div key={medecin.id} className="bg-white/95 rounded-3xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-primary-100">
                                         <div className="p-6">
                                             <div className="w-24 h-24 mx-auto mb-4">
                                                 <img
-                                                    src={`http://localhost:8000/${doctor.image_medecin}`}
-                                                    alt={`${doctor.name} `}
+                                                    src={`http://localhost:8000/${medecin.image_medecin}`}
+                                                    alt={medecin.name}
                                                     className="w-full h-full object-cover rounded-full"
                                                 />
                                             </div>
                                             <div className="text-center">
                                                 <h3 className="text-lg font-semibold text-slate-900">
-                                                    Dr. {doctor.name}
+                                                    Dr. {medecin.name}
                                                 </h3>
                                                 <p className="text-primary-600 font-medium mb-2">
-                                                    {doctor.specialite?.name}
+                                                    {medecin.specialite?.name}
                                                 </p>
                                                 <p className="text-sm text-slate-600 mb-4">
-                                                    {doctor.experience || 'Experienced'} years of experience
+                                                    {medecin.experience || 'Experimente'} ans d'experience
                                                 </p>
                                                 <button
-                                                    onClick={() => window.location.href = `/doctors/${doctor.id}`}
+                                                    onClick={() => window.location.href = `/medecins/${medecin.id}`}
                                                     className="w-full bg-primary-600 text-white py-3 rounded-full hover:bg-primary-700 transition-colors"
                                                 >
-                                                    View Profile
+                                                    Voir le profil
                                                 </button>
                                             </div>
                                         </div>
@@ -176,5 +174,4 @@ const Specialities = () => {
     );
 };
 
-export default Specialities;
-
+export default Specialites;

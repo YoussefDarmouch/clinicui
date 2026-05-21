@@ -16,7 +16,7 @@ export default function Navbar() {
     const handleLogout = () => {
         dispatch(logout());
         localStorage.clear();
-        navigate("/home");
+        navigate("/");
     };
     const handleRendezvous = () => {
         if (!isAuthenticated) {
@@ -27,7 +27,7 @@ export default function Navbar() {
             });
             return
         }
-        navigate("/createRendezVous");
+        navigate("/creer-rendez-vous");
     }
     const closeMenu = () => setIsMenuOpen(false);
 
@@ -48,20 +48,20 @@ export default function Navbar() {
 
                     {/* DESKTOP MENU */}
                     <nav className="hidden md:flex items-center gap-6 font-medium">
-                        <Link to="/">Home</Link>
-                        <Link to="/doctors">Doctors</Link>
-                        <Link to="/specialites">Specialities</Link>
+                        <Link to="/">Accueil</Link>
+                        <Link to="/medecins">Medecins</Link>
+                        <Link to="/specialites">Specialites</Link>
                         <Link to="/medicaments">Medicaments</Link>
                         {isAdmin && (
                             <Link to="/admin/dashboard" className="font-semibold">
-                                Dashboard Admin
+                                Tableau de bord admin
                             </Link>
                         )}
                         <button
                             onClick={handleRendezvous}
                             className="bg-white text-primary-600 px-4 py-2 rounded-full font-semibold"
                         >
-                            Create RendezVous
+                            Creer rendez-vous
                         </button>
 
                         {isAuthenticated ? (
@@ -69,14 +69,14 @@ export default function Navbar() {
                                 onClick={handleLogout}
                                 className="bg-primary-500 px-4 py-2 rounded-full"
                             >
-                                Logout
+                                Deconnexion
                             </button>
                         ) : (
                             <Link
                                 to="/login"
                                 className="bg-white text-primary-600 px-4 py-2 rounded-full"
                             >
-                                Login
+                                Connexion
                             </Link>
                         )}
                     </nav>
@@ -97,12 +97,12 @@ export default function Navbar() {
 
                 <div className="px-4 py-3 space-y-2">
 
-                    <Link to="/" onClick={closeMenu}>Home</Link>
-                    <Link to="/doctors" onClick={closeMenu}>Doctors</Link>
-                    <Link to="/specialites" onClick={closeMenu}>Specialities</Link>
+                    <Link to="/" onClick={closeMenu}>Accueil</Link>
+                    <Link to="/medecins" onClick={closeMenu}>Medecins</Link>
+                    <Link to="/specialites" onClick={closeMenu}>Specialites</Link>
                     <Link to="/medicaments" onClick={closeMenu}>Medicaments</Link>
                     {isAdmin && (
-                        <Link to="/admin/dashboard" onClick={closeMenu}>Dashboard Admin</Link>
+                        <Link to="/admin/dashboard" onClick={closeMenu}>Tableau de bord admin</Link>
                     )}
                     <button
                         onClick={() => {
@@ -111,7 +111,7 @@ export default function Navbar() {
                         }}
                         className="bg-white text-primary-600 px-4 py-2 rounded-full font-semibold w-full"
                     >
-                        Create RendezVous
+                        Creer rendez-vous
                     </button>
 
                     {isAuthenticated ? (
@@ -119,14 +119,14 @@ export default function Navbar() {
                             onClick={handleLogout}
                             className="bg-primary-500 px-4 py-2 rounded-full"
                         >
-                            Logout
+                            Deconnexion
                         </button>
                     ) : (
                         <Link
                             to="/login"
                             className="bg-white text-primary-600 px-4 py-2 rounded-full"
                         >
-                            Login
+                            Connexion
                         </Link>
                     )}
 

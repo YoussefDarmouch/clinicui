@@ -8,11 +8,11 @@ import ResetPassword from "../features/auth/pages/ResetPassword"
 import AdminLayout from "../components/layout/AdminLayout";
 
 // Public Pages
-import Home from "../features/public/pages/Home"
-import Doctors from "../features/public/pages/Doctors"
-import DoctorDetails from "../features/public/pages/DoctorDetails"
-import Specialities from "../features/public/pages/Specialities"
-import CreateRendezVous from "../features/public/pages/CreateRendezVous"
+import Accueil from "../features/public/pages/Accueil"
+import Medecins from "../features/public/pages/Medecins"
+import DetailsMedecin from "../features/public/pages/DetailsMedecin"
+import Specialites from "../features/public/pages/Specialites"
+import CreerRendezVous from "../features/public/pages/CreerRendezVous"
 import Medicaments from "../features/public/pages/Medicaments"
 import Dashboard from "../features/admin/dashboard/Dashboard";
 import UsersList from "../features/admin/users/UsersList";
@@ -72,11 +72,11 @@ export default function AppRoutes() {
                 <Route path="specialites/:id" element={<SpecialiteForm />} />
             </Route>
             {/* Public Routes */}
-            <Route path="/" element={<Home />} />
-            <Route path="/doctors" element={<Doctors />} />
-            <Route path="/doctors/:id" element={<DoctorDetails />} />
-            <Route path="/specialites" element={<Specialities />} />
-            <Route path="/createRendezVous" element={<CreateRendezVous />} />
+            <Route path="/" element={<Accueil />} />
+            <Route path="/medecins" element={<Medecins />} />
+            <Route path="/medecins/:id" element={<DetailsMedecin />} />
+            <Route path="/specialites" element={<Specialites />} />
+            <Route path="/creer-rendez-vous" element={<CreerRendezVous />} />
             <Route path="/medicaments" element={<Medicaments />} />
 
             {/* Auth Routes */}

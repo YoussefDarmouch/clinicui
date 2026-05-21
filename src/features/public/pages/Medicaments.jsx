@@ -20,10 +20,11 @@ const Medicaments = () => {
     const fetchMedicaments = async () => {
         try {
             const response = await getMedicamentsService();
-            setMedicaments(response.data.data);
-            setFilteredMedicaments(response.data.data);
+            setMedicaments(response.data.data.data);
+            console.log(response.data.data.data);
+            setFilteredMedicaments(response.data.data.data);
         } catch (error) {
-            console.error('Error fetching medicaments:', error);
+            console.error('Erreur lors du chargement des medicaments :', error);
         } finally {
             setLoading(false);
         }
@@ -48,7 +49,7 @@ const Medicaments = () => {
                 <div className="min-h-screen flex items-center justify-center px-4 py-12">
                     <div className="text-center">
                         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-600 mx-auto"></div>
-                        <p className="mt-4 text-slate-600">Loading medicaments...</p>
+                        <p className="mt-4 text-slate-600">Chargement des medicaments...</p>
                     </div>
                 </div>
                 <Footer />
@@ -66,7 +67,7 @@ const Medicaments = () => {
                     <div className="text-center">
                         <h1 className="text-4xl font-bold text-slate-900 mb-4">Medicaments</h1>
                         <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-                            Browse our comprehensive catalog of medications and healthcare products.
+                            Parcourez notre catalogue complet de medicaments et de produits de sante.
                         </p>
                     </div>
 
@@ -74,7 +75,7 @@ const Medicaments = () => {
                     <div className="mt-8 max-w-md mx-auto">
                         <input
                             type="text"
-                            placeholder="Search medicaments..."
+                            placeholder="Rechercher un medicament..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                             className="w-full px-4 py-3 border border-primary-200 rounded-xl bg-white focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500"
@@ -88,7 +89,7 @@ const Medicaments = () => {
                 {filteredMedicaments.length === 0 ? (
                     <div className="text-center py-12">
                         <p className="text-slate-500 text-lg">
-                            {searchTerm ? 'No medicaments found matching your search.' : 'No medicaments available.'}
+                            {searchTerm ? 'Aucun medicament ne correspond a votre recherche.' : 'Aucun medicament disponible.'}
                         </p>
                     </div>
                 ) : (
@@ -106,7 +107,7 @@ const Medicaments = () => {
                                             {medicament.nom}
                                         </h3>
                                         <p className="text-slate-600 text-sm mb-4">
-                                            {medicament.description || 'Medical product for healthcare needs.'}
+                                            {medicament.description || 'Produit medical pour les besoins de sante.'}
                                         </p>
                                         <div className="flex items-center justify-center space-x-4 text-sm text-slate-600">
                                             <span className="bg-primary-100 text-primary-700 px-2 py-1 rounded-full">

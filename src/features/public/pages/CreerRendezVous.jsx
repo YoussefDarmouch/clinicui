@@ -5,7 +5,7 @@ import Footer from '../../../components/layout/Footer';
 import { getMedecinsService, getAvailableSlotsService } from '../services/public.service';
 import { createRendezVous } from '../../../api/patient.api';
 
-const CreateRendezVous = () => {
+const CreerRendezVous = () => {
 
     const [doctors, setDoctors] = useState([]);
     const [selectedDoctor, setSelectedDoctor] = useState('');
@@ -82,7 +82,7 @@ const CreateRendezVous = () => {
     const handleCreateRDV = async () => {
 
         if (!selectedDoctor || !selectedSlot) {
-            alert("Please select doctor and time");
+            alert("Veuillez selectionner un medecin et un horaire.");
             return;
         }
 
@@ -119,7 +119,7 @@ const CreateRendezVous = () => {
             <div className="min-h-screen bg-primary-50">
                 <Navbar />
                 <div className="min-h-screen flex items-center justify-center px-4 py-12 text-slate-600">
-                    Loading...
+                    Chargement...
                 </div>
                 <Footer />
             </div>
@@ -145,7 +145,7 @@ const CreateRendezVous = () => {
                         onChange={(e) => setSelectedDoctor(e.target.value)}
                         className="w-full p-3 border border-primary-200 rounded-xl mb-4 bg-white focus:ring-2 focus:ring-primary-500/20"
                     >
-                        <option value="">Select doctor</option>
+                        <option value="">Selectionner un medecin</option>
                         {doctors.map(doc => (
                             <option key={doc.id} value={doc.id}>
                                 Dr {doc.user.name}
@@ -163,7 +163,7 @@ const CreateRendezVous = () => {
                     {/* SLOTS */}
                     <div className="grid grid-cols-3 gap-2">
                         {slotsLoading ? (
-                            <p className="text-slate-600">Loading slots...</p>
+                            <p className="text-slate-600">Chargement des creneaux...</p>
                         ) : (
                             availableSlots.map((slot, i) => (
                                 <button
@@ -213,5 +213,5 @@ const CreateRendezVous = () => {
     );
 };
 
-export default CreateRendezVous;
+export default CreerRendezVous;
 

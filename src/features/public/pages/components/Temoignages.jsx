@@ -40,7 +40,7 @@ function Temoignages() {
     if (loading) {
         return (
             <div className="text-center py-20 text-slate-600">
-                Loading testimonials...
+                Chargement des temoignages...
             </div>
         );
     }
@@ -52,15 +52,15 @@ function Temoignages() {
             <div className="text-center mb-14">
 
                 <p className="text-primary-600 font-semibold mb-3">
-                    Testimonials
+                    Temoignages
                 </p>
 
                 <h1 className="text-4xl font-bold text-slate-900 mb-4">
-                    What Our Patients Say
+                    Ce que disent nos patients
                 </h1>
 
                 <p className="text-slate-600 max-w-2xl mx-auto">
-                    Real feedback from patients after consultations with our doctors.
+                    Des retours reels de patients apres consultation avec nos medecins.
                 </p>
 
             </div>
@@ -122,7 +122,7 @@ function Temoignages() {
                                 <div className="text-right">
 
                                     <p className="text-xs text-slate-500">
-                                        Doctor
+                                        Medecin
                                     </p>
 
                                     <p className="font-semibold text-primary-600 text-sm">

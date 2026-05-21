@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../../../components/layout/Navbar';
 import Footer from '../../../components/layout/Footer';
 
-const Doctors = () => {
+const Medecins = () => {
     const [doctors, setDoctors] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
@@ -29,7 +29,7 @@ const Doctors = () => {
             setDoctors(doctorsData);
 
         } catch (error) {
-            console.error('Error fetching doctors:', error);
+            console.error('Erreur lors du chargement des medecins :', error);
         } finally {
             setLoading(false);
         }
@@ -78,7 +78,7 @@ const Doctors = () => {
                 <div className="min-h-screen flex items-center justify-center">
                     <div className="text-center">
                         <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary-600 mx-auto"></div>
-                        <p className="mt-4 text-slate-600">Loading doctors...</p>
+                        <p className="mt-4 text-slate-600">Chargement des medecins...</p>
                     </div>
                 </div>
                 <Footer />
@@ -94,11 +94,11 @@ const Doctors = () => {
             <div className="bg-primary-50 border-b border-primary-200">
                 <div className="max-w-7xl mx-auto px-4 py-12 text-center">
                     <h1 className="text-4xl font-bold mb-4 text-slate-900">
-                        Our Doctors
+                        Nos medecins
                     </h1>
 
                     <p className="text-slate-600">
-                        Find and book appointments with top specialists
+                        Trouvez et prenez rendez-vous avec nos meilleurs specialistes
                     </p>
 
                     {/* SEARCH */}
@@ -106,7 +106,7 @@ const Doctors = () => {
 
                         <input
                             type="text"
-                            placeholder="Search doctors..."
+                            placeholder="Rechercher un medecin..."
                             value={searchTerm}
                             onChange={(e) =>
                                 setSearchTerm(e.target.value)
@@ -122,7 +122,7 @@ const Doctors = () => {
                             className="px-4 py-3 border border-primary-200 bg-white/90 rounded-xl focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                         >
                             <option value="">
-                                All Specialities
+                                Toutes les specialites
                             </option>
 
                             {specialities.map((s) => (
@@ -141,7 +141,7 @@ const Doctors = () => {
 
                 {filteredDoctors.length === 0 ? (
                     <p className="text-center text-slate-500">
-                        No doctors found
+                        Aucun medecin trouve
                     </p>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -170,17 +170,17 @@ const Doctors = () => {
 
                                 {/* EXPERIENCE */}
                                 <p className="text-center text-sm text-slate-500 mt-1">
-                                    {doctor.annees_experience} years experience
+                                    {doctor.annees_experience} ans d'experience
                                 </p>
 
                                 {/* BUTTON */}
                                 <button
                                     onClick={() =>
-                                        navigate(`/doctors/${doctor.id}`)
+                                        navigate(`/medecins/${doctor.id}`)
                                     }
                                     className="w-full mt-4 bg-primary-600 text-white py-3 rounded-full font-semibold hover:bg-primary-700 transition"
                                 >
-                                    View Profile
+                                    Voir le profil
                                 </button>
 
                             </div>
@@ -196,5 +196,5 @@ const Doctors = () => {
     );
 };
 
-export default Doctors;
+export default Medecins;
 

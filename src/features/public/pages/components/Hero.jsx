@@ -8,28 +8,28 @@ function Hero() {
             <div className="max-w-xl">
 
                 <p className="text-primary-600 font-semibold mb-4">
-                    Trusted Healthcare Platform
+                    Plateforme de sante de confiance
                 </p>
 
                 <h1 className="text-5xl font-bold leading-tight text-slate-900 mb-6">
-                    Get trusted medical care anytime, anywhere
+                    Recevez des soins medicaux fiables, partout et a tout moment
                 </h1>
 
                 <p className="text-slate-600 text-lg mb-8 leading-8">
-                    Connect with professional doctors and specialists
-                    for online consultations, appointments, and medical
-                    support from the comfort of your home.
+                    Connectez-vous a des medecins et specialistes qualifies
+                    pour des consultations en ligne, des rendez-vous et un
+                    accompagnement medical sans quitter votre domicile.
                 </p>
 
                 {/* Buttons */}
                 <div className="flex gap-4">
 
                     <button className="bg-primary-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-primary-700 transition">
-                        Book Appointment
+                        Prendre rendez-vous
                     </button>
 
                     <button className="border border-primary-600 text-primary-600 px-6 py-3 rounded-full font-semibold hover:bg-primary-100 transition">
-                        Browse Doctors
+                        Voir les medecins
                     </button>
 
                 </div>
@@ -53,7 +53,7 @@ function Hero() {
                     </h2>
 
                     <p className="text-slate-600 text-sm">
-                        Patient Satisfaction
+                        Satisfaction patients
                     </p>
                 </div>
 
@@ -64,7 +64,7 @@ function Hero() {
                     </h2>
 
                     <p className="text-slate-600 text-sm">
-                        Medical Support
+                        Assistance medicale
                     </p>
                 </div>
 

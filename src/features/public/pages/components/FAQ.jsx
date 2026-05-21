@@ -6,20 +6,20 @@ function FAQ() {
 
     const faqs = [
         {
-            question: "How can I book an appointment?",
-            answer: "You can book an appointment by selecting a doctor and choosing an available time slot."
+            question: "Comment prendre un rendez-vous ?",
+            answer: "Vous pouvez prendre un rendez-vous en selectionnant un medecin puis un creneau disponible."
         },
         {
-            question: "Are online consultations available?",
-            answer: "Yes, you can consult doctors online through video or chat."
+            question: "Les consultations en ligne sont-elles disponibles ?",
+            answer: "Oui, vous pouvez consulter les medecins en ligne via video ou chat."
         },
         {
-            question: "Can I cancel my appointment?",
-            answer: "Yes, you can cancel or reschedule your appointment from your dashboard."
+            question: "Puis-je annuler mon rendez-vous ?",
+            answer: "Oui, vous pouvez annuler ou reprogrammer votre rendez-vous depuis votre tableau de bord."
         },
         {
-            question: "Is my medical data secure?",
-            answer: "Yes, all your data is encrypted and securely stored."
+            question: "Mes donnees medicales sont-elles securisees ?",
+            answer: "Oui, toutes vos donnees sont chiffrees et stockees en toute securite."
         }
     ];
 
@@ -38,11 +38,11 @@ function FAQ() {
                 </p>
 
                 <h1 className="text-4xl font-bold text-slate-900 mb-4">
-                    Frequently Asked Questions
+                    Questions frequentes
                 </h1>
 
                 <p className="text-slate-600 max-w-2xl mx-auto">
-                    Find answers to the most common questions about our medical platform.
+                    Retrouvez les reponses aux questions les plus posees sur notre plateforme medicale.
                 </p>
 
             </div>
