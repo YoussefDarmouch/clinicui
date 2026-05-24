@@ -17,6 +17,12 @@ export default function Login() {
     const location = useLocation();
     const redirectPath = location.state?.from || "/";
 
+    const normalizeRole = (role) =>
+        String(role || "")
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .toLowerCase();
+
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
@@ -41,7 +47,19 @@ export default function Login() {
             localStorage.setItem("role", user?.roles?.[0]?.name || "user");
 
             const role = user?.roles?.[0]?.name || "user";
-            navigate(role === "admin" ? "/admin/dashboard" : redirectPath);
+            const normalizedRole = normalizeRole(role);
+
+            if (normalizedRole === "admin") {
+                navigate("/admin/dashboard");
+                return;
+            }
+
+            if (normalizedRole === "medecin") {
+                navigate("/medecin/dashboard");
+                return;
+            }
+
+            navigate(redirectPath);
         } catch (error) {
             console.log(error);
             setMessage(error?.response?.data?.message || "Login failed ❌");
@@ -251,5 +269,4 @@ export default function Login() {
         </>
     );
 }
-
 

@@ -6,6 +6,7 @@ import Register from "../features/auth/pages/Register"
 import ForgotPassword from "../features/auth/pages/ForgotPassword"
 import ResetPassword from "../features/auth/pages/ResetPassword"
 import AdminLayout from "../components/layout/AdminLayout";
+import MedecinLayout from "../components/layout/MedecinLayout";
 
 // Public Pages
 import Accueil from "../features/public/pages/Accueil"
@@ -29,8 +30,15 @@ import RendezVous from "../features/admin/medecins/RendezVous";
 import Profile from "../features/admin/profile/Profile";
 import SpecialitesList from "../features/admin/specialites/SpecialitesList";
 import SpecialiteForm from "../features/admin/specialites/SpecialiteForm";
+import MedecinDashboard from "../features/medecin/pages/Dashboard";
+import MedecinConsultations from "../features/medecin/pages/Consultations";
+import MedecinRendezVous from "../features/medecin/pages/RendezVous";
+import MedecinOrdonnances from "../features/medecin/pages/Ordonnances";
+import MedecinStatistics from "../features/medecin/pages/Statistics";
+import MedecinProfile from "../features/medecin/pages/Profile";
 //
 import AdminRoute from "./AdminRoute";
+import MedecinRoute from "./MedecinRoute";
 export default function AppRoutes() {
     return (
 
@@ -70,6 +78,23 @@ export default function AppRoutes() {
                 <Route path="specialites" element={<SpecialitesList />} />
                 <Route path="specialites/new" element={<SpecialiteForm />} />
                 <Route path="specialites/:id" element={<SpecialiteForm />} />
+            </Route>
+
+            <Route
+                path="/medecin"
+                element={
+                    <MedecinRoute>
+                        <MedecinLayout />
+                    </MedecinRoute>
+                }
+            >
+                <Route index element={<Navigate to="dashboard" replace />} />
+                <Route path="dashboard" element={<MedecinDashboard />} />
+                <Route path="consultations" element={<MedecinConsultations />} />
+                <Route path="rendezvous" element={<MedecinRendezVous />} />
+                <Route path="ordonnances" element={<MedecinOrdonnances />} />
+                <Route path="statistics" element={<MedecinStatistics />} />
+                <Route path="profile" element={<MedecinProfile />} />
             </Route>
             {/* Public Routes */}
             <Route path="/" element={<Accueil />} />

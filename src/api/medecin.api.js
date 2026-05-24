@@ -21,6 +21,11 @@ export const deleteConsultation = (id) =>
 export const createOrdonnance = (consultationId, data) =>
     api.post(`/medecin/consultations/${consultationId}/ordonnances`, data);
 
+export const getOrdonnance = (ordonnanceId) =>
+    api.get(`/medecin/ordonnances/${ordonnanceId}`);
+export const getOrdonnances = () =>
+    api.get(`/medecin/ordonnances`);
+
 // get medicaments of ordonnance
 
 export const getOrdonnanceMedicaments = (ordonnanceId) =>
@@ -30,6 +35,9 @@ export const getOrdonnanceMedicaments = (ordonnanceId) =>
 
 export const getRendezVous = () =>
     api.get("/medecin/rendezvous");
+
+export const getAvailableRendezVous = () =>
+    api.get("/medecin/rendezvous/available");
 
 export const getRendezVousById = (id) =>
     api.get(`/medecin/rendezvous/${id}`);
@@ -48,4 +56,3 @@ export const getUpcomingRendezVous = () =>
 
 export const getTodayConsultations = () =>
     api.get("/medecin/today-consultations");
-
