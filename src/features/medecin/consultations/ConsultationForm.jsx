@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import LoadingSpinner from "../components/LoadingSpinner";
-import { ConsultationService } from "../services/medecin.services";
+import { ConsultationService, RendezVousService } from "../services/medecin.services";
 import { parseError, resolveData } from "../pages/page.utils";
 
 const initialForm = {
@@ -15,15 +15,18 @@ const initialForm = {
 
 export default function ConsultationForm() {
     const { id } = useParams();
+    const location = useLocation();
     const navigate = useNavigate();
     const isEdit = useMemo(() => Boolean(id), [id]);
+    const rdvId = useMemo(() => new URLSearchParams(location.search).get("rdv_id"), [location.search]);
     const [form, setForm] = useState(initialForm);
-    const [loading, setLoading] = useState(isEdit);
+    const [loading, setLoading] = useState(isEdit || Boolean(rdvId));
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState("");
 
     useEffect(() => {
         if (!isEdit) return;
+
         const fetchDetails = async () => {
             setLoading(true);
             setError("");
@@ -44,8 +47,33 @@ export default function ConsultationForm() {
                 setLoading(false);
             }
         };
+
         fetchDetails();
     }, [id, isEdit]);
+
+    useEffect(() => {
+        if (isEdit || !rdvId) return;
+
+        const fetchRendezVous = async () => {
+            setLoading(true);
+            setError("");
+            try {
+                const response = await RendezVousService.getById(rdvId);
+                const payload = resolveData(response) || {};
+                setForm((prev) => ({
+                    ...prev,
+                    rendezvous_id: payload.id || rdvId,
+                    patient_id: payload.patient_id || payload.patient?.id || prev.patient_id,
+                }));
+            } catch (err) {
+                setError(parseError(err, "Impossible de charger le rendez-vous confirmé."));
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchRendezVous();
+    }, [rdvId, isEdit]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -92,6 +120,7 @@ export default function ConsultationForm() {
                             value={form.rendezvous_id}
                             onChange={(e) => setForm({ ...form, rendezvous_id: e.target.value })}
                             className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm"
+                            readOnly={Boolean(rdvId)}
                         />
                     </div>
                     <div>

@@ -1,12 +1,11 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import Navbar from '../../../components/layout/Navbar';
 import Footer from '../../../components/layout/Footer';
-import { getMedecinsService, getAvailableSlotsService } from '../services/public.service';
-import { createRendezVous } from '../../../api/patient.api';
+import { getMedecinsService } from '../services/public.service';
+import { createRendezVousService, getAvailableSlotsService as getPatientAvailableSlotsService } from '../../patient/services/patient.services';
 
 const CreerRendezVous = () => {
-
     const [doctors, setDoctors] = useState([]);
     const [selectedDoctor, setSelectedDoctor] = useState('');
     const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
@@ -24,13 +23,11 @@ const CreerRendezVous = () => {
 
     const navigate = useNavigate();
 
-    // 🔐 auth check
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (!token) navigate("/login");
-    }, []);
+    }, [navigate]);
 
-    // 📥 load doctors
     useEffect(() => {
         fetchDoctors();
     }, []);
@@ -47,7 +44,6 @@ const CreerRendezVous = () => {
         }
     };
 
-    // 📅 load slots
     useEffect(() => {
         if (selectedDoctor && selectedDate) {
             fetchSlots();
@@ -57,12 +53,9 @@ const CreerRendezVous = () => {
     const fetchSlots = async () => {
         setSlotsLoading(true);
         try {
-            const res = await getAvailableSlotsService(selectedDoctor, selectedDate);
-
-            // 🔥 IMPORTANT: slots are strings
-            setAvailableSlots(res.data.data || []);
+            const res = await getPatientAvailableSlotsService({ medecin_id: selectedDoctor, date: selectedDate });
+            setAvailableSlots(res?.data?.data || res?.data || []);
             setSelectedSlot(null);
-
         } catch (err) {
             console.error(err);
             setAvailableSlots([]);
@@ -78,9 +71,7 @@ const CreerRendezVous = () => {
         });
     };
 
-    // 🚀 CREATE RDV
     const handleCreateRDV = async () => {
-
         if (!selectedDoctor || !selectedSlot) {
             alert("Veuillez selectionner un medecin et un horaire.");
             return;
@@ -91,21 +82,19 @@ const CreerRendezVous = () => {
         try {
             const payload = {
                 medecin_id: selectedDoctor,
-                date_heure: selectedSlot, // ✅ FIXED
+                date_heure: selectedSlot,
                 motif: form.motif,
                 notes: form.notes
             };
 
-            await createRendezVous(payload);
+            await createRendezVousService(payload);
 
             alert("Rendez-vous créé avec succès!");
 
-            // reset
             setSelectedDoctor('');
             setSelectedSlot(null);
             setAvailableSlots([]);
             setForm({ motif: '', notes: '' });
-
         } catch (error) {
             console.error(error);
             alert("Erreur lors de la création du rendez-vous");
@@ -135,8 +124,6 @@ const CreerRendezVous = () => {
             </div>
 
             <div className="max-w-5xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-2 gap-8">
-
-                {/* LEFT */}
                 <div>
                     <h2 className="font-bold mb-4">Choisir Médecin</h2>
 
@@ -160,7 +147,6 @@ const CreerRendezVous = () => {
                         className="w-full p-3 border border-primary-200 rounded-xl mb-4 bg-white focus:ring-2 focus:ring-primary-500/20"
                     />
 
-                    {/* SLOTS */}
                     <div className="grid grid-cols-3 gap-2">
                         {slotsLoading ? (
                             <p className="text-slate-600">Chargement des creneaux...</p>
@@ -178,7 +164,6 @@ const CreerRendezVous = () => {
                     </div>
                 </div>
 
-                {/* RIGHT */}
                 <div>
                     <h2 className="font-bold mb-4">Détails</h2>
 
@@ -214,4 +199,3 @@ const CreerRendezVous = () => {
 };
 
 export default CreerRendezVous;
-

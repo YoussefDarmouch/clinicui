@@ -37,6 +37,7 @@ export default function Dashboard() {
         fetchDashboard();
     }, []);
 
+    console.log("STATS:", stats);
     if (loading) return <LoadingSpinner text="Chargement du dashboard médecin..." />;
 
     return (
@@ -76,15 +77,24 @@ export default function Dashboard() {
             ) : null}
 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                <StatsCard
-                    label="Consultations aujourd'hui"
-                    value={stats.consultations_today ?? todayConsultations.length}
-                />
+
                 <StatsCard
                     label="Rendez-vous à venir"
-                    value={stats.upcoming_rendezvous ?? upcomingRendezvous.length}
+                    value={
+                        Array.isArray(stats.upcoming_rendezvous)
+                            ? stats.upcoming_rendezvous.length
+                            : stats.upcoming_rendezvous ?? upcomingRendezvous.length
+                    }
                 />
-                <StatsCard label="Patients suivis" value={stats.total_patients ?? 0} />
+                <StatsCard
+                    label="Consultations aujourd'hui"
+                    value={stats.today_count ?? todayConsultations.length}
+                />
+
+                <StatsCard
+                    label="Patients suivis"
+                    value={stats.patients_count ?? 0}
+                />
             </div>
 
             <section className="space-y-3">

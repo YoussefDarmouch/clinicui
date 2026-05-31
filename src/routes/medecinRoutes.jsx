@@ -23,6 +23,7 @@ export default function medecinRoutes() {
             <Route path="rendezvous/:id" element={<RendezVousDetails />} />
 
             <Route path="consultations" element={<ConsultationsList />} />
+            <Route path="consultations/create" element={<ConsultationForm />} />
             <Route path="consultations/new" element={<ConsultationForm />} />
             <Route path="consultations/:id" element={<ConsultationDetails />} />
             <Route path="consultations/:id/edit" element={<ConsultationForm />} />

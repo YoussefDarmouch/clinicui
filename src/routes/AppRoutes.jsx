@@ -5,6 +5,7 @@ import ForgotPassword from "../features/auth/pages/ForgotPassword"
 import ResetPassword from "../features/auth/pages/ResetPassword"
 import AdminLayout from "../components/layout/AdminLayout";
 import MedecinLayout from "../features/medecin/layouts/MedecinLayout";
+import PatientLayout from "../features/patient/layouts/PatientLayout";
 
 // Public Pages
 import Accueil from "../features/public/pages/Accueil"
@@ -31,7 +32,9 @@ import SpecialiteForm from "../features/admin/specialites/SpecialiteForm";
 //
 import AdminRoute from "./AdminRoute";
 import MedecinRoute from "./MedecinRoute";
+import PatientRoute from "./PatientRoute";
 import medecinRoutes from "./medecinRoutes";
+import patientRoutes from "./patientRoutes";
 export default function AppRoutes() {
     return (
 
@@ -82,6 +85,16 @@ export default function AppRoutes() {
                 }
             >
                 {medecinRoutes()}
+            </Route>
+            <Route
+                path="/patient"
+                element={
+                    <PatientRoute>
+                        <PatientLayout />
+                    </PatientRoute>
+                }
+            >
+                {patientRoutes()}
             </Route>
             {/* Public Routes */}
             <Route path="/" element={<Accueil />} />
