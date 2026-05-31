@@ -33,7 +33,13 @@ import {
     getOrdonnanceById,
     getOrdonnanceMedicaments,
     deleteOrdonnance,
-} from "./medecin.api";
+
+    getMedecinProfile,
+    updateMedecinProfile,
+    getNotifications,
+    markNotificationAsRead,
+    getMedecinStatistics,
+} from "../../../api/medecin.api";
 
 
 // ========================
@@ -211,6 +217,49 @@ export const OrdonnanceService = {
 
     async delete(id) {
         const res = await deleteOrdonnance(id);
+        return res.data;
+    },
+};
+
+
+// ========================
+// PROFILE SERVICE
+// ========================
+export const MedecinProfileService = {
+    async get() {
+        const res = await getMedecinProfile();
+        return res.data;
+    },
+
+    async update(data) {
+        const res = await updateMedecinProfile(data);
+        return res.data;
+    },
+};
+
+
+// ========================
+// NOTIFICATIONS SERVICE
+// ========================
+export const NotificationService = {
+    async getAll(params) {
+        const res = await getNotifications(params);
+        return res.data;
+    },
+
+    async markAsRead(id) {
+        const res = await markNotificationAsRead(id);
+        return res.data;
+    },
+};
+
+
+// ========================
+// STATISTICS SERVICE
+// ========================
+export const MedecinStatisticsService = {
+    async getAll(params) {
+        const res = await getMedecinStatistics(params);
         return res.data;
     },
 };

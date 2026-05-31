@@ -64,16 +64,16 @@ export const deleteRendezvous = (id) =>
     api.delete(`/medecin/rendezvous/${id}`);
 
 export const confirmRendezvous = (id) =>
-    api.post(`/ medecin / rendezvous / ${id} / confirm`);
+    api.post(`/medecin/rendezvous/${id}/confirm`);
 
 export const cancelRendezvous = (id) =>
-    api.post(`/ medecin / rendezvous / ${id} / cancel`);
+    api.post(`/medecin/rendezvous/${id}/cancel`);
 
 export const completeRendezvous = (id) =>
-    api.post(`/ medecin / rendezvous / ${id} / complete`);
+    api.post(`/medecin/rendezvous/${id}/complete`);
 
 export const getRendezvousPatient = (id) =>
-    api.get(`/ medecin / rendezvous / ${id} / patient`);
+    api.get(`/medecin/rendezvous/${id}/patient`);
 
 
 // ========================
@@ -83,19 +83,19 @@ export const getPatients = (params = {}) =>
     api.get("/medecin/patients", { params });
 
 export const getPatientById = (id) =>
-    api.get(`/ medecin / patients / ${id}`);
+    api.get(`/medecin/patients/${id}`);
 
 export const getPatientDossier = (id) =>
-    api.get(`/ medecin / patients / ${id} / dossier - medical`);
+    api.get(`/medecin/patients/${id}/dossier-medical`);
 
 export const getPatientConsultations = (id) =>
-    api.get(`/ medecin / patients / ${id} / consultations`);
+    api.get(`/medecin/patients/${id}/consultations`);
 
 export const getPatientRendezvous = (id) =>
-    api.get(`/ medecin / patients / ${id} / rendezvous`);
+    api.get(`/medecin/patients/${id}/rendezvous`);
 
 export const getPatientOrdonnances = (id) =>
-    api.get(`/ medecin / patients / ${id} / ordonnances`);
+    api.get(`/medecin/patients/${id}/ordonnances`);
 
 
 // ========================
@@ -105,13 +105,40 @@ export const getOrdonnances = (params = {}) =>
     api.get("/medecin/ordonnances", { params });
 
 export const getOrdonnanceById = (id) =>
-    api.get(`/ medecin / ordonnances / ${id}`);
+    api.get(`/medecin/ordonnances/${id}`);
 
 export const getOrdonnanceMedicaments = (id) =>
-    api.get(`/ medecin / ordonnances / ${id} / medicaments`);
+    api.get(`/medecin/ordonnances/${id}/medicaments`);
 
 export const deleteOrdonnance = (id) =>
-    api.delete(`/ medecin / ordonnances / ${id}`);
+    api.delete(`/medecin/ordonnances/${id}`);
+
+
+// ========================
+// PROFILE
+// ========================
+export const getMedecinProfile = () =>
+    api.get("/medecin/profile");
+
+export const updateMedecinProfile = (data) =>
+    api.put("/medecin/profile", data);
+
+
+// ========================
+// NOTIFICATIONS
+// ========================
+export const getNotifications = (params = {}) =>
+    api.get("/medecin/notifications", { params });
+
+export const markNotificationAsRead = (id) =>
+    api.patch(`/medecin/notifications/${id}/read`);
+
+
+// ========================
+// STATISTICS
+// ========================
+export const getMedecinStatistics = (params = {}) =>
+    api.get("/medecin/statistics", { params });
 
 
 // ========================
@@ -152,4 +179,12 @@ export const medecinApi = {
     getOrdonnanceById,
     getOrdonnanceMedicaments,
     deleteOrdonnance,
+
+    getMedecinProfile,
+    updateMedecinProfile,
+
+    getNotifications,
+    markNotificationAsRead,
+
+    getMedecinStatistics,
 };
