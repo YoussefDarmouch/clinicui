@@ -49,6 +49,11 @@ export default function OrdonnancesList() {
         }
     };
 
+    const formatDateTime = (value) => (value ? new Date(value).toLocaleString("fr-FR") : "—");
+    const formatDate = (value) => (value ? new Date(value).toLocaleDateString("fr-FR") : "—");
+    const truncate = (value, limit = 40) =>
+        value && value.length > limit ? `${value.slice(0, limit)}...` : value || "—";
+
     if (loading && rows.length === 0) return <LoadingSpinner text="Chargement des ordonnances..." />;
 
     return (
@@ -84,27 +89,19 @@ export default function OrdonnancesList() {
                 loading={loading}
                 columns={[
                     { key: "id", label: "#" },
-                    {
-                        key: "patient",
-                        label: "Patient",
-                        render: (row) => row.patient?.user?.name || row.patient?.name || row.patient_name || "—",
-                    },
-                    {
-                        key: "issued_at",
-                        label: "Date",
-                        render: (row) =>
-                            row.issued_at ? new Date(row.issued_at).toLocaleDateString("fr-FR") : "—",
-                    },
+                    { key: "consultation_id", label: "Consultation", render: (row) => row.consultation_id || "—" },
+                    { key: "patient_id", label: "Patient ID", render: (row) => row.patient_id || "—" },
+                    { key: "medecin_id", label: "Médecin ID", render: (row) => row.medecin_id || "—" },
+                    { key: "issued_at", label: "Issued At", render: (row) => formatDateTime(row.issued_at) },
+                    { key: "valid_until", label: "Valid Until", render: (row) => formatDate(row.valid_until) },
                     {
                         key: "instructions",
                         label: "Instructions",
-                        render: (row) => row.instructions || row.notes || "—",
+                        render: (row) => truncate(row.instructions || row.notes),
                     },
-                    {
-                        key: "statut",
-                        label: "Statut",
-                        render: (row) => row.statut || "—",
-                    },
+                    { key: "statut", label: "Statut", render: (row) => row.statut || "—" },
+                    { key: "created_at", label: "Created At", render: (row) => formatDateTime(row.created_at) },
+                    { key: "updated_at", label: "Updated At", render: (row) => formatDateTime(row.updated_at) },
                 ]}
                 actions={(row) => (
                     <>
@@ -121,6 +118,12 @@ export default function OrdonnancesList() {
                         >
                             Supprimer
                         </button>
+                        <Link
+                            to={`/medecin/ordonnances/${row.id}#medicaments`}
+                            className="rounded-xl bg-emerald-100 px-3 py-2 text-xs font-semibold text-emerald-700"
+                        >
+                            Créer médicament
+                        </Link>
                     </>
                 )}
                 pagination={{

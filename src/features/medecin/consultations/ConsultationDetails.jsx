@@ -8,7 +8,15 @@ export default function ConsultationDetails() {
     const { id } = useParams();
     const [consultation, setConsultation] = useState(null);
     const [dossier, setDossier] = useState(null);
-    const [ordonnanceForm, setOrdonnanceForm] = useState({ notes: "" });
+    const [ordonnanceForm, setOrdonnanceForm] = useState(() => {
+        const defaultValidUntil = new Date();
+        defaultValidUntil.setDate(defaultValidUntil.getDate() + 30);
+
+        return {
+            instructions: "",
+            valid_until: defaultValidUntil.toISOString().slice(0, 10),
+        };
+    });
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState("");
@@ -43,7 +51,12 @@ export default function ConsultationDetails() {
         try {
             await ConsultationService.createOrdonnance(id, ordonnanceForm);
             setSuccess("Ordonnance créée avec succès.");
-            setOrdonnanceForm({ notes: "" });
+            const defaultValidUntil = new Date();
+            defaultValidUntil.setDate(defaultValidUntil.getDate() + 30);
+            setOrdonnanceForm({
+                instructions: "",
+                valid_until: defaultValidUntil.toISOString().slice(0, 10),
+            });
         } catch (err) {
             setError(parseError(err, "Création de l'ordonnance impossible."));
         } finally {
@@ -109,12 +122,26 @@ export default function ConsultationDetails() {
                 </div>
             </div>
 
-            <form onSubmit={handleCreateOrdonnance} className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+            <form
+                id="ordonnance"
+                onSubmit={handleCreateOrdonnance}
+                className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"
+            >
                 <h2 className="text-lg font-semibold text-slate-900">Créer une ordonnance depuis la consultation</h2>
-                <label className="mt-4 block text-sm text-slate-600">Notes ordonnance</label>
+                <label className="mt-4 block text-sm text-slate-600">Valide jusqu’au</label>
+                <input
+                    type="date"
+                    value={ordonnanceForm.valid_until}
+                    onChange={(e) => setOrdonnanceForm({ ...ordonnanceForm, valid_until: e.target.value })}
+                    className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm"
+                    required
+                />
+                <label className="mt-4 block text-sm text-slate-600">Instructions</label>
                 <textarea
-                    value={ordonnanceForm.notes}
-                    onChange={(e) => setOrdonnanceForm({ notes: e.target.value })}
+                    value={ordonnanceForm.instructions}
+                    onChange={(e) =>
+                        setOrdonnanceForm((prev) => ({ ...prev, instructions: e.target.value }))
+                    }
                     rows={3}
                     className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm"
                 />

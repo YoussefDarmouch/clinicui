@@ -132,7 +132,7 @@ export default function MedecinDetails() {
                             </div>
                             <div>
                                 <p className="text-sm text-slate-500">Spécialité</p>
-                                <p className="mt-2 text-base font-medium text-slate-900">{medecin.specialite?.name || '—'}</p>
+                                <p className="mt-2 text-base font-medium text-slate-900">{medecin.specialite?.name || '—'} {console.log(medecin)}</p>
                             </div>
                             <div>
                                 <p className="text-sm text-slate-500">Années d’expérience</p>

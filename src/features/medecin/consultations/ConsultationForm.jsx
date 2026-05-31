@@ -6,12 +6,19 @@ import { parseError, resolveData } from "../pages/page.utils";
 
 const initialForm = {
     patient_id: "",
+    patient_name: "",
     rendezvous_id: "",
     date_consultation: "",
+    poids: "",
+    tension: "",
+    temperature: "",
     diagnostic: "",
     traitement: "",
     notes: "",
 };
+
+const resolveNestedId = (...values) =>
+    values.find((value) => value !== undefined && value !== null && value !== "") || "";
 
 export default function ConsultationForm() {
     const { id } = useParams();
@@ -34,9 +41,24 @@ export default function ConsultationForm() {
                 const response = await ConsultationService.getById(id);
                 const payload = resolveData(response) || {};
                 setForm({
-                    patient_id: payload.patient_id || "",
-                    rendezvous_id: payload.rendezvous_id || "",
+                    patient_id: resolveNestedId(
+                        payload.patient_id,
+                        payload.patient?.id,
+                        payload.patient?.patient_id,
+                        payload.patient?.user_id,
+                        payload.patient?.user?.id
+                    ),
+                    patient_name: payload.patient?.user?.name || payload.patient?.name || "",
+                    rendezvous_id: resolveNestedId(
+                        payload.rendezvous_id,
+                        payload.rendezvous?.id,
+                        payload.rdv_id,
+                        payload.rendezvous?.rendezvous_id
+                    ),
                     date_consultation: payload.date_consultation || "",
+                    poids: payload.poids || "",
+                    tension: payload.tension || "",
+                    temperature: payload.temperature || "",
                     diagnostic: payload.diagnostic || "",
                     traitement: payload.traitement || "",
                     notes: payload.notes || payload.details?.notes || "",
@@ -58,12 +80,36 @@ export default function ConsultationForm() {
             setLoading(true);
             setError("");
             try {
-                const response = await RendezVousService.getById(rdvId);
-                const payload = resolveData(response) || {};
+                const [rdvResponse, patientResponse] = await Promise.all([
+                    RendezVousService.getById(rdvId),
+                    RendezVousService.getPatient(rdvId),
+                ]);
+                const payload = resolveData(rdvResponse) || {};
+                const patientPayload = resolveData(patientResponse) || {};
                 setForm((prev) => ({
                     ...prev,
-                    rendezvous_id: payload.id || rdvId,
-                    patient_id: payload.patient_id || payload.patient?.id || prev.patient_id,
+                    rendezvous_id: resolveNestedId(
+                        payload.id,
+                        payload.rendezvous_id,
+                        payload.rdv_id,
+                        rdvId
+                    ),
+                    patient_id: resolveNestedId(
+                        payload.patient_id,
+                        patientPayload.id,
+                        patientPayload.patient_id,
+                        payload.patient?.id,
+                        payload.patient?.patient_id,
+                        payload.patient?.user_id,
+                        payload.patient?.user?.id,
+                        prev.patient_id
+                    ),
+                    patient_name:
+                        patientPayload.user?.name ||
+                        patientPayload.name ||
+                        payload.patient?.user?.name ||
+                        payload.patient?.name ||
+                        prev.patient_name,
                 }));
             } catch (err) {
                 setError(parseError(err, "Impossible de charger le rendez-vous confirmé."));
@@ -101,10 +147,20 @@ export default function ConsultationForm() {
                 <h1 className="text-2xl font-semibold text-slate-900">
                     {isEdit ? "Modifier consultation" : "Nouvelle consultation"}
                 </h1>
+                {isEdit ? <p className="mt-2 text-sm text-slate-500">Consultation ID: {id}</p> : null}
             </div>
 
             <form onSubmit={handleSubmit} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    <div>
+                        <label className="mb-1 block text-sm text-slate-600">Patient</label>
+                        <input
+                            value={form.patient_name}
+                            className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm bg-slate-50"
+                            readOnly
+                            placeholder="Patient lié au rendez-vous"
+                        />
+                    </div>
                     <div>
                         <label className="mb-1 block text-sm text-slate-600">Patient ID</label>
                         <input
@@ -131,6 +187,36 @@ export default function ConsultationForm() {
                             onChange={(e) => setForm({ ...form, date_consultation: e.target.value })}
                             className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm"
                             required
+                        />
+                    </div>
+                    <div>
+                        <label className="mb-1 block text-sm text-slate-600">Poids</label>
+                        <input
+                            type="text"
+                            value={form.poids}
+                            onChange={(e) => setForm({ ...form, poids: e.target.value })}
+                            className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm"
+                            placeholder="Ex: 72 kg"
+                        />
+                    </div>
+                    <div>
+                        <label className="mb-1 block text-sm text-slate-600">Tension</label>
+                        <input
+                            type="text"
+                            value={form.tension}
+                            onChange={(e) => setForm({ ...form, tension: e.target.value })}
+                            className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm"
+                            placeholder="Ex: 12/8"
+                        />
+                    </div>
+                    <div>
+                        <label className="mb-1 block text-sm text-slate-600">Température</label>
+                        <input
+                            type="text"
+                            value={form.temperature}
+                            onChange={(e) => setForm({ ...form, temperature: e.target.value })}
+                            className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm"
+                            placeholder="Ex: 37.2 °C"
                         />
                     </div>
                     <div>

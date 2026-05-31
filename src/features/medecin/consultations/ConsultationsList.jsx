@@ -88,6 +88,21 @@ export default function ConsultationsList() {
                         label: "Patient",
                         render: (row) => row.patient?.name || row.patient_name || "—",
                     },
+                    {
+                        key: "poids",
+                        label: "Poids",
+                        render: (row) => row.details.poids || "—",
+                    },
+                    {
+                        key: "tension",
+                        label: "Tension",
+                        render: (row) => row.details.tension || "—",
+                    },
+                    {
+                        key: "temperature",
+                        label: "Température",
+                        render: (row) => row.details.temperature || "—",
+                    },
                     { key: "diagnostic", label: "Diagnostic" },
                     {
                         key: "date_consultation",
@@ -111,6 +126,12 @@ export default function ConsultationsList() {
                             className="rounded-xl bg-primary-100 px-3 py-2 text-xs font-semibold text-primary-700"
                         >
                             Modifier
+                        </Link>
+                        <Link
+                            to={`/medecin/consultations/${row.id}#ordonnance`}
+                            className="rounded-xl bg-emerald-100 px-3 py-2 text-xs font-semibold text-emerald-700"
+                        >
+                            Créer ordonnance
                         </Link>
                     </>
                 )}

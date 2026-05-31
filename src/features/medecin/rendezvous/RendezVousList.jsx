@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import DataTable from "../components/DataTable";
 import FilterBar from "../components/FilterBar";
 import LoadingSpinner from "../components/LoadingSpinner";
@@ -7,7 +7,6 @@ import { RendezVousService } from "../services/medecin.services";
 import { parseError, resolveArray, resolvePagination } from "../pages/page.utils";
 
 export default function RendezVousList() {
-    const navigate = useNavigate();
     const [rows, setRows] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
@@ -67,10 +66,6 @@ export default function RendezVousList() {
             }
 
             await fetchRows();
-
-            if (action === "complete") {
-                navigate(`/medecin/consultations/create?rdv_id=${id}`);
-            }
         } catch (err) {
             setError(parseError(err, "Action non exécutée."));
         } finally {
@@ -123,9 +118,7 @@ export default function RendezVousList() {
             </FilterBar>
 
             {error ? (
-                <div className="rounded-2xl border bg-red-50 p-3 text-sm text-red-700">
-                    {error}
-                </div>
+                <div className="rounded-2xl border bg-red-50 p-3 text-sm text-red-700">{error}</div>
             ) : null}
 
             <DataTable
@@ -170,9 +163,17 @@ export default function RendezVousList() {
 
                     if (status === "complete") {
                         return (
-                            <span className="rounded-xl bg-slate-100 px-3 py-2 text-xs font-semibold">
-                                Terminé
-                            </span>
+                            <>
+                                <span className="rounded-xl bg-slate-100 px-3 py-2 text-xs font-semibold">
+                                    Terminé
+                                </span>
+                                <Link
+                                    to={`/medecin/consultations/create?rdv_id=${row.id}`}
+                                    className="rounded-xl bg-primary-100 px-3 py-2 text-xs font-semibold text-primary-700"
+                                >
+                                    Créer consultation
+                                </Link>
+                            </>
                         );
                     }
 
@@ -201,9 +202,9 @@ export default function RendezVousList() {
                                         onClick={() => runAction("cancel", row.id)}
                                         disabled={isLoading}
                                         className="rounded-xl bg-red-100 px-3 py-2 text-xs font-semibold disabled:cursor-not-allowed disabled:opacity-40"
-                                        >
-                                            {isLoading ? "..." : "Annuler"}
-                                        </button>
+                                    >
+                                        {isLoading ? "..." : "Annuler"}
+                                    </button>
                                 </>
                             )}
 

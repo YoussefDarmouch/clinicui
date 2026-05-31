@@ -38,6 +38,8 @@ export default function RendezVousDetails() {
     }
     if (!rendezvous) return <EmptyState title="Rendez-vous introuvable" />;
 
+    const status = (rendezvous.statut || rendezvous.status || "").toString().toLowerCase();
+
     return (
         <div className="space-y-4">
             <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -57,6 +59,17 @@ export default function RendezVousDetails() {
                         Retour
                     </Link>
                 </div>
+
+                {status === "complete" ? (
+                    <div className="mt-4">
+                        <Link
+                            to={`/medecin/consultations/create?rdv_id=${rendezvous.id}`}
+                            className="inline-flex rounded-xl bg-primary-600 px-4 py-2 text-sm font-semibold text-white"
+                        >
+                            Créer consultation
+                        </Link>
+                    </div>
+                ) : null}
             </div>
 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">

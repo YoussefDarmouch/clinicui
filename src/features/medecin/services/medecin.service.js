@@ -144,6 +144,7 @@ export const ConsultationService = {
     },
 
     async update(id, data) {
+        getOrdonnanceMedicaments
         const res = await updateConsultation(id, data);
         return res.data;
     },
