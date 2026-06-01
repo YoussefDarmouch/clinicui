@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import LoadingSpinner from "../components/LoadingSpinner";
 import EmptyState from "../components/EmptyState";
 import DataTable from "../components/DataTable";
+import { useSelector } from "react-redux";
 import { OrdonnanceService } from "../services/medecin.services";
 import { parseError, resolveArray, resolveData } from "../pages/page.utils";
 
@@ -12,6 +13,7 @@ export default function OrdonnanceDetails() {
     const [medicaments, setMedicaments] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const { isAuthenticated, role, user } = useSelector((state) => state.auth);
 
     useEffect(() => {
         const fetchDetails = async () => {
@@ -30,15 +32,27 @@ export default function OrdonnanceDetails() {
                 setLoading(false);
             }
         };
+
         fetchDetails();
     }, [id]);
 
     const formatDateTime = (value) => (value ? new Date(value).toLocaleString("fr-FR") : "—");
     const formatDate = (value) => (value ? new Date(value).toLocaleDateString("fr-FR") : "—");
+    const patientName =
+        ordonnance?.patient?.user?.name ||
+        ordonnance?.patient?.name ||
+        ordonnance?.patient_name ||
+        "—";
+    const medecinName =
+        ordonnance?.medecin?.user?.name ||
+        ordonnance?.medecin?.name ||
+        ordonnance?.medecin_name ||
+        "—";
 
     if (loading) return <LoadingSpinner text="Chargement ordonnance..." />;
 
     if (!ordonnance) return <EmptyState title="Ordonnance introuvable" />;
+
 
     return (
         <div className="space-y-4">
@@ -46,9 +60,8 @@ export default function OrdonnanceDetails() {
                 <div className="flex items-start justify-between gap-4">
                     <div>
                         <h1 className="text-2xl font-semibold text-slate-900">Ordonnance #{ordonnance.id}</h1>
-                        <p className="mt-2 text-sm text-slate-500">
-                            Patient: {ordonnance.patient?.user?.name || ordonnance.patient?.name || ordonnance.patient_name || "—"}
-                        </p>
+                        <p className="mt-2 text-sm text-slate-500">Patient: {patientName}</p>
+                        <p className="mt-1 text-sm text-slate-500">Médecin: {user?.name}</p>
                     </div>
                     <div className="flex gap-2">
                         <button
@@ -74,16 +87,14 @@ export default function OrdonnanceDetails() {
                     <h2 className="text-lg font-semibold text-slate-900">Infos ordonnance</h2>
                     <div className="mt-4 grid grid-cols-1 gap-3 text-sm text-slate-600">
                         <p>
+                            <span className="font-semibold text-slate-700">Patient:</span> {patientName}
+                        </p>
+                        <p>
+                            <span className="font-semibold text-slate-700">Médecin:</span> {user?.name}
+                        </p>
+                        <p>
                             <span className="font-semibold text-slate-700">Consultation ID:</span>{" "}
                             {ordonnance.consultation_id || "—"}
-                        </p>
-                        <p>
-                            <span className="font-semibold text-slate-700">Patient ID:</span>{" "}
-                            {ordonnance.patient_id || "—"}
-                        </p>
-                        <p>
-                            <span className="font-semibold text-slate-700">Médecin ID:</span>{" "}
-                            {ordonnance.medecin_id || "—"}
                         </p>
                         <p>
                             <span className="font-semibold text-slate-700">Issued At:</span>{" "}
@@ -94,8 +105,7 @@ export default function OrdonnanceDetails() {
                             {formatDate(ordonnance.valid_until)}
                         </p>
                         <p>
-                            <span className="font-semibold text-slate-700">Statut:</span>{" "}
-                            {ordonnance.statut || "—"}
+                            <span className="font-semibold text-slate-700">Statut:</span> {ordonnance.statut || "—"}
                         </p>
                         <p>
                             <span className="font-semibold text-slate-700">Created At:</span>{" "}
@@ -114,10 +124,10 @@ export default function OrdonnanceDetails() {
                     </div>
                 </div>
 
-            <div id="medicaments" className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-                <h2 className="text-lg font-semibold text-slate-900">Médicaments</h2>
-                <DataTable
-                    rows={medicaments}
+                <div id="medicaments" className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+                    <h2 className="text-lg font-semibold text-slate-900">Médicaments</h2>
+                    <DataTable
+                        rows={medicaments}
                         emptyText="Aucun médicament trouvé."
                         columns={[
                             { key: "name", label: "Nom", render: (row) => row.name || row.nom || "—" },

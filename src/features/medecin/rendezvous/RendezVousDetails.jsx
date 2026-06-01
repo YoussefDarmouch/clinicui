@@ -14,9 +14,9 @@ export default function RendezVousDetails() {
 
     useEffect(() => {
         const fetchDetails = async () => {
-            setLoading(true);
-            setError("");
-            try {
+                setLoading(true);
+                setError("");
+                try {
                 const [rdvRes, patientRes] = await Promise.all([
                     RendezVousService.getById(id),
                     RendezVousService.getPatient(id),
@@ -39,6 +39,7 @@ export default function RendezVousDetails() {
     if (!rendezvous) return <EmptyState title="Rendez-vous introuvable" />;
 
     const status = (rendezvous.statut || rendezvous.status || "").toString().toLowerCase();
+    const consultation = rendezvous.consultation ?? null;
 
     return (
         <div className="space-y-4">
@@ -60,7 +61,7 @@ export default function RendezVousDetails() {
                     </Link>
                 </div>
 
-                {status === "complete" ? (
+                {status === "confirme" && consultation === null ? (
                     <div className="mt-4">
                         <Link
                             to={`/medecin/consultations/create?rdv_id=${rendezvous.id}`}

@@ -20,6 +20,7 @@ export default function PatientsList() {
             const response = await PatientService.getAll(filters);
             const list = resolveArray(response);
             setRows(list);
+            console.log("📦 NORMALIZED LIST:", list);
             setPagination(resolvePagination(response, list.length));
         } catch (err) {
             setError(parseError(err, "Impossible de charger les patients."));

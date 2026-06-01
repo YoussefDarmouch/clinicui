@@ -43,6 +43,80 @@ export default function RendezVousList() {
         }));
     };
 
+    const renderRowActions = (row) => {
+        const status = normalizeStatus(row.statut);
+        const consultation = row.consultation ?? null;
+        const isLoading = actionLoadingId === row.id;
+
+        if (status === "annule") {
+            return (
+                <span className="rounded-xl bg-slate-100 px-3 py-2 text-xs font-semibold">
+                    Annulé
+                </span>
+            );
+        }
+
+        if (status === "complete") {
+            return (
+                <span className="rounded-xl bg-slate-100 px-3 py-2 text-xs font-semibold">
+                    Terminé
+                </span>
+            );
+        }
+
+        return (
+            <>
+                <Link
+                    to={`/medecin/rendezvous/${row.id}`}
+                    className="rounded-xl bg-slate-100 px-3 py-2 text-xs font-semibold"
+                >
+                    Détails
+                </Link>
+
+                {status === "planifie" && (
+                    <>
+                        <button
+                            type="button"
+                            onClick={() => runAction("confirm", row.id)}
+                            disabled={isLoading}
+                            className="rounded-xl bg-green-100 px-3 py-2 text-xs font-semibold disabled:cursor-not-allowed disabled:opacity-40"
+                        >
+                            {isLoading ? "..." : "Confirmer"}
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={() => runAction("cancel", row.id)}
+                            disabled={isLoading}
+                            className="rounded-xl bg-red-100 px-3 py-2 text-xs font-semibold disabled:cursor-not-allowed disabled:opacity-40"
+                        >
+                            {isLoading ? "..." : "Annuler"}
+                        </button>
+                    </>
+                )}
+
+                {status === "confirme" &&
+                    (consultation === null ? (
+                        <Link
+                            to={`/medecin/consultations/create?rdv_id=${row.id}`}
+                            className="rounded-xl bg-primary-100 px-3 py-2 text-xs font-semibold text-primary-700"
+                        >
+                            Créer consultation
+                        </Link>
+                    ) : (
+                        <button
+                            type="button"
+                            onClick={() => runAction("complete", row.id)}
+                            disabled={isLoading}
+                            className="rounded-xl bg-blue-100 px-3 py-2 text-xs font-semibold disabled:cursor-not-allowed disabled:opacity-40"
+                        >
+                            {isLoading ? "..." : "Terminer"}
+                        </button>
+                    ))}
+            </>
+        );
+    };
+
     const runAction = async (action, id) => {
         setActionLoadingId(id);
         setError("");
@@ -52,6 +126,8 @@ export default function RendezVousList() {
 
             if (action === "confirm") {
                 response = await RendezVousService.confirm(id);
+
+
             } else if (action === "cancel") {
                 response = await RendezVousService.cancel(id);
             } else if (action === "complete") {
@@ -149,78 +225,7 @@ export default function RendezVousList() {
                         render: (row) => row.statut || "—",
                     },
                 ]}
-                actions={(row) => {
-                    const status = normalizeStatus(row.statut);
-                    const isLoading = actionLoadingId === row.id;
-
-                    if (status === "annule") {
-                        return (
-                            <span className="rounded-xl bg-slate-100 px-3 py-2 text-xs font-semibold">
-                                Annulé
-                            </span>
-                        );
-                    }
-
-                    if (status === "complete") {
-                        return (
-                            <>
-                                <span className="rounded-xl bg-slate-100 px-3 py-2 text-xs font-semibold">
-                                    Terminé
-                                </span>
-                                <Link
-                                    to={`/medecin/consultations/create?rdv_id=${row.id}`}
-                                    className="rounded-xl bg-primary-100 px-3 py-2 text-xs font-semibold text-primary-700"
-                                >
-                                    Créer consultation
-                                </Link>
-                            </>
-                        );
-                    }
-
-                    return (
-                        <>
-                            <Link
-                                to={`/medecin/rendezvous/${row.id}`}
-                                className="rounded-xl bg-slate-100 px-3 py-2 text-xs font-semibold"
-                            >
-                                Détails
-                            </Link>
-
-                            {status === "planifie" && (
-                                <>
-                                    <button
-                                        type="button"
-                                        onClick={() => runAction("confirm", row.id)}
-                                        disabled={isLoading}
-                                        className="rounded-xl bg-green-100 px-3 py-2 text-xs font-semibold disabled:cursor-not-allowed disabled:opacity-40"
-                                    >
-                                        {isLoading ? "..." : "Confirmer"}
-                                    </button>
-
-                                    <button
-                                        type="button"
-                                        onClick={() => runAction("cancel", row.id)}
-                                        disabled={isLoading}
-                                        className="rounded-xl bg-red-100 px-3 py-2 text-xs font-semibold disabled:cursor-not-allowed disabled:opacity-40"
-                                    >
-                                        {isLoading ? "..." : "Annuler"}
-                                    </button>
-                                </>
-                            )}
-
-                            {status === "confirme" && (
-                                <button
-                                    type="button"
-                                    onClick={() => runAction("complete", row.id)}
-                                    disabled={isLoading}
-                                    className="rounded-xl bg-blue-100 px-3 py-2 text-xs font-semibold disabled:cursor-not-allowed disabled:opacity-40"
-                                >
-                                    {isLoading ? "..." : "Terminer"}
-                                </button>
-                            )}
-                        </>
-                    );
-                }}
+                actions={renderRowActions}
                 pagination={{
                     page: pagination.page,
                     lastPage: pagination.lastPage,
